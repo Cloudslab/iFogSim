@@ -328,7 +328,7 @@ public class ModulePlacementEdgewards extends ModulePlacement{
 					int finalNumInstances = initialNumInstances + moduleToNumInstances.get(module_);
 					getCurrentModuleInstanceNum().get(id).put(module_, finalNumInstances);
 				}
-				getCurrentCpuLoad().put(id, totalLoad);
+				getCurrentCpuLoad().put(id, getCurrentCpuLoad().get(id) + totalLoad);
 				operatorsToPlace.removeAll(loadMap.keySet());
 				List<String> placedOperators = new ArrayList<String>();
 				for(String op : loadMap.keySet())placedOperators.add(op);
