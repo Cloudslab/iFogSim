@@ -17,6 +17,7 @@ import org.fog.placement.Controller;
 import org.fog.placement.ModuleMapping;
 import org.fog.placement.ModulePlacementEdgewards;
 import org.fog.utils.JsonToTopology;
+import org.fog.utils.TimeKeeper;
 
 /**
  * Simulation setup for EEG Beam Tractor Game extracting physical topology 
@@ -55,6 +56,8 @@ public class CleanFromJson {
 			controller.submitApplication(application, 0, new ModulePlacementEdgewards(physicalTopology.getFogDevices(), 
 					physicalTopology.getSensors(), physicalTopology.getActuators(), 
 					application, ModuleMapping.createModuleMapping()));
+			
+			TimeKeeper.getInstance().setSimulationStartTime(Calendar.getInstance().getTimeInMillis());
 			
 			CloudSim.startSimulation();
 
