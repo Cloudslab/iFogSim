@@ -1,0 +1,590 @@
+++++++++++++++++++++++++++++++++++++++++++++++++++
+num-depts = 2
+mobile/dept = 4
+=========================================
+============== RESULTS ==================
+cloud
+=========================================
+1
+[EEG, client, classifier, client, DISPLAY] ---> 414.04924276042055
+2
+[classifier, connector, classifier] ---> NaN
+=========================================
+cloud : Energy Consumed = 181781.4488044089
+proxy-server : Energy Consumed = 0.0
+d-0 : Energy Consumed = 0.0
+m-0-0 : Energy Consumed = 54799.33098359385
+m-0-1 : Energy Consumed = 70870.14040799713
+m-0-2 : Energy Consumed = 75534.3400093849
+m-0-3 : Energy Consumed = 80641.31747681752
+d-1 : Energy Consumed = 0.0
+m-1-0 : Energy Consumed = 81288.57757367406
+m-1-1 : Energy Consumed = 77891.05367369915
+m-1-2 : Energy Consumed = 78477.97484151361
+m-1-3 : Energy Consumed = 83857.35356937899
+Cost of execution in cloud = 363562.897608818
+Total network usage = 58346.82
+=========================================
+============== RESULTS ==================
+fog
+=========================================
+1
+[EEG, client, classifier, client, DISPLAY] ---> 10.430040780689088
+2
+[classifier, connector, classifier] ---> NaN
+=========================================
+cloud : Energy Consumed = 22560.000000000044
+proxy-server : Energy Consumed = 0.0
+d-0 : Energy Consumed = 0.0
+m-0-0 : Energy Consumed = 105110.53361917814
+m-0-1 : Energy Consumed = 104764.61915839787
+m-0-2 : Energy Consumed = 115400.65103991627
+m-0-3 : Energy Consumed = 114295.40316068733
+d-1 : Energy Consumed = 0.0
+m-1-0 : Energy Consumed = 120652.13071803295
+m-1-1 : Energy Consumed = 124883.97869881912
+m-1-2 : Energy Consumed = 117464.58241970997
+m-1-3 : Energy Consumed = 113087.17237388346
+Cost of execution in cloud = 45120.00000000009
+Total network usage = 17947.2
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+num-depts = 3
+mobile/dept = 4
+=========================================
+cloud
+============== RESULTS ==================
+=========================================
+1
+[EEG, client, classifier, client, DISPLAY] ---> 414.33788682667387
+2
+[classifier, connector, classifier] ---> NaN
+=========================================
+cloud : Energy Consumed = 251352.9129612754
+proxy-server : Energy Consumed = 0.0
+d-0 : Energy Consumed = 0.0
+m-0-0 : Energy Consumed = 54905.55614964556
+m-0-1 : Energy Consumed = 54513.34724066024
+m-0-2 : Energy Consumed = 75628.18167163615
+m-0-3 : Energy Consumed = 75862.98256246562
+d-1 : Energy Consumed = 0.0
+m-1-0 : Energy Consumed = 75259.14209738423
+m-1-1 : Energy Consumed = 85023.15386696541
+m-1-2 : Energy Consumed = 77352.21974463796
+m-1-3 : Energy Consumed = 86716.22305270351
+d-2 : Energy Consumed = 0.0
+m-2-0 : Energy Consumed = 84197.48296810928
+m-2-1 : Energy Consumed = 75885.10697846868
+m-2-2 : Energy Consumed = 79168.0306669604
+m-2-3 : Energy Consumed = 92006.65920129878
+Cost of execution in cloud = 502705.8259225509
+Total network usage = 89113.06
+=========================================
+fog
+============== RESULTS ==================
+=========================================
+1
+[EEG, client, classifier, client, DISPLAY] ---> 10.337661142175655
+2
+[classifier, connector, classifier] ---> NaN
+=========================================
+cloud : Energy Consumed = 33840.00000000031
+proxy-server : Energy Consumed = 0.0
+d-0 : Energy Consumed = 0.0
+m-0-0 : Energy Consumed = 99027.36598248142
+m-0-1 : Energy Consumed = 96464.23526273938
+m-0-2 : Energy Consumed = 116587.75160439228
+m-0-3 : Energy Consumed = 118376.17658638628
+d-1 : Energy Consumed = 0.0
+m-1-0 : Energy Consumed = 117610.23939883098
+m-1-1 : Energy Consumed = 108795.80119115132
+m-1-2 : Energy Consumed = 108428.92328997163
+m-1-3 : Energy Consumed = 113388.613311491
+d-2 : Energy Consumed = 0.0
+m-2-0 : Energy Consumed = 115887.22017881693
+m-2-1 : Energy Consumed = 117622.5534568436
+m-2-2 : Energy Consumed = 113661.2120955525
+m-2-3 : Energy Consumed = 115350.08697172804
+Cost of execution in cloud = 67680.00000000067
+Total network usage = 25940.8
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+numOfDepts = 4;
+numOfMobilesPerDept = 4;
+=========================================
+============== RESULTS ==================
+cloud
+=========================================
+1
+[EEG, client, classifier, client, DISPLAY] ---> 415.08343868672773
+2
+[classifier, connector, classifier] ---> NaN
+=========================================
+cloud : Energy Consumed = 298739.64044956
+proxy-server : Energy Consumed = 0.0
+d-0 : Energy Consumed = 0.0
+m-0-0 : Energy Consumed = 59481.0312372772
+m-0-1 : Energy Consumed = 62172.26903500101
+m-0-2 : Energy Consumed = 80075.39043068278
+m-0-3 : Energy Consumed = 82122.19284738487
+d-1 : Energy Consumed = 0.0
+m-1-0 : Energy Consumed = 81676.3129430218
+m-1-1 : Energy Consumed = 83104.60854788282
+m-1-2 : Energy Consumed = 74938.90644655883
+m-1-3 : Energy Consumed = 75527.4551475782
+d-2 : Energy Consumed = 0.0
+m-2-0 : Energy Consumed = 76981.24908117668
+m-2-1 : Energy Consumed = 81691.2689744505
+m-2-2 : Energy Consumed = 72196.1779349007
+m-2-3 : Energy Consumed = 83206.68895895345
+d-3 : Energy Consumed = 0.0
+m-3-0 : Energy Consumed = 76571.53951140775
+m-3-1 : Energy Consumed = 78288.42073706718
+m-3-2 : Energy Consumed = 73493.34598952744
+m-3-3 : Energy Consumed = 86120.44432849987
+Cost of execution in cloud = 597479.2808991207
+Total network usage = 122227.78
+
+=========================================
+fog
+============== RESULTS ==================
+=========================================
+1
+[EEG, client, classifier, client, DISPLAY] ---> 10.345305614073467
+2
+[classifier, connector, classifier] ---> NaN
+=========================================
+cloud : Energy Consumed = 45120.00000000062
+proxy-server : Energy Consumed = 0.0
+d-0 : Energy Consumed = 0.0
+m-0-0 : Energy Consumed = 98685.16470913924
+m-0-1 : Energy Consumed = 97962.320356949
+m-0-2 : Energy Consumed = 118886.65391550257
+m-0-3 : Energy Consumed = 114515.1969660515
+d-1 : Energy Consumed = 0.0
+m-1-0 : Energy Consumed = 112963.20133212855
+m-1-1 : Energy Consumed = 110421.19064747207
+m-1-2 : Energy Consumed = 112586.49870911252
+m-1-3 : Energy Consumed = 120159.4909649661
+d-2 : Energy Consumed = 0.0
+m-2-0 : Energy Consumed = 114875.83282766625
+m-2-1 : Energy Consumed = 119896.6347185527
+m-2-2 : Energy Consumed = 116638.74844341158
+m-2-3 : Energy Consumed = 108137.36209827953
+d-3 : Energy Consumed = 0.0
+m-3-0 : Energy Consumed = 109711.7822657458
+m-3-1 : Energy Consumed = 115075.36489278547
+m-3-2 : Energy Consumed = 115340.6795238342
+m-3-3 : Energy Consumed = 117413.64048806226
+Cost of execution in cloud = 90240.00000000132
+Total network usage = 33934.4
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+static int numOfDepts = 4;
+numOfMobilesPerDept = 8;
+
+=========================================
+cloud
+============== RESULTS ==================
+=========================================
+1
+[EEG, client, classifier, client, DISPLAY] ---> 1986.037858283829
+2
+[classifier, connector, classifier] ---> NaN
+=========================================
+cloud : Energy Consumed = 383015.44202243
+proxy-server : Energy Consumed = 0.0
+d-0 : Energy Consumed = 0.0
+m-0-0 : Energy Consumed = 39850.67724125543
+m-0-1 : Energy Consumed = 38265.40518947851
+m-0-2 : Energy Consumed = 50987.326223261625
+m-0-3 : Energy Consumed = 52215.54188443439
+m-0-4 : Energy Consumed = 48813.59436453839
+m-0-5 : Energy Consumed = 50641.683260826496
+m-0-6 : Energy Consumed = 54623.63799205364
+m-0-7 : Energy Consumed = 52597.11240550019
+d-1 : Energy Consumed = 0.0
+m-1-0 : Energy Consumed = 56748.41307559108
+m-1-1 : Energy Consumed = 59043.08481799324
+m-1-2 : Energy Consumed = 48428.21727146251
+m-1-3 : Energy Consumed = 57390.9965393362
+m-1-4 : Energy Consumed = 52491.47628824005
+m-1-5 : Energy Consumed = 51262.17000632143
+m-1-6 : Energy Consumed = 49002.9264709162
+m-1-7 : Energy Consumed = 50691.837639358935
+d-2 : Energy Consumed = 0.0
+m-2-0 : Energy Consumed = 51720.272002177735
+m-2-1 : Energy Consumed = 51231.08081457531
+m-2-2 : Energy Consumed = 51092.15010835027
+m-2-3 : Energy Consumed = 47519.59550264985
+m-2-4 : Energy Consumed = 54590.856601470674
+m-2-5 : Energy Consumed = 50360.304219383564
+m-2-6 : Energy Consumed = 53489.82293711161
+m-2-7 : Energy Consumed = 50786.51113890574
+d-3 : Energy Consumed = 0.0
+m-3-0 : Energy Consumed = 56327.26817558339
+m-3-1 : Energy Consumed = 56402.15143025788
+m-3-2 : Energy Consumed = 54272.56244151585
+m-3-3 : Energy Consumed = 48952.712395411974
+m-3-4 : Energy Consumed = 46451.073209069065
+m-3-5 : Energy Consumed = 53906.69607144316
+m-3-6 : Energy Consumed = 51328.83624696692
+m-3-7 : Energy Consumed = 56040.05494421369
+Cost of execution in cloud = 766030.8840448617
+Total network usage = 230406.54
+
+=========================================
+fog
+============== RESULTS ==================
+=========================================
+1
+[EEG, client, classifier, client, DISPLAY] ---> 10.369047939724972
+2
+[classifier, connector, classifier] ---> NaN
+=========================================
+cloud : Energy Consumed = 108569.99999999756
+proxy-server : Energy Consumed = 0.0
+d-0 : Energy Consumed = 0.0
+m-0-0 : Energy Consumed = 99994.59569548978
+m-0-1 : Energy Consumed = 97622.59590543341
+m-0-2 : Energy Consumed = 118616.54726099267
+m-0-3 : Energy Consumed = 118269.16909650643
+m-0-4 : Energy Consumed = 123863.13269032812
+m-0-5 : Energy Consumed = 112418.87990432343
+m-0-6 : Energy Consumed = 116862.89620217014
+m-0-7 : Energy Consumed = 113311.75877147212
+d-1 : Energy Consumed = 0.0
+m-1-0 : Energy Consumed = 112750.72903963449
+m-1-1 : Energy Consumed = 111832.86409889025
+m-1-2 : Energy Consumed = 116683.31023714488
+m-1-3 : Energy Consumed = 111194.45994702404
+m-1-4 : Energy Consumed = 119169.26786160326
+m-1-5 : Energy Consumed = 110731.11769301104
+m-1-6 : Energy Consumed = 122385.099308181
+m-1-7 : Energy Consumed = 117289.65195053091
+d-2 : Energy Consumed = 0.0
+m-2-0 : Energy Consumed = 117816.41165684393
+m-2-1 : Energy Consumed = 119168.23296066793
+m-2-2 : Energy Consumed = 115293.20341250839
+m-2-3 : Energy Consumed = 115549.19839672779
+m-2-4 : Energy Consumed = 111909.0806130495
+m-2-5 : Energy Consumed = 119431.04433039195
+m-2-6 : Energy Consumed = 116072.31444703502
+m-2-7 : Energy Consumed = 114030.21774640013
+d-3 : Energy Consumed = 0.0
+m-3-0 : Energy Consumed = 119134.01245069061
+m-3-1 : Energy Consumed = 111934.27292184535
+m-3-2 : Energy Consumed = 118296.29407151471
+m-3-3 : Energy Consumed = 115260.54914204872
+m-3-4 : Energy Consumed = 115370.09139487508
+m-3-5 : Energy Consumed = 118949.71360220548
+m-3-6 : Energy Consumed = 113328.53574594192
+m-3-7 : Energy Consumed = 113300.545666691
+Cost of execution in cloud = 217139.99999999523
+Total network usage = 65908.8
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+int numOfDepts = 4;
+int numOfMobilesPerDept = 12;
+
+=========================================
+cloud
+============== RESULTS ==================
+=========================================
+1
+[EEG, client, classifier, client, DISPLAY] ---> 2382.13699075106
+2
+[classifier, connector, classifier] ---> NaN
+=========================================
+cloud : Energy Consumed = 420059.71069924237
+proxy-server : Energy Consumed = 0.0
+d-0 : Energy Consumed = 0.0
+m-0-0 : Energy Consumed = 36334.90252990102
+m-0-1 : Energy Consumed = 40163.7125778775
+m-0-2 : Energy Consumed = 47380.81273710701
+m-0-3 : Energy Consumed = 43021.36022228261
+m-0-4 : Energy Consumed = 42603.9295961936
+m-0-5 : Energy Consumed = 44827.68397610216
+m-0-6 : Energy Consumed = 40339.13772921108
+m-0-7 : Energy Consumed = 44490.36051002036
+m-0-8 : Energy Consumed = 47610.17137367697
+m-0-9 : Energy Consumed = 43627.17075414035
+m-0-10 : Energy Consumed = 39030.92836632067
+m-0-11 : Energy Consumed = 43309.393608496306
+d-1 : Energy Consumed = 0.0
+m-1-0 : Energy Consumed = 42233.99800094443
+m-1-1 : Energy Consumed = 45796.68044085462
+m-1-2 : Energy Consumed = 42970.66242339409
+m-1-3 : Energy Consumed = 45217.29756146378
+m-1-4 : Energy Consumed = 44529.84755587795
+m-1-5 : Energy Consumed = 41534.204783898575
+m-1-6 : Energy Consumed = 42548.26485795748
+m-1-7 : Energy Consumed = 45513.38750762421
+m-1-8 : Energy Consumed = 44149.03068730739
+m-1-9 : Energy Consumed = 43746.26626139213
+m-1-10 : Energy Consumed = 42807.24127878446
+m-1-11 : Energy Consumed = 42941.89663612645
+d-2 : Energy Consumed = 0.0
+m-2-0 : Energy Consumed = 41178.22986340912
+m-2-1 : Energy Consumed = 43344.77173809375
+m-2-2 : Energy Consumed = 41599.03009444518
+m-2-3 : Energy Consumed = 43328.68845055407
+m-2-4 : Energy Consumed = 43375.8300082098
+m-2-5 : Energy Consumed = 39451.23146181303
+m-2-6 : Energy Consumed = 45245.43409179037
+m-2-7 : Energy Consumed = 41304.990509895004
+m-2-8 : Energy Consumed = 44500.98025981215
+m-2-9 : Energy Consumed = 41085.954404945165
+m-2-10 : Energy Consumed = 42321.71964167139
+m-2-11 : Energy Consumed = 42070.78011446481
+d-3 : Energy Consumed = 0.0
+m-3-0 : Energy Consumed = 43604.02587826572
+m-3-1 : Energy Consumed = 43332.21837927983
+m-3-2 : Energy Consumed = 41654.11638256334
+m-3-3 : Energy Consumed = 40680.00743451379
+m-3-4 : Energy Consumed = 41919.28649712229
+m-3-5 : Energy Consumed = 44209.502633963966
+m-3-6 : Energy Consumed = 41659.25287978619
+m-3-7 : Energy Consumed = 43570.22831988841
+m-3-8 : Energy Consumed = 40740.41659981994
+m-3-9 : Energy Consumed = 44896.72861201069
+m-3-10 : Energy Consumed = 42858.569498839934
+m-3-11 : Energy Consumed = 44361.60788610663
+Cost of execution in cloud = 840119.421398488
+Total network usage = 336674.24
+
+=========================================
+fog
+============== RESULTS ==================
+=========================================
+1
+[EEG, client, classifier, client, DISPLAY] ---> 10.354081266687292
+2
+[classifier, connector, classifier] ---> NaN
+=========================================
+cloud : Energy Consumed = 163089.9999999931
+proxy-server : Energy Consumed = 0.0
+d-0 : Energy Consumed = 0.0
+m-0-0 : Energy Consumed = 102580.51844307178
+m-0-1 : Energy Consumed = 98692.87428316509
+m-0-2 : Energy Consumed = 112907.8795855899
+m-0-3 : Energy Consumed = 118373.88511171806
+m-0-4 : Energy Consumed = 115932.95198768156
+m-0-5 : Energy Consumed = 115081.32713424644
+m-0-6 : Energy Consumed = 107028.92488102405
+m-0-7 : Energy Consumed = 116435.81155175902
+m-0-8 : Energy Consumed = 112976.22771223154
+m-0-9 : Energy Consumed = 119473.30019529472
+m-0-10 : Energy Consumed = 114578.33135539174
+m-0-11 : Energy Consumed = 112507.57296809429
+d-1 : Energy Consumed = 0.0
+m-1-0 : Energy Consumed = 116173.28422439285
+m-1-1 : Energy Consumed = 117116.6418479383
+m-1-2 : Energy Consumed = 118530.53138572059
+m-1-3 : Energy Consumed = 115414.74415788133
+m-1-4 : Energy Consumed = 116255.64605523035
+m-1-5 : Energy Consumed = 114810.31164184102
+m-1-6 : Energy Consumed = 113519.0144007566
+m-1-7 : Energy Consumed = 116008.51469345475
+m-1-8 : Energy Consumed = 120387.2453474011
+m-1-9 : Energy Consumed = 115642.8800638741
+m-1-10 : Energy Consumed = 111968.40984107894
+m-1-11 : Energy Consumed = 116339.51921233343
+d-2 : Energy Consumed = 0.0
+m-2-0 : Energy Consumed = 118988.64003519408
+m-2-1 : Energy Consumed = 117144.1154934022
+m-2-2 : Energy Consumed = 117017.67687663148
+m-2-3 : Energy Consumed = 115960.64936361296
+m-2-4 : Energy Consumed = 119028.35154790102
+m-2-5 : Energy Consumed = 117087.08808045337
+m-2-6 : Energy Consumed = 113850.42039255655
+m-2-7 : Energy Consumed = 117391.22147965388
+m-2-8 : Energy Consumed = 123103.18717987384
+m-2-9 : Energy Consumed = 115181.40577247005
+m-2-10 : Energy Consumed = 119651.35241659306
+m-2-11 : Energy Consumed = 119743.23728967391
+d-3 : Energy Consumed = 0.0
+m-3-0 : Energy Consumed = 110511.96555643616
+m-3-1 : Energy Consumed = 116202.40623681244
+m-3-2 : Energy Consumed = 112700.49640464727
+m-3-3 : Energy Consumed = 113735.07713202827
+m-3-4 : Energy Consumed = 118985.28711457399
+m-3-5 : Energy Consumed = 120689.60666339885
+m-3-6 : Energy Consumed = 115246.33942774491
+m-3-7 : Energy Consumed = 114020.12299250654
+m-3-8 : Energy Consumed = 125862.70123768912
+m-3-9 : Energy Consumed = 116960.03834061086
+m-3-10 : Energy Consumed = 118243.1646671723
+m-3-11 : Energy Consumed = 113264.65148134949
+Cost of execution in cloud = 326179.9999999863
+Total network usage = 97883.2
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+numOfDepts = 4;
+numOfMobilesPerDept = 16;
+
+=========================================
+============== RESULTS ==================
+=========================================
+1
+[EEG, client, classifier, client, DISPLAY] ---> 2503.357269028455
+2
+[classifier, connector, classifier] ---> NaN
+=========================================
+cloud : Energy Consumed = 454863.57697076484
+proxy-server : Energy Consumed = 0.0
+d-0 : Energy Consumed = 0.0
+m-0-0 : Energy Consumed = 35352.126064200755
+m-0-1 : Energy Consumed = 36461.644987169035
+m-0-2 : Energy Consumed = 38931.22140651672
+m-0-3 : Energy Consumed = 38812.12101490384
+m-0-4 : Energy Consumed = 39455.69363102526
+m-0-5 : Energy Consumed = 39730.15365679351
+m-0-6 : Energy Consumed = 40061.75609994081
+m-0-7 : Energy Consumed = 39166.4251159698
+m-0-8 : Energy Consumed = 37899.44777727231
+m-0-9 : Energy Consumed = 39708.326023454734
+m-0-10 : Energy Consumed = 38628.372637581764
+m-0-11 : Energy Consumed = 39479.340098167966
+m-0-12 : Energy Consumed = 38871.5236690414
+m-0-13 : Energy Consumed = 41366.09407231128
+m-0-14 : Energy Consumed = 36464.154593449035
+m-0-15 : Energy Consumed = 38582.376818758166
+d-1 : Energy Consumed = 0.0
+m-1-0 : Energy Consumed = 39105.99499676801
+m-1-1 : Energy Consumed = 40308.90509325025
+m-1-2 : Energy Consumed = 40174.894147259736
+m-1-3 : Energy Consumed = 37446.24683747838
+m-1-4 : Energy Consumed = 40193.65165075961
+m-1-5 : Energy Consumed = 39266.033272879395
+m-1-6 : Energy Consumed = 42417.32894342651
+m-1-7 : Energy Consumed = 38783.15059764388
+m-1-8 : Energy Consumed = 39708.02143541233
+m-1-9 : Energy Consumed = 41102.21074144298
+m-1-10 : Energy Consumed = 38294.59883616836
+m-1-11 : Energy Consumed = 39812.470823204836
+m-1-12 : Energy Consumed = 40034.65686089293
+m-1-13 : Energy Consumed = 36844.69421391559
+m-1-14 : Energy Consumed = 37651.41659357184
+m-1-15 : Energy Consumed = 40680.05399282829
+d-2 : Energy Consumed = 0.0
+m-2-0 : Energy Consumed = 42231.22245919246
+m-2-1 : Energy Consumed = 41903.55040602728
+m-2-2 : Energy Consumed = 40635.59754688208
+m-2-3 : Energy Consumed = 37107.77849881868
+m-2-4 : Energy Consumed = 41097.1837046224
+m-2-5 : Energy Consumed = 38815.58827258858
+m-2-6 : Energy Consumed = 36773.059340992055
+m-2-7 : Energy Consumed = 40495.534225210395
+m-2-8 : Energy Consumed = 40165.929217624616
+m-2-9 : Energy Consumed = 38121.207532815584
+m-2-10 : Energy Consumed = 38594.68120170544
+m-2-11 : Energy Consumed = 38211.94979882575
+m-2-12 : Energy Consumed = 38803.65973284592
+m-2-13 : Energy Consumed = 40641.95680764341
+m-2-14 : Energy Consumed = 39073.86581229574
+m-2-15 : Energy Consumed = 42203.043922964134
+d-3 : Energy Consumed = 0.0
+m-3-0 : Energy Consumed = 41376.06079977024
+m-3-1 : Energy Consumed = 39224.43209708367
+m-3-2 : Energy Consumed = 40924.714859838845
+m-3-3 : Energy Consumed = 38009.91954112621
+m-3-4 : Energy Consumed = 40568.48747504036
+m-3-5 : Energy Consumed = 42669.42666034779
+m-3-6 : Energy Consumed = 39347.72556410414
+m-3-7 : Energy Consumed = 38682.46329001778
+m-3-8 : Energy Consumed = 40837.24470490222
+m-3-9 : Energy Consumed = 40539.1038751638
+m-3-10 : Energy Consumed = 38106.45964900275
+m-3-11 : Energy Consumed = 37459.07458487509
+m-3-12 : Energy Consumed = 38784.88709980207
+m-3-13 : Energy Consumed = 38435.73990657942
+m-3-14 : Energy Consumed = 38744.17412603934
+m-3-15 : Energy Consumed = 38236.56238797843
+Cost of execution in cloud = 909727.1539415348
+Total network usage = 440946.86
+
+
+=========================================
+fog
+============== RESULTS ==================
+=========================================
+1
+[EEG, client, classifier, client, DISPLAY] ---> 10.373388784597587
+2
+[classifier, connector, classifier] ---> NaN
+=========================================
+cloud : Energy Consumed = 170609.99999999173
+proxy-server : Energy Consumed = 0.0
+d-0 : Energy Consumed = 0.0
+m-0-0 : Energy Consumed = 99876.51621419162
+m-0-1 : Energy Consumed = 95488.04201516084
+m-0-2 : Energy Consumed = 117783.28823307197
+m-0-3 : Energy Consumed = 114667.53785373541
+m-0-4 : Energy Consumed = 115671.29457657572
+m-0-5 : Energy Consumed = 115026.16489868268
+m-0-6 : Energy Consumed = 118202.5568280863
+m-0-7 : Energy Consumed = 113329.0024979322
+m-0-8 : Energy Consumed = 112203.91145203743
+m-0-9 : Energy Consumed = 113345.97602157725
+m-0-10 : Energy Consumed = 121105.49117552949
+m-0-11 : Energy Consumed = 112987.38383318696
+m-0-12 : Energy Consumed = 119605.87362810996
+m-0-13 : Energy Consumed = 113866.13323173556
+m-0-14 : Energy Consumed = 120492.94654248047
+m-0-15 : Energy Consumed = 116150.82203695725
+d-1 : Energy Consumed = 0.0
+m-1-0 : Energy Consumed = 117740.26484941336
+m-1-1 : Energy Consumed = 117303.98015662664
+m-1-2 : Energy Consumed = 114203.88229370222
+m-1-3 : Energy Consumed = 113798.41065586236
+m-1-4 : Energy Consumed = 116662.30649979916
+m-1-5 : Energy Consumed = 121630.461745946
+m-1-6 : Energy Consumed = 118157.06539650873
+m-1-7 : Energy Consumed = 114400.76188934917
+m-1-8 : Energy Consumed = 116428.95843171902
+m-1-9 : Energy Consumed = 115148.99536922306
+m-1-10 : Energy Consumed = 121981.882069746
+m-1-11 : Energy Consumed = 119546.18999710641
+m-1-12 : Energy Consumed = 119176.8702803883
+m-1-13 : Energy Consumed = 119000.02403875132
+m-1-14 : Energy Consumed = 116973.89864840408
+m-1-15 : Energy Consumed = 115743.04653360968
+d-2 : Energy Consumed = 0.0
+m-2-0 : Energy Consumed = 120849.28808019598
+m-2-1 : Energy Consumed = 115874.51948574642
+m-2-2 : Energy Consumed = 117626.14461015465
+m-2-3 : Energy Consumed = 121609.41939789284
+m-2-4 : Energy Consumed = 125051.36658195808
+m-2-5 : Energy Consumed = 114131.89587235765
+m-2-6 : Energy Consumed = 119408.35666521595
+m-2-7 : Energy Consumed = 122779.67647750227
+m-2-8 : Energy Consumed = 117576.2204550099
+m-2-9 : Energy Consumed = 117120.80926665507
+m-2-10 : Energy Consumed = 115591.37704567588
+m-2-11 : Energy Consumed = 119910.01582691309
+m-2-12 : Energy Consumed = 115556.04112871413
+m-2-13 : Energy Consumed = 119782.77393531974
+m-2-14 : Energy Consumed = 113273.56279057183
+m-2-15 : Energy Consumed = 116656.40039954279
+d-3 : Energy Consumed = 0.0
+m-3-0 : Energy Consumed = 119364.27287798209
+m-3-1 : Energy Consumed = 118180.0591544669
+m-3-2 : Energy Consumed = 119301.11634944772
+m-3-3 : Energy Consumed = 117136.76190867973
+m-3-4 : Energy Consumed = 116110.82383928887
+m-3-5 : Energy Consumed = 120398.07486717569
+m-3-6 : Energy Consumed = 119114.24508779362
+m-3-7 : Energy Consumed = 116468.37722141904
+m-3-8 : Energy Consumed = 118142.0535637986
+m-3-9 : Energy Consumed = 117733.5356697675
+m-3-10 : Energy Consumed = 120907.58648890635
+m-3-11 : Energy Consumed = 118389.65139529106
+m-3-12 : Energy Consumed = 126092.96853808645
+m-3-13 : Energy Consumed = 123481.76358152027
+m-3-14 : Energy Consumed = 118157.23710568767
+m-3-15 : Energy Consumed = 116608.31674703717
+Cost of execution in cloud = 341219.99999998364
+Total network usage = 129857.6

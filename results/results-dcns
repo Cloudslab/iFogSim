@@ -1,0 +1,275 @@
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+static int numOfAreas = 1;
+static int numOfCamerasPerArea = 3;
+=========================================
+============== RESULTS ==================
+fog
+=========================================
+1
+[motion_detector, object_detector, object_tracker] ---> 11.153455882353773
+2
+[object_tracker, PTZ_CONTROL] ---> 3.1300000000007087
+=========================================
+cloud : Energy Consumed = 1750.0000000009265
+proxy-server : Energy Consumed = 0.0
+r-0 : Energy Consumed = 564290.000000063
+m-0-0 : Energy Consumed = 523710.00000014214
+m-0-1 : Energy Consumed = 523710.00000014214
+m-0-2 : Energy Consumed = 523710.00000014214
+Cost of execution in cloud = 3500.000000001853
+Total network usage = 25645.94
+
+=========================================
+============== RESULTS ==================
+cloud
+=========================================
+1
+[motion_detector, object_detector, object_tracker] ---> 211.65577344226355
+2
+[object_tracker, PTZ_CONTROL] ---> 205.15000000000097
+=========================================
+cloud : Energy Consumed = 205940.0015001599
+proxy-server : Energy Consumed = 0.0
+r-0 : Energy Consumed = 0.0
+m-0-0 : Energy Consumed = 523710.00000014214
+m-0-1 : Energy Consumed = 523710.00000014214
+m-0-2 : Energy Consumed = 523710.00000014214
+Cost of execution in cloud = 411880.00300031994
+Total network usage = 572629.76
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+static int numOfAreas = 2;
+	static int numOfCamerasPerArea = 3;
+
+=========================================
+============== RESULTS ==================
+fog
+=========================================
+1
+[motion_detector, object_detector, object_tracker] ---> 11.692762487258959
+2
+[object_tracker, PTZ_CONTROL] ---> 3.1300000000007087
+=========================================
+cloud : Energy Consumed = 4970.0000000023465
+proxy-server : Energy Consumed = 0.0
+r-0 : Energy Consumed = 608235.0000000618
+m-0-0 : Energy Consumed = 523710.00000014214
+m-0-1 : Energy Consumed = 523710.00000014214
+m-0-2 : Energy Consumed = 523710.00000014214
+r-1 : Energy Consumed = 616870.000000063
+m-1-0 : Energy Consumed = 523710.00000014214
+m-1-1 : Energy Consumed = 523710.00000014214
+m-1-2 : Energy Consumed = 523710.00000014214
+Cost of execution in cloud = 9940.000000004693
+Total network usage = 69567.88
+
+=========================================
+============== RESULTS ==================
+cloud
+=========================================
+1
+[motion_detector, object_detector, object_tracker] ---> 213.7268332836146
+2
+[object_tracker, PTZ_CONTROL] ---> 205.16000000000147
+=========================================
+cloud : Energy Consumed = 695370.0165017201
+proxy-server : Energy Consumed = 0.0
+r-0 : Energy Consumed = 0.0
+m-0-0 : Energy Consumed = 523710.00000014214
+m-0-1 : Energy Consumed = 523710.00000014214
+m-0-2 : Energy Consumed = 523710.00000014214
+r-1 : Energy Consumed = 0.0
+m-1-0 : Energy Consumed = 523710.00000014214
+m-1-1 : Energy Consumed = 523710.00000014214
+m-1-2 : Energy Consumed = 523710.00000014214
+Cost of execution in cloud = 1390740.0330034401
+Total network usage = 1157725.52
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+=========================================
+============== RESULTS ==================
+fog
+=========================================
+1
+[motion_detector, object_detector, object_tracker] ---> 11.539962911452207
+2
+[object_tracker, PTZ_CONTROL] ---> 3.1300000000007087
+=========================================
+cloud : Energy Consumed = 8085.000000004271
+proxy-server : Energy Consumed = 0.0
+r-0 : Energy Consumed = 589920.0000000576
+m-0-0 : Energy Consumed = 523710.00000014214
+m-0-1 : Energy Consumed = 523710.00000014214
+m-0-2 : Energy Consumed = 523710.00000014214
+r-1 : Energy Consumed = 595630.0000000607
+m-1-0 : Energy Consumed = 523710.00000014214
+m-1-1 : Energy Consumed = 523710.00000014214
+m-1-2 : Energy Consumed = 523710.00000014214
+r-2 : Energy Consumed = 577670.0000000595
+m-2-0 : Energy Consumed = 523710.00000014214
+m-2-1 : Energy Consumed = 523710.00000014214
+m-2-2 : Energy Consumed = 523710.00000014214
+Cost of execution in cloud = 16170.000000008542
+Total network usage = 112637.82
+
+=========================================
+============== RESULTS ==================
+cloud
+=========================================
+1
+[motion_detector, object_detector, object_tracker] ---> 217.21923171170332
+2
+[object_tracker, PTZ_CONTROL] ---> 205.17000000000132
+=========================================
+cloud : Energy Consumed = 953680.0150015985
+proxy-server : Energy Consumed = 0.0
+r-0 : Energy Consumed = 0.0
+m-0-0 : Energy Consumed = 523710.00000014214
+m-0-1 : Energy Consumed = 523710.00000014214
+m-0-2 : Energy Consumed = 523710.00000014214
+r-1 : Energy Consumed = 0.0
+m-1-0 : Energy Consumed = 523710.00000014214
+m-1-1 : Energy Consumed = 523710.00000014214
+m-1-2 : Energy Consumed = 523710.00000014214
+r-2 : Energy Consumed = 0.0
+m-2-0 : Energy Consumed = 523710.00000014214
+m-2-1 : Energy Consumed = 523710.00000014214
+m-2-2 : Energy Consumed = 523710.00000014214
+Cost of execution in cloud = 1907360.030003197
+Total network usage = 1776361.28
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	static int numOfAreas = 4;
+	static int numOfCamerasPerArea = 3;
+=========================================
+============== RESULTS ==================
+fog
+=========================================
+1
+[motion_detector, object_detector, object_tracker] ---> 11.543783046223218
+2
+[object_tracker, PTZ_CONTROL] ---> 3.1300000000007087
+=========================================
+cloud : Energy Consumed = 10115.00000000586
+proxy-server : Energy Consumed = 0.0
+r-0 : Energy Consumed = 610725.0000000625
+m-0-0 : Energy Consumed = 523710.00000014214
+m-0-1 : Energy Consumed = 523710.00000014214
+m-0-2 : Energy Consumed = 523710.00000014214
+r-1 : Energy Consumed = 603130.00000006
+m-1-0 : Energy Consumed = 523710.00000014214
+m-1-1 : Energy Consumed = 523710.00000014214
+m-1-2 : Energy Consumed = 523710.00000014214
+r-2 : Energy Consumed = 582890.0000000622
+m-2-0 : Energy Consumed = 523710.00000014214
+m-2-1 : Energy Consumed = 523710.00000014214
+m-2-2 : Energy Consumed = 523710.00000014214
+r-3 : Energy Consumed = 585805.0000000637
+m-3-0 : Energy Consumed = 523710.00000014214
+m-3-1 : Energy Consumed = 523710.00000014214
+m-3-2 : Energy Consumed = 523710.00000014214
+Cost of execution in cloud = 20230.00000001172
+Total network usage = 142691.76
+
+=========================================
+============== RESULTS ==================
+cloud
+=========================================
+1
+[motion_detector, object_detector, object_tracker] ---> 772.1146740239961
+2
+[object_tracker, PTZ_CONTROL] ---> 205.1800000000012
+=========================================
+cloud : Energy Consumed = 975995.0000000352
+proxy-server : Energy Consumed = 0.0
+r-0 : Energy Consumed = 0.0
+m-0-0 : Energy Consumed = 523710.00000014214
+m-0-1 : Energy Consumed = 523710.00000014214
+m-0-2 : Energy Consumed = 523710.00000014214
+r-1 : Energy Consumed = 0.0
+m-1-0 : Energy Consumed = 523710.00000014214
+m-1-1 : Energy Consumed = 523710.00000014214
+m-1-2 : Energy Consumed = 523710.00000014214
+r-2 : Energy Consumed = 0.0
+m-2-0 : Energy Consumed = 523710.00000014214
+m-2-1 : Energy Consumed = 523710.00000014214
+m-2-2 : Energy Consumed = 523710.00000014214
+r-3 : Energy Consumed = 0.0
+m-3-0 : Energy Consumed = 523710.00000014214
+m-3-1 : Energy Consumed = 523710.00000014214
+m-3-2 : Energy Consumed = 523710.00000014214
+Cost of execution in cloud = 1951990.0000000703
+Total network usage = 2043585.04
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	static int numOfAreas = 5;
+	static int numOfCamerasPerArea = 3;
+	
+=========================================
+============== RESULTS ==================
+fog
+=========================================
+1
+[motion_detector, object_detector, object_tracker] ---> 11.505745164961342
+2
+[object_tracker, PTZ_CONTROL] ---> 3.1300000000007087
+=========================================
+cloud : Energy Consumed = 11935.000000006763
+proxy-server : Energy Consumed = 0.0
+r-0 : Energy Consumed = 564430.0000000631
+m-0-0 : Energy Consumed = 523710.00000014214
+m-0-1 : Energy Consumed = 523710.00000014214
+m-0-2 : Energy Consumed = 523710.00000014214
+r-1 : Energy Consumed = 577710.0000000617
+m-1-0 : Energy Consumed = 523710.00000014214
+m-1-1 : Energy Consumed = 523710.00000014214
+m-1-2 : Energy Consumed = 523710.00000014214
+r-2 : Energy Consumed = 600660.000000058
+m-2-0 : Energy Consumed = 523710.00000014214
+m-2-1 : Energy Consumed = 523710.00000014214
+m-2-2 : Energy Consumed = 523710.00000014214
+r-3 : Energy Consumed = 577305.0000000627
+m-3-0 : Energy Consumed = 523710.00000014214
+m-3-1 : Energy Consumed = 523710.00000014214
+m-3-2 : Energy Consumed = 523710.00000014214
+r-4 : Energy Consumed = 563650.0000000615
+m-4-0 : Energy Consumed = 523710.00000014214
+m-4-1 : Energy Consumed = 523710.00000014214
+m-4-2 : Energy Consumed = 523710.00000014214
+Cost of execution in cloud = 23870.000000013526
+Total network usage = 169577.7
+=========================================
+============== RESULTS ==================
+cloud
+=========================================
+1
+[motion_detector, object_detector, object_tracker] ---> 1726.3172526573796
+2
+[object_tracker, PTZ_CONTROL] ---> 205.19000000000165
+=========================================
+cloud : Energy Consumed = 978630.0000000348
+proxy-server : Energy Consumed = 0.0
+r-0 : Energy Consumed = 0.0
+m-0-0 : Energy Consumed = 523710.00000014214
+m-0-1 : Energy Consumed = 523710.00000014214
+m-0-2 : Energy Consumed = 523710.00000014214
+r-1 : Energy Consumed = 0.0
+m-1-0 : Energy Consumed = 523710.00000014214
+m-1-1 : Energy Consumed = 523710.00000014214
+m-1-2 : Energy Consumed = 523710.00000014214
+r-2 : Energy Consumed = 0.0
+m-2-0 : Energy Consumed = 523710.00000014214
+m-2-1 : Energy Consumed = 523710.00000014214
+m-2-2 : Energy Consumed = 523710.00000014214
+r-3 : Energy Consumed = 0.0
+m-3-0 : Energy Consumed = 523710.00000014214
+m-3-1 : Energy Consumed = 523710.00000014214
+m-3-2 : Energy Consumed = 523710.00000014214
+r-4 : Energy Consumed = 0.0
+m-4-0 : Energy Consumed = 523710.00000014214
+m-4-1 : Energy Consumed = 523710.00000014214
+m-4-2 : Energy Consumed = 523710.00000014214
+Cost of execution in cloud = 1957260.0000000696
+Total network usage = 2056008.8

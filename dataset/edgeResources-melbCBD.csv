@@ -1,0 +1,132 @@
+ID,Latitude,Longitude,Block,Level,Parent,State,Details
+0,-37.8136,144.9631,0,0,-1,VIC,DataCenter
+1,-37.813946,144.954633,1,1,0,VIC,Block1 Proxy
+2,-37.816762,144.955915,2,1,0,VIC,Block2 Proxy
+3,-37.818903,144.95694,3,1,0,VIC,Block3 Proxy
+4,-37.812591,144.959656,4,1,0,VIC,Block4 Proxy
+5,-37.815423,144.960901,5,1,0,VIC,Block5 Proxy
+6,-37.817443,144.961784,6,1,0,VIC,Block6 Proxy
+7,-37.811136,144.964557,7,1,0,VIC,Block7 Proxy
+8,-37.813741,144.965706,8,1,0,VIC,Block8 Proxy
+9,-37.815953,144.96675,9,1,0,VIC,Block9 Proxy
+10,-37.809728,144.969459,10,1,0,VIC,Block10 Proxy
+11,-37.812124,144.970587,11,1,0,VIC,Block11 Proxy
+12,-37.814584,144.971705,12,1,0,VIC,Block12 Proxy
+13,-37.81517,144.97476,12,2,12,VIC,Spring and Flinders ucell Optus North West corner Spring and Flinders St MELBOURNE
+14,-37.81524,144.95256,1,2,1,VIC,Optus Minicell - Lon_Spencer Corner Spencer and Lonsdale St MELBOURNE
+15,-37.81239,144.9712,11,2,11,VIC,136 Exhibition St MELBOURNE
+16,-37.81679,144.96918,9,2,9,VIC,Federation Square North -V 164A Flinders Street MELBOURNE
+17,-37.81808,144.95692,3,2,3,VIC,KING ST (3144 REPLACEMENT) -V 530 Collins Street MELBOURNE
+18,-37.811269,144.957909,4,2,4,VIC,Empire Apartments 402-408 La Trobe Street MELBOURNE
+19,-37.809081,144.96893,10,2,10,VIC,CMTS Site 287-293 Exhibition St MELBOURNE
+20,-37.81285,144.955026,1,2,1,VIC,CGU Bldg 485 La Trobe Street MELBOURNE
+21,-37.816356,144.962313,6,2,6,VIC,360 Collins St Collins Wales Building MELBOURNE
+22,-37.818071,144.957211,3,2,3,VIC,Stock Exchange Bldg 530 Collins Street MELBOURNE
+23,-37.818202,144.954367,2,2,2,VIC,625 Lt Collins St MELBOURNE
+24,-37.814225,144.971971,12,2,12,VIC,ANZ Bank Tower 55 Collins Street MELBOURNE
+25,-37.815975,144.955905,2,2,2,VIC,Bourke Place 600 Bourke Street MELBOURNE
+26,-37.815493,144.956714,2,2,2,VIC,Marland House 570 Bourke Street MELBOURNE
+27,-37.81852,144.957141,3,2,3,VIC,Rialto Towers 525 Collins Street MELBOURNE
+28,-37.817303,144.962344,6,2,6,VIC,367 Collins Street Optus Centre MELBOURNE
+29,-37.818162,144.959934,6,2,6,VIC,Optus Site National Mutual Building 447 Collins St MELBOURNE
+30,-37.813381,144.959612,4,2,4,VIC,CMTS Site 235 Queen St MELBOURNE
+31,-37.812084,144.967997,11,2,11,VIC,CMTS Site 180 Russell St MELBOURNE
+32,-37.818494,144.957705,3,2,3,VIC,Optus Site Rialto 525 Collins Street MELBOURNE
+33,-37.812122,144.97071,11,2,11,VIC,Optus Site CBD123 Cnr Bourkr & Exhibition Streets MELBOURNE
+34,-37.811625,144.964919,7,2,7,VIC,Optus Site Lonsdale/Swanston 253 Lonsdale St MELBOURNE
+35,-37.814263,144.972105,12,2,12,VIC,Optus Site 101 Collins St (Pac Dun) 101 Collins St MELBOURNE
+36,-37.815549,144.966686,9,2,9,VIC,Optus Site Collins & Swanston Cnr Collins & Swanston Sts MELBOURNE
+37,-37.818166,144.964831,6,2,6,VIC,Optus Site Flinders/Elizabeth 1 Elizabeth St MELBOURNE
+38,-37.817384,144.959217,6,2,6,VIC,Optus Site Melbourne City West 454 Collins St MELBOURNE
+39,-37.814896,144.971668,12,2,12,VIC,Optus Site Collins PLace/ANZ Tower 55 Collins St MELBOURNE
+40,-37.811126,144.962116,5,2,5,VIC,Optus Site Melbourne Central Tower 360 Elizabeth St MELBOURNE
+41,-37.818656,144.956626,3,2,3,VIC,Optus Site Minicell - King & Collins 539-557 Collins St MELBOURNE
+42,-37.817261,144.962515,6,2,6,VIC,Optus Site Bridge Information Systems 360 Collins St MELBOURNE
+43,-37.812845,144.968248,11,2,11,VIC,Optus Site Bourke/Russell 175 Bourke St MELBOURNE
+44,-37.811978,144.962388,5,2,5,VIC,Optus Site Lonsdale/Elizabeth Elizabeth & Lonsdale MELBOURNE
+45,-37.812723,144.960164,4,2,4,VIC,Optus Site Queen St 250 Queen St MELBOURNE
+46,-37.813463,144.973217,12,2,12,VIC,Optus Site Minicell - Spring & Collins 14-16 Collins St MELBOURNE
+47,-37.810996,144.967095,7,2,7,VIC,Optus Site Minicell - Lonsdale & Russell 177-183 Lonsdale St MELBOURNE
+48,-37.82091,144.955155,3,2,3,VIC,Optus Site Minicell - Flinders and Spencer 2 Spencer St MELBOURNE
+49,-37.820123,144.957552,3,2,3,VIC,Optus Site Minicell - King & Flinders King & Flinders St MELBOURNE
+50,-37.812899,144.959886,4,2,4,VIC,Optus Site Lonsdale/Queen 250 Queen St MELBOURNE
+51,-37.811678,144.962783,7,2,7,VIC,Optus Site CBD North 360 Elizabeth St MELBOURNE
+52,-37.819576,144.95985,3,2,3,VIC,Optus Site Flinders/William 1 William St MELBOURNE
+53,-37.817069,144.961828,6,2,6,VIC,Optus Site Minicell - Collins & Queen 379 Collins St MELBOURNE
+54,-37.818218,144.960705,6,2,6,VIC,Optus Sire Minicell - Market & Flinders 50 Market St MELBOURNE
+55,-37.809885,144.963286,7,2,7,VIC,Optus Site Museum Station Cnr Latrobe and Elizabeth Sts MELBOURNE
+56,-37.812799,144.954686,1,2,1,VIC,Optus Site CGU Centre 485 Latrobe Street MELBOURNE
+57,-37.811928,144.956414,1,2,1,VIC,Optus Site Flagstaff Station 433 Latrobe Street MELBOURNE
+58,-37.816011,144.972058,12,2,12,VIC,Optus Site Minicell-Flinders & Exhibition 82 Flinders Street MELBOURNE
+59,-37.814431,144.954653,1,2,1,VIC,Optus Site Minicell - Lonsdale & King 600-610 Lonsdale St MELBOURNE
+60,-37.810382,144.971223,10,2,10,VIC,Optus Site TAC Building 222 Exhibition Street MELBOURNE
+61,-37.816467,144.958334,2,2,2,VIC,Optus Site BHP House 140 William Street MELBOURNE
+62,-37.815777,144.970508,12,2,12,VIC,Optus Site BHP Petroleum Plaza 120 Collins Street MELBOURNE
+63,-37.812578,144.965314,8,2,8,VIC,Optus Site Minicell - Little Bourke & Swa Ltl Bourke & Swanston St MELBOURNE
+64,-37.81607,144.957254,2,2,2,VIC,Optus Site Minicell - Bourke & William 121 William St MELBOURNE
+65,-37.814398,144.96632,8,2,8,VIC,Optus Site Minicell - Town Hall 134-142 Swanston Street MELBOURNE
+66,-37.813963,144.957301,1,2,1,VIC,Optus Site Minicell - Lonsdale & William Lonsdale & William Streets MELBOURNE
+67,-37.817779,144.955969,2,2,2,VIC,99 King Street MELBOURNE
+68,-37.818018,144.964596,6,2,6,VIC,1 Elizabeth Street cnr Flinders St MELBOURNE
+69,-37.812857,144.96843,11,2,11,VIC,Optus/Telstra Site cnr Russell & Bourke Sts MELBOURNE
+70,-37.811627,144.965056,7,2,7,VIC,CMTS Site cnr Swanston & Lonsdale Sts MELBOURNE
+71,-37.816122,144.964421,9,2,9,VIC,Optus/Telstra Site cnr Collins & Elizabeth Sts MELBOURNE
+72,-37.813447,144.966028,8,2,8,VIC,Optus Site cnr Bourke & Swanston Sts MELBOURNE
+73,-37.815488,144.966824,9,2,9,VIC,cnr Collins & Swanston Streets Westin Hotel MELBOURNE
+74,-37.814765,144.969286,12,2,12,VIC,Telstra/Optus Site cnr Russell & Collins Sts MELBOURNE
+75,-37.812088,144.970836,11,2,11,VIC,Optus/Telstra Site cnr Bourke & Exhibition Sts MELBOURNE
+76,-37.816206,144.966634,9,2,9,VIC,Optus/Vodafone Site 55 Swanston Walk MELBOURNE
+77,-37.819471,144.960069,6,2,6,VIC,Optus Site 1 William St MELBOURNE
+78,-37.810219,144.9618,5,2,5,VIC,Optus/Telstra Site cnr Elizabeth & La Trobe Sts MELBOURNE
+79,-37.809538,144.964091,7,2,7,VIC,Optus/Telstra Site cnr Swanston & La Trobe Sts MELBOURNE
+80,-37.812653,144.956622,1,2,1,VIC,Nubrick House 271 William Street MELBOURNE
+81,-37.811251,144.964157,7,2,7,VIC,Legacy House 283 Swanston Street MELBOURNE
+82,-37.81354,144.971421,12,2,12,VIC,Level 6 / 161 Collins Street MELBOURNE
+83,-37.809969,144.97078,10,2,10,VIC,Telstra/Vodafone Site 43 Lonsdale St MELBOURNE
+84,-37.809264,144.971708,10,2,10,VIC,Casselden Place 2 Lonsdale St MELBOURNE
+85,-37.812711,144.959971,4,2,4,VIC,Optus Site 250 Queen St MELBOURNE
+86,-37.81653,144.961967,6,2,6,VIC,394 Collins St MELBOURNE
+87,-37.815387,144.968815,9,2,9,VIC,161 Collins St Carpark MELBOURNE
+88,-37.81751,144.959237,6,2,6,VIC,Vodafone Microcell Cnr Collins & William Streets MELBOURNE
+89,-37.814257,144.96337,8,2,8,VIC,Vodafone Microcell Cnr Bourke & Elizabeth Streets MELBOURNE
+90,-37.809041,144.971828,10,2,10,VIC,Level 33 Casselden Place 235 Spring Street MELBOURNE
+91,-37.820744,144.955485,3,2,3,VIC,Hotham Hotel 2 Spencer St MELBOURNE
+92,-37.817483,144.959445,6,2,6,VIC,Optus Site 454 Collins St MELBOURNE
+93,-37.812934,144.952075,1,2,1,VIC,Optus Site 318-326 Spencer St MELBOURNE
+94,-37.812343,144.954135,1,2,1,VIC,Optus Site 450 LaTrobe St MELBOURNE
+95,-37.811533,144.972614,11,2,11,VIC,Optus Site 10 Bourke St MELBOURNE
+96,-37.813573,144.973404,12,2,12,VIC,Optus Site 14-16 Collins St MELBOURNE
+97,-37.815793,144.958295,5,2,5,VIC,Optus Site AMP Square 121 William St MELBOURNE
+98,-37.818474,144.956805,3,2,3,VIC,Optus Site 539-557 Collins St MELBOURNE
+99,-37.814395,144.963537,8,2,8,VIC,S/E Cnr Bourke & Elizabeth Sts MELBOURNE
+100,-37.815891,144.958861,5,2,5,VIC,140 William Street MELBOURNE
+101,-37.815195,144.974409,12,2,12,VIC,Optus microcell - Cnr Spring St & Flinders St MELBOURNE
+102,-37.815371,144.973076,12,2,12,VIC,8 Exhibition St MELBOURNE
+103,-37.818151,144.96081,6,2,6,VIC,BTS Site 38465D Treasure Funds House 50 Market Street MELBOURNE
+104,-37.814905,144.954913,1,2,1,VIC,225 King Street MELBOURNE
+105,-37.812379,144.956402,1,2,1,VIC,Upper Flagstaff Station MELBOURNE
+106,-37.816822,144.963209,6,2,6,VIC,333 Collins Street MELBOURNE
+107,-37.815309,144.969476,12,2,12,VIC,Hyatt Hotel 123 Collins St MELBOURNE
+108,-37.809356,144.970729,10,2,10,VIC,50 Lonsdale St MELBOURNE
+109,-37.811313,144.972958,11,2,11,VIC,Parliament Underground Station MELBOURNE
+110,-37.810641,144.970534,10,2,10,VIC,222 Exhibition St MELBOURNE
+111,-37.810911,144.96269,5,2,5,VIC,cnr Elizabeth & La Trobe Streets MELBOURNE
+112,-37.810065,144.963281,7,2,7,VIC,Optus/Vodafone Site 6/211 La Trobe St MELBOURNE
+113,-37.811398,144.972672,11,2,11,VIC,20-30 Bourke St MELBOURNE
+114,-37.816891,144.961957,6,2,6,VIC,Optus/Telstra Site cnr Collins & Queen Sts MELBOURNE
+115,-37.813545,144.971705,12,2,12,VIC,Optus/Telstra Site cnr Collins & Exhibition Sts MELBOURNE
+116,-37.814265,144.971685,12,2,12,VIC,CMTS Site Penthouse 71 Collins St MELBOURNE
+117,-37.814484,144.9635,8,2,8,VIC,Optus/Vodafone Site 341-357 Bourke St MELBOURNE
+118,-37.813167,144.965468,8,2,8,VIC,Vodafone Site 195 Swanston St MELBOURNE
+119,-37.81922,144.958485,3,2,3,VIC,452-470 Flinders Street MELBOURNE
+120,-37.815858,144.954818,2,2,2,VIC,Citipower House 628 Bourke Street MELBOURNE
+121,-37.816217,144.970928,12,2,12,VIC,Wilson Parking 114 Flinders Street MELBOURNE
+122,-37.810269,144.969863,10,2,10,VIC,Optus Minicell SE Cnr Exhibition St and Lonsdale St MELBOURNE
+123,-37.819101,144.954229,3,2,3,VIC,Optus Minicell NE Cnr Spencer St and Collins St MELBOURNE
+124,-37.811022,144.959234,4,2,4,VIC,Optus Minicell SE Cnr Queen St and Latrobe St MELBOURNE
+125,-37.81215,144.961955,4,2,4,VIC,Optus Rooftop Site Mitchell House 283 Elizabeth Street MELBOURNE
+126,-37.816496,144.96509,9,2,9,VIC,Customer Site 271 Collins Street MELBOURNE
+127,-37.815296,144.958369,5,2,5,VIC,Optus Rooftop Site 520 Bourke Street MELBOURNE
+128,-37.81631,144.964351,9,2,9,VIC,Optus Rooftop Site 287 Collins Street MELBOURNE
+129,-37.817386,144.96123,6,2,6,VIC,Telstra IBC 401 Collins St MELBOURNE
+130,-37.813175,144.952919,1,2,1,VIC,Vodafone Site Building C William Angliss Institute 555 La Trobe Street MELBOURNE VIC 3000

@@ -1,0 +1,396 @@
+Starting VRGame...
+0.0 Submitted application vr_game
+NEW PATH
+On device m-0-0
+Currently placed operators = [EEG, DISPLAY]
+client----->DISPLAY : 0.01
+client----->classifier : 0.17647058823529416
+classifier----->client : 0.17647058823529416
+client----->DISPLAY : 0.17647058823529416
+Placed Modules : [EEG, DISPLAY]
+Modules to place : [client]
+BEGINNING OF LOOP : Operators to Place : [client]
+
+[6, 5, 4, 3]
+m-0-0
+d-0
+proxy-server
+cloud
+client XXXXX Upstream Device : m-0-0
+m-0-0 : 0 modules of Operator client is already placed on device m-0-0
+Placed Modules : [EEG, DISPLAY, client]
+Modules to place : [classifier]
+You can rest in peace. client can be created in m-0-0
+BEGINNING OF LOOP : Operators to Place : [classifier]
+
+[6, 5, 4, 3]
+m-0-0
+d-0
+proxy-server
+cloud
+classifier XXXXX Upstream Device : cloud
+m-0-0 : 0 modules of Operator classifier is already placed on device cloud
+On device d-0
+Currently placed operators = [EEG, DISPLAY, client, client]
+Placed Modules : [EEG, DISPLAY, client, client]
+Modules to place : [classifier]
+BEGINNING OF LOOP : Operators to Place : [classifier]
+
+[6, 5, 4, 3]
+m-0-0
+d-0
+proxy-server
+cloud
+classifier XXXXX Upstream Device : cloud
+d-0 : 0 modules of Operator classifier is already placed on device cloud
+On device proxy-server
+Currently placed operators = [EEG, DISPLAY, client, client]
+Placed Modules : [EEG, DISPLAY, client, client]
+Modules to place : [classifier]
+BEGINNING OF LOOP : Operators to Place : [classifier]
+
+[6, 5, 4, 3]
+m-0-0
+d-0
+proxy-server
+cloud
+classifier XXXXX Upstream Device : cloud
+proxy-server : 0 modules of Operator classifier is already placed on device cloud
+On device cloud
+Currently placed operators = [EEG, DISPLAY, client, client]
+Placed Modules : [EEG, DISPLAY, client, client]
+Modules to place : [classifier]
+BEGINNING OF LOOP : Operators to Place : [classifier]
+
+[6, 5, 4, 3]
+m-0-0
+d-0
+proxy-server
+cloud
+classifier XXXXX Upstream Device : cloud
+cloud : 0 modules of Operator classifier is already placed on device cloud
+Placed Modules : [EEG, DISPLAY, client, client, classifier]
+Modules to place : [connector]
+You can rest in peace. classifier can be created in cloud
+BEGINNING OF LOOP : Operators to Place : [connector]
+
+[6, 5, 4, 3]
+m-0-0
+d-0
+proxy-server
+cloud
+connector XXXXX Upstream Device : cloud
+cloud : 0 modules of Operator connector is already placed on device cloud
+Placed Modules : [EEG, DISPLAY, client, client, classifier, classifier, connector]
+Modules to place : []
+You can rest in peace. connector can be created in cloud
+NEW PATH
+On device m-0-1
+Currently placed operators = [EEG, DISPLAY]
+client----->DISPLAY : 0.01
+client----->classifier : 0.17647058823529416
+classifier----->client : 0.17647058823529416
+client----->DISPLAY : 0.17647058823529416
+Placed Modules : [EEG, DISPLAY]
+Modules to place : [client]
+BEGINNING OF LOOP : Operators to Place : [client]
+
+[9, 5, 4, 3]
+m-0-1
+d-0
+proxy-server
+cloud
+client XXXXX Upstream Device : m-0-1
+m-0-1 : 0 modules of Operator client is already placed on device m-0-1
+Placed Modules : [EEG, DISPLAY, client]
+Modules to place : [classifier]
+You can rest in peace. client can be created in m-0-1
+BEGINNING OF LOOP : Operators to Place : [classifier]
+
+[9, 5, 4, 3]
+m-0-1
+d-0
+proxy-server
+cloud
+classifier XXXXX Upstream Device : cloud
+m-0-1 : 1 modules of Operator classifier is already placed on device cloud
+On device d-0
+Currently placed operators = [EEG, DISPLAY, client, client]
+Placed Modules : [EEG, DISPLAY, client, client]
+Modules to place : [classifier]
+BEGINNING OF LOOP : Operators to Place : [classifier]
+
+[9, 5, 4, 3]
+m-0-1
+d-0
+proxy-server
+cloud
+classifier XXXXX Upstream Device : cloud
+d-0 : 1 modules of Operator classifier is already placed on device cloud
+On device proxy-server
+Currently placed operators = [EEG, DISPLAY, client, client]
+Placed Modules : [EEG, DISPLAY, client, client]
+Modules to place : [classifier]
+BEGINNING OF LOOP : Operators to Place : [classifier]
+
+[9, 5, 4, 3]
+m-0-1
+d-0
+proxy-server
+cloud
+classifier XXXXX Upstream Device : cloud
+proxy-server : 1 modules of Operator classifier is already placed on device cloud
+On device cloud
+Currently placed operators = [EEG, DISPLAY, client, client]
+Placed Modules : [EEG, DISPLAY, client, client]
+Modules to place : [classifier]
+BEGINNING OF LOOP : Operators to Place : [classifier]
+
+[9, 5, 4, 3]
+m-0-1
+d-0
+proxy-server
+cloud
+classifier XXXXX Upstream Device : cloud
+cloud : 1 modules of Operator classifier is already placed on device cloud
+Placed Modules : [EEG, DISPLAY, client, client, classifier]
+Modules to place : [connector]
+You can rest in peace. classifier can be created in cloud
+BEGINNING OF LOOP : Operators to Place : [connector]
+
+[9, 5, 4, 3]
+m-0-1
+d-0
+proxy-server
+cloud
+connector XXXXX Upstream Device : cloud
+cloud : 1 modules of Operator connector is already placed on device cloud
+Placed Modules : [EEG, DISPLAY, client, client, classifier, classifier, connector]
+Modules to place : []
+You can rest in peace. connector can be created in cloud
+NEW PATH
+On device m-0-2
+Currently placed operators = [EEG, DISPLAY]
+client----->DISPLAY : 0.01
+client----->classifier : 0.17647058823529416
+classifier----->client : 0.17647058823529416
+client----->DISPLAY : 0.17647058823529416
+Placed Modules : [EEG, DISPLAY]
+Modules to place : [client]
+BEGINNING OF LOOP : Operators to Place : [client]
+
+[12, 5, 4, 3]
+m-0-2
+d-0
+proxy-server
+cloud
+client XXXXX Upstream Device : m-0-2
+m-0-2 : 0 modules of Operator client is already placed on device m-0-2
+Placed Modules : [EEG, DISPLAY, client]
+Modules to place : [classifier]
+You can rest in peace. client can be created in m-0-2
+BEGINNING OF LOOP : Operators to Place : [classifier]
+
+[12, 5, 4, 3]
+m-0-2
+d-0
+proxy-server
+cloud
+classifier XXXXX Upstream Device : cloud
+m-0-2 : 2 modules of Operator classifier is already placed on device cloud
+On device d-0
+Currently placed operators = [EEG, DISPLAY, client, client]
+Placed Modules : [EEG, DISPLAY, client, client]
+Modules to place : [classifier]
+BEGINNING OF LOOP : Operators to Place : [classifier]
+
+[12, 5, 4, 3]
+m-0-2
+d-0
+proxy-server
+cloud
+classifier XXXXX Upstream Device : cloud
+d-0 : 2 modules of Operator classifier is already placed on device cloud
+On device proxy-server
+Currently placed operators = [EEG, DISPLAY, client, client]
+Placed Modules : [EEG, DISPLAY, client, client]
+Modules to place : [classifier]
+BEGINNING OF LOOP : Operators to Place : [classifier]
+
+[12, 5, 4, 3]
+m-0-2
+d-0
+proxy-server
+cloud
+classifier XXXXX Upstream Device : cloud
+proxy-server : 2 modules of Operator classifier is already placed on device cloud
+On device cloud
+Currently placed operators = [EEG, DISPLAY, client, client]
+Placed Modules : [EEG, DISPLAY, client, client]
+Modules to place : [classifier]
+BEGINNING OF LOOP : Operators to Place : [classifier]
+
+[12, 5, 4, 3]
+m-0-2
+d-0
+proxy-server
+cloud
+classifier XXXXX Upstream Device : cloud
+cloud : 2 modules of Operator classifier is already placed on device cloud
+Placed Modules : [EEG, DISPLAY, client, client, classifier]
+Modules to place : [connector]
+You can rest in peace. classifier can be created in cloud
+BEGINNING OF LOOP : Operators to Place : [connector]
+
+[12, 5, 4, 3]
+m-0-2
+d-0
+proxy-server
+cloud
+connector XXXXX Upstream Device : cloud
+cloud : 2 modules of Operator connector is already placed on device cloud
+Placed Modules : [EEG, DISPLAY, client, client, classifier, classifier, connector]
+Modules to place : []
+You can rest in peace. connector can be created in cloud
+NEW PATH
+On device m-0-3
+Currently placed operators = [EEG, DISPLAY]
+client----->DISPLAY : 0.01
+client----->classifier : 0.17647058823529416
+classifier----->client : 0.17647058823529416
+client----->DISPLAY : 0.17647058823529416
+Placed Modules : [EEG, DISPLAY]
+Modules to place : [client]
+BEGINNING OF LOOP : Operators to Place : [client]
+
+[15, 5, 4, 3]
+m-0-3
+d-0
+proxy-server
+cloud
+client XXXXX Upstream Device : m-0-3
+m-0-3 : 0 modules of Operator client is already placed on device m-0-3
+Placed Modules : [EEG, DISPLAY, client]
+Modules to place : [classifier]
+You can rest in peace. client can be created in m-0-3
+BEGINNING OF LOOP : Operators to Place : [classifier]
+
+[15, 5, 4, 3]
+m-0-3
+d-0
+proxy-server
+cloud
+classifier XXXXX Upstream Device : cloud
+m-0-3 : 3 modules of Operator classifier is already placed on device cloud
+On device d-0
+Currently placed operators = [EEG, DISPLAY, client, client]
+Placed Modules : [EEG, DISPLAY, client, client]
+Modules to place : [classifier]
+BEGINNING OF LOOP : Operators to Place : [classifier]
+
+[15, 5, 4, 3]
+m-0-3
+d-0
+proxy-server
+cloud
+classifier XXXXX Upstream Device : cloud
+d-0 : 3 modules of Operator classifier is already placed on device cloud
+On device proxy-server
+Currently placed operators = [EEG, DISPLAY, client, client]
+Placed Modules : [EEG, DISPLAY, client, client]
+Modules to place : [classifier]
+BEGINNING OF LOOP : Operators to Place : [classifier]
+
+[15, 5, 4, 3]
+m-0-3
+d-0
+proxy-server
+cloud
+classifier XXXXX Upstream Device : cloud
+proxy-server : 3 modules of Operator classifier is already placed on device cloud
+On device cloud
+Currently placed operators = [EEG, DISPLAY, client, client]
+Placed Modules : [EEG, DISPLAY, client, client]
+Modules to place : [classifier]
+BEGINNING OF LOOP : Operators to Place : [classifier]
+
+[15, 5, 4, 3]
+m-0-3
+d-0
+proxy-server
+cloud
+classifier XXXXX Upstream Device : cloud
+cloud : 3 modules of Operator classifier is already placed on device cloud
+Placed Modules : [EEG, DISPLAY, client, client, classifier]
+Modules to place : [connector]
+You can rest in peace. classifier can be created in cloud
+BEGINNING OF LOOP : Operators to Place : [connector]
+
+[15, 5, 4, 3]
+m-0-3
+d-0
+proxy-server
+cloud
+connector XXXXX Upstream Device : cloud
+cloud : 3 modules of Operator connector is already placed on device cloud
+Placed Modules : [EEG, DISPLAY, client, client, classifier, classifier, connector]
+Modules to place : []
+You can rest in peace. connector can be created in cloud
+cloud--->[classifier, connector]
+Creating classifier on device cloud
+Creating connector on device cloud
+proxy-server--->[]
+d-0--->[]
+m-0-0--->[client]
+Creating client on device m-0-0
+m-0-1--->[client]
+Creating client on device m-0-1
+m-0-2--->[client]
+Creating client on device m-0-2
+m-0-3--->[client]
+Creating client on device m-0-3
+{3={connector=4, classifier=4}, 4={}, 5={}, 6={client=1}, 9={client=1}, 12={client=1}, 15={client=1}}
+cloud Creating 4 instances of module classifier
+cloud Creating 4 instances of module connector
+m-0-0 Creating 1 instances of module client
+m-0-1 Creating 1 instances of module client
+m-0-2 Creating 1 instances of module client
+m-0-3 Creating 1 instances of module client
+=========================================
+============== RESULTS ==================
+=========================================
+EXECUTION TIME : 2089
+=========================================
+APPLICATION LOOP DELAYS
+=========================================
+[EEG, client, classifier, client, DISPLAY] ---> 225.15702405515665
+=========================================
+TUPLE CPU EXECUTION DELAY
+=========================================
+GLOBAL_GAME_STATE ---> 0.3390022005587743
+CLASSIFICATION ---> 0.5361701777912904
+EEG ---> 3.9442626565403334
+PLAYER_GAME_STATE ---> 0.18932622841805924
+_SENSOR ---> 0.17877422504247079
+=========================================
+cloud : Energy Consumed = 1.3704092537715308E7
+proxy-server : Energy Consumed = 834332.9999999987
+d-0 : Energy Consumed = 834332.9999999987
+m-0-0 : Energy Consumed = 874724.9330725175
+m-0-1 : Energy Consumed = 874743.9658550094
+m-0-2 : Energy Consumed = 874454.8894849952
+m-0-3 : Energy Consumed = 874348.2768900081
+Cost of execution in cloud = 544536.2560009073
+Total network usage = 77545.3
+THESIS RESULTS
+225.15702405515665
+1.3704092537715308E7
+3498272.0653025303
+834332.9999999987
+2090
+0.3390022005587743
+0.5361701777912904
+3.9442626565403334
+0.18932622841805924
+0.17877422504247079
+77545.3
