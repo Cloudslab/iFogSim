@@ -102,7 +102,7 @@ public class Sensor extends SimEntity{
 		send(gatewayDeviceId, getLatency(), FogEvents.TUPLE_ARRIVAL,tuple);
 	}
 	
-	private int updateTimings(String src, String dest){
+	protected int updateTimings(String src, String dest){
 		Application application = getApp();
 		for(AppLoop loop : application.getLoops()){
 			if(loop.hasEdge(src, dest)){
@@ -230,5 +230,7 @@ public class Sensor extends SimEntity{
 	public void setLatency(Double latency) {
 		this.latency = latency;
 	}
+
+	protected long getOutputSize(){return this.outputSize;}
 
 }

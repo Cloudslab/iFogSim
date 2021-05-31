@@ -328,7 +328,7 @@ public class FogDevice extends PowerDatacenter {
 	 * Perform miscellaneous resource management tasks
 	 * @param ev
 	 */
-	private void manageResources(SimEvent ev) {
+	protected void manageResources(SimEvent ev) {
 		updateEnergyConsumption();
 		send(getId(), Config.RESOURCE_MGMT_INTERVAL, FogEvents.RESOURCE_MGMT);
 	}
@@ -337,7 +337,7 @@ public class FogDevice extends PowerDatacenter {
 	 * Updating the number of modules of an application module on this device
 	 * @param ev instance of SimEvent containing the module and no of instances 
 	 */
-	private void updateModuleInstanceCount(SimEvent ev) {
+	protected void updateModuleInstanceCount(SimEvent ev) {
 		ModuleLaunchConfig config = (ModuleLaunchConfig)ev.getData();
 		String appId = config.getModule().getAppId();
 		if(!moduleInstanceCount.containsKey(appId))
@@ -361,7 +361,7 @@ public class FogDevice extends PowerDatacenter {
 	 * Sending periodic tuple for an application edge. Note that for multiple instances of a single source module, only one tuple is sent DOWN while instanceCount number of tuples are sent UP.
 	 * @param ev SimEvent instance containing the edge to send tuple on
 	 */
-	private void sendPeriodicTuple(SimEvent ev) {
+	protected void sendPeriodicTuple(SimEvent ev) {
 		AppEdge edge = (AppEdge)ev.getData();
 		String srcModule = edge.getSource();
 		AppModule module = getModuleByName(srcModule);
@@ -813,7 +813,7 @@ public class FogDevice extends PowerDatacenter {
 		processVmDestroy(ev, false);
 	}
 	
-	private void initializePeriodicTuples(AppModule module) {
+	protected void initializePeriodicTuples(AppModule module) {
 		String appId = module.getAppId();
 		Application app = getApplicationMap().get(appId);
 		List<AppEdge> periodicEdges = app.getPeriodicEdges(module.getName());

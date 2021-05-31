@@ -1,7 +1,7 @@
 package org.fog.utils;
 
 public class FogEvents {
-	private static final int BASE = 50;
+    private static final int BASE = 50;
 	public static final int TUPLE_ARRIVAL = BASE + 1;
 	public static final int LAUNCH_MODULE = BASE + 2;
 	public static final int RELEASE_OPERATOR = BASE + 3;
@@ -34,6 +34,10 @@ public class FogEvents {
 	public static final int MODULE_SEND= BASE+28;
 	public static final int MODULE_RECEIVE= BASE+29;
 	public static final int RELEASE_MODULE= BASE+30;
-	
+	//-------------------------------------------
+	public static final int UPDATE_CLUSTER_TUPLE_QUEUE = BASE + 31;
+	public static final int PROCESS_PRS = BASE + 32;
+	public static final int RECEIVE_PR = BASE+33;
+	public static final int UPDATE_SERVICE_DISCOVERY = BASE + 34;
 	
 }
