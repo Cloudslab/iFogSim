@@ -3,7 +3,7 @@ package org.fog.utils;
 public class Config {
 
 	public static final double RESOURCE_MGMT_INTERVAL = 100;
-	public static int MAX_SIMULATION_TIME = 1000;
+	public static int MAX_SIMULATION_TIME = 20000;
 	public static int RESOURCE_MANAGE_INTERVAL = 100;
 	public static String FOG_DEVICE_ARCH = "x86";
 	public static String FOG_DEVICE_OS = "Linux";
@@ -17,5 +17,18 @@ public class Config {
 
 	// For periodic placement
 	public static final double PLACEMENT_INTERVAL = 50;
+
+	// simulation modes - STATIC - 1(placement happens before simulation start)  DYNAMIC - 2(placement happens after simulation starts)
+	public static String SIMULATION_MODE = "DYNAMIC";
+
+	//Placement Request Processing Mode
+	public static String PERIODIC = "Periodic";
+	public static String SEQUENTIAL = "Sequential";
+	public static String PR_PROCESSING_MODE = SEQUENTIAL;
+
+	//Resource info sharing among cluster nodes
+	public static Boolean ENABLE_RESOURCE_DATA_SHARING = true;
+	public static double MODULE_DEPLYMENT_TIME = 200;
+	public static final int TRANSMISSION_START_DELAY = 500;
 	
 }

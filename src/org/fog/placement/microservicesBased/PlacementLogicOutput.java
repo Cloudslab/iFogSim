@@ -2,6 +2,8 @@ package org.fog.placement.microservicesBased;
 
 import org.apache.commons.math3.util.Pair;
 import org.fog.application.Application;
+import org.fog.entities.microservicesBased.PlacementRequest;
+import org.fog.utils.ModuleLaunchConfig;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,27 +18,28 @@ public class PlacementLogicOutput {
     // module placement info
     //todo it assumed that modules are not shared among applications.
     // <deviceid, < app, list of modules to deploy > this is to remove deploying same module more than once on a certain device.
-    Map<Integer, Map<Application, List<String>>> perDevice = new HashMap<>();
+    Map<Integer, Map<Application, List<ModuleLaunchConfig>>> perDevice = new HashMap<>();
 
     Map<Integer, List<Pair<String, Integer>>> serviceDiscoveryInfo = new HashMap<>();
 
-    List<Integer> completedPrs = new ArrayList<>();
+    //Integer indicates next device to send the placement request (-1 for finished, or device id for others )
+    Map<PlacementRequest,Integer> prStatus = new HashMap<>();
 
-    public PlacementLogicOutput(Map<Integer, Map<Application, List<String>>> perDevice, Map<Integer, List<Pair<String, Integer>>> serviceDiscoveryInfo, List<Integer> completedPrs) {
+    public PlacementLogicOutput(Map<Integer, Map<Application, List<ModuleLaunchConfig>>> perDevice, Map<Integer, List<Pair<String, Integer>>> serviceDiscoveryInfo, Map<PlacementRequest,Integer> prStatus) {
         this.perDevice = perDevice;
         this.serviceDiscoveryInfo = serviceDiscoveryInfo;
-        this.completedPrs = completedPrs;
+        this.prStatus = prStatus;
     }
 
     public Map<Integer, List<Pair<String, Integer>>> getServiceDiscoveryInfo() {
         return serviceDiscoveryInfo;
     }
 
-    public Map<Integer, Map<Application, List<String>>> getPerDevice() {
+    public Map<Integer, Map<Application, List<ModuleLaunchConfig>>> getPerDevice() {
         return perDevice;
     }
 
-    public List<Integer> getCompletedPrs() {
-        return completedPrs;
+    public Map<PlacementRequest,Integer> getPrStatus() {
+        return prStatus;
     }
 }

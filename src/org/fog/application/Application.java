@@ -338,4 +338,12 @@ public class Application {
 	public void setEdgeMap(Map<String, AppEdge> edgeMap) {
 		this.edgeMap = edgeMap;
 	}
+
+	public List<String> getModuleNames(){
+		List<String> appModuleNames = new ArrayList<>();
+		for(AppModule module:getModules()){
+			appModuleNames.add(module.getName());
+		}
+		return appModuleNames;
+	}
 }

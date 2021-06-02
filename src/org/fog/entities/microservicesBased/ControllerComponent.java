@@ -4,6 +4,9 @@ import org.fog.application.Application;
 import org.fog.entities.FogDevice;
 import org.fog.placement.microservicesBased.MicroservicePlacementLogic;
 import org.fog.placement.microservicesBased.PlacementLogicOutput;
+import org.fog.utils.Config;
+import org.fog.utils.FogUtils;
+import org.fog.utils.ModuleLaunchConfig;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,7 +21,6 @@ public class ControllerComponent {
     protected LoadBalancer loadBalancer;
     protected MicroservicePlacementLogic microservicePlacementLogic = null;
     protected ServiceDiscoveryInfo serviceDiscoveryInfo = new ServiceDiscoveryInfo();
-    protected MicroservicePlacementInfo microservicePlacementInfo = new MicroservicePlacementInfo();
 
     protected int deviceId;
 
@@ -88,17 +90,12 @@ public class ControllerComponent {
         return null;
     }
 
-    public void addServiceDiscoveryInfo(String microserviceName,Integer deviceID) {
+    public void addServiceDiscoveryInfo(String microserviceName, Integer deviceID) {
         this.serviceDiscoveryInfo.addServiceDIscoveryInfo(microserviceName, deviceID);
     }
 
     public int getDestinationDeviceId(String destModuleName) {
         return loadBalancer.getDeviceId(destModuleName, serviceDiscoveryInfo);
-    }
-
-    //todo
-    public void updateMicroservicesPlacementInfo() {
-
     }
 
     public Application getApplicationPerId(String appID) {
@@ -120,6 +117,10 @@ public class ControllerComponent {
             resources.put(resourceIdentifier, remainingResourceAmount);
             resourceAvailability.put(device, resources);
         }
+    }
+
+    public void updateResourceInfo(int deviceId, Map<String, Double> resources) {
+        resourceAvailability.put(deviceId,resources);
     }
 }
 
@@ -144,45 +145,8 @@ class ServiceDiscoveryInfo {
 }
 
 
-//todo not handled yet
-class MicroservicePlacementInfo {
 
-    public static int To_BE_DEPLOYED = 1;
-    public static int ALREADY_DEPLOYED = 2;
-    /**
-     * placedMicroservice -> instanceCOunt
-     * for deployed microservices
-     */
-    protected Map<String, Integer> microserviceInstance = new HashMap<>();
 
-    protected Map<String, Integer> microservicesToDeploy = new HashMap<>();
-
-    public int addMicroserviceToDeploy(String microservcieName, int instanceCount) {
-        if (microserviceInstance.containsKey(microservcieName)) {
-            int count = microserviceInstance.get(microservcieName) + instanceCount;
-            microserviceInstance.put(microservcieName, count);
-            return ALREADY_DEPLOYED;
-        } else if (microservicesToDeploy.containsKey(microservcieName)) {
-            int count = microservicesToDeploy.get(microservcieName) + instanceCount;
-            microservicesToDeploy.put(microservcieName, count);
-        } else {
-            microservicesToDeploy.put(microservcieName, instanceCount);
-        }
-        return To_BE_DEPLOYED;
-    }
-
-    public Map<String, Integer> getMicroservicesToDeploy() {
-        return microservicesToDeploy;
-    }
-
-    public Map<String, Integer> getDeplyedMicroservices() {
-        return microserviceInstance;
-    }
-
-    public void setDeplyedMicroservices(String microservice, Integer count) {
-        microserviceInstance.put(microservice, count);
-    }
-}
 
 
 

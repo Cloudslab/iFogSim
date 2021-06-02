@@ -14,7 +14,6 @@ import org.fog.entities.FogDeviceCharacteristics;
 import org.fog.entities.Tuple;
 import org.fog.placement.microservicesBased.MicroservicePlacementLogic;
 import org.fog.placement.microservicesBased.PlacementLogicOutput;
-import org.fog.test.qosAwareTests.ResultGenerator;
 import org.fog.utils.*;
 
 import java.util.*;
@@ -110,14 +109,36 @@ public class ClusteredFogDevice extends FogDevice {
             case FogEvents.UPDATE_SERVICE_DISCOVERY:
                 updateServiceDiscovery(ev);
                 break;
+            case FogEvents.TRANSMIT_PR:
+                transmitPR((PlacementRequest) ev.getData());
+                break;
+            case FogEvents.MANAGEMENT_TUPLE_ARRIVAL:
+                processManagementTuple(ev);
+                break;
+            case FogEvents.UPDATE_RESOURCE_INFO:
+                updateResourceInfo(ev);
+                break;
             default:
                 super.processOtherEvent(ev);
                 break;
         }
     }
 
+    private void updateResourceInfo(SimEvent ev) {
+        Pair<Integer, Map<String, Double>> pair = (Pair<Integer, Map<String, Double>>) ev.getData();
+        int deviceId = pair.getFirst();
+        getControllerComponent().updateResourceInfo(deviceId, pair.getSecond());
+    }
+
+    public Map<String, Double> getResourceAvailabilityOfDevice() {
+        return getControllerComponent().resourceAvailability.get(getId());
+    }
+
+
     public void addPlacementRequest(PlacementRequest pr) {
         placementRequests.add(pr);
+        if (Config.PR_PROCESSING_MODE == Config.SEQUENTIAL && placementRequests.size() == 1)
+            sendNow(getId(), FogEvents.PROCESS_PRS);
     }
 
 
@@ -144,8 +165,16 @@ public class ClusteredFogDevice extends FogDevice {
         setClusterLinkBusy(true);
         double latency = (getClusterNodeToLatencyMap()).get(clusterNodeID);
         send(getId(), networkDelay, FogEvents.UPDATE_CLUSTER_TUPLE_QUEUE);
-        send(clusterNodeID, networkDelay + latency, FogEvents.TUPLE_ARRIVAL, tuple);
-        NetworkUsageMonitor.sendingTuple(latency, tuple.getCloudletFileSize());
+
+        if (tuple instanceof ManagementTuple) {
+            send(clusterNodeID, networkDelay + latency + ((ManagementTuple) tuple).processingDelay, FogEvents.MANAGEMENT_TUPLE_ARRIVAL, tuple);
+            //todo
+//            if (Config.ENABLE_NETWORK_USAGE_AT_PLACEMENT)
+//                NetworkUsageMonitor.sendingManagementTuple(latency, tuple.getCloudletFileSize());
+        } else {
+            send(clusterNodeID, networkDelay + latency, FogEvents.TUPLE_ARRIVAL, tuple);
+            NetworkUsageMonitor.sendingTuple(latency, tuple.getCloudletFileSize());
+        }
     }
 
     protected void sendToCluster(Tuple tuple, int clusterNodeID) {
@@ -207,7 +236,6 @@ public class ClusteredFogDevice extends FogDevice {
     }
 
     protected void processTupleArrival(SimEvent ev) {
-
 
         TupleM tuple = (TupleM) ev.getData();
 
@@ -282,7 +310,7 @@ public class ClusteredFogDevice extends FogDevice {
 
             executeTuple(ev, tuple.getDestModuleName());
         } else {
-            if(tuple.getDestinationDeviceId()!=-1) {
+            if (tuple.getDestinationDeviceId() != -1) {
                 int nextDeviceToSend = routingTable.get(tuple.getDestinationDeviceId());
                 if (nextDeviceToSend == parentId)
                     sendUp(tuple);
@@ -292,10 +320,9 @@ public class ClusteredFogDevice extends FogDevice {
                     sendToCluster(tuple, nextDeviceToSend);
                 else
                     Logger.error("Routing error", "Routing table of " + getName() + "does not contain next device for destination Id" + tuple.getDestinationDeviceId());
-            }
-            else{
-                if(tuple.getDirection() == Tuple.DOWN){
-                    if(appToModulesMap.containsKey(tuple.getAppId())) {
+            } else {
+                if (tuple.getDirection() == Tuple.DOWN) {
+                    if (appToModulesMap.containsKey(tuple.getAppId())) {
                         if (appToModulesMap.get(tuple.getAppId()).contains(tuple.getDestModuleName())) {
                             int vmId = -1;
                             for (Vm vm : getHost().getVmList()) {
@@ -320,11 +347,10 @@ public class ClusteredFogDevice extends FogDevice {
 
 
                     for (int childId : getChildrenIds())
-                            sendDown(tuple, childId);
+                        sendDown(tuple, childId);
 
-                }
-                else{
-                    Logger.error("Routing error", "Destination id -1 for UP tuple" );
+                } else {
+                    Logger.error("Routing error", "Destination id -1 for UP tuple");
                 }
 
             }
@@ -345,8 +371,12 @@ public class ClusteredFogDevice extends FogDevice {
      * FCN and Client devices
      */
     public void initializeController(LoadBalancer loadBalancer) {
-        if (getDeviceType() != ClusteredFogDevice.FON)
+        if (getDeviceType() != ClusteredFogDevice.FON) {
             controllerComponent = new ControllerComponent(getId(), loadBalancer);
+            controllerComponent.updateResources(getId(), ControllerComponent.CPU, getHost().getTotalMips());
+            controllerComponent.updateResources(getId(), ControllerComponent.RAM, getHost().getRam());
+            controllerComponent.updateResources(getId(), ControllerComponent.STORAGE, getHost().getStorage());
+        }
     }
 
     public ControllerComponent getControllerComponent() {
@@ -362,19 +392,30 @@ public class ClusteredFogDevice extends FogDevice {
     }
 
     protected void processPlacementRequests() {
-        if (placementRequests.size() == 0) {
+        System.out.println("Execute placement");
+        if (Config.PR_PROCESSING_MODE == Config.PERIODIC && placementRequests.size() == 0) {
             send(getId(), Config.PLACEMENT_INTERVAL, FogEvents.PROCESS_PRS);
             return;
         }
         long startTime = System.nanoTime();
+
+        List<PlacementRequest> placementRequests = new ArrayList<>();
+
+        if (Config.PR_PROCESSING_MODE == Config.PERIODIC) {
+            placementRequests.addAll(this.placementRequests);
+            this.placementRequests.clear();
+        } else if (Config.PR_PROCESSING_MODE == Config.SEQUENTIAL) {
+            placementRequests.add(this.placementRequests.get(0));
+            this.placementRequests.remove(0);
+        }
+
         PlacementLogicOutput placementLogicOutput = getControllerComponent().executeApplicationPlacementLogic(placementRequests);
         long endTime = System.nanoTime();
         System.out.println("Placement Algorithm Completed. Time : " + (endTime - startTime) / 1e6);
-        ResultGenerator.executionTime = (endTime - startTime);
 
-        Map<Integer, Map<Application, List<String>>> perDevice = placementLogicOutput.getPerDevice();
+        Map<Integer, Map<Application, List<ModuleLaunchConfig>>> perDevice = placementLogicOutput.getPerDevice();
         Map<Integer, List<Pair<String, Integer>>> serviceDicovery = placementLogicOutput.getServiceDiscoveryInfo();
-        List<Integer> completedPlacementRequests = placementLogicOutput.getCompletedPrs();
+        Map<PlacementRequest, Integer> placementRequestStatus = placementLogicOutput.getPrStatus();
 
         int fogDeviceCount = 0;
         StringBuilder placementString = new StringBuilder();
@@ -384,38 +425,52 @@ public class ClusteredFogDevice extends FogDevice {
                 fogDeviceCount++;
             placementString.append(CloudSim.getEntity(deviceID).getName() + " : ");
             for (Application app : perDevice.get(deviceID).keySet()) {
-                //ACTIVE_APP_UPDATE
-                sendNow(deviceID, FogEvents.ACTIVE_APP_UPDATE, app);
-                //APP_SUBMIT
-                sendNow(deviceID, FogEvents.APP_SUBMIT, app);
-                for (String microserviceName : perDevice.get(deviceID).get(app)) {
-                    placementString.append(microserviceName + " , ");
-                    //LAUNCH_MODULE
-                    sendNow(deviceID, FogEvents.LAUNCH_MODULE, new AppModule(app.getModuleByName(microserviceName)));
+                if (Config.SIMULATION_MODE == "STATIC") {
+                    //ACTIVE_APP_UPDATE
+                    sendNow(deviceID, FogEvents.ACTIVE_APP_UPDATE, app);
+                    //APP_SUBMIT
+                    sendNow(deviceID, FogEvents.APP_SUBMIT, app);
+                    for (ModuleLaunchConfig moduleLaunchConfig : perDevice.get(deviceID).get(app)) {
+                        String microserviceName = moduleLaunchConfig.getModule().getName();
+                        placementString.append(microserviceName + " , ");
+                        //LAUNCH_MODULE
+                        sendNow(deviceID, FogEvents.LAUNCH_MODULE, new AppModule(app.getModuleByName(microserviceName)));
+                        sendNow(deviceID, FogEvents.LAUNCH_MODULE_INSTANCE, moduleLaunchConfig);
+                    }
                 }
+            }
+            if (Config.SIMULATION_MODE == "DYNAMIC") {
+                //todo
+                transmitModulesToDeply(deviceID, perDevice.get(deviceID));
             }
             placementString.append("\n");
         }
         System.out.println(placementString.toString());
-        ResultGenerator.placementData = placementString;
-        ResultGenerator.deviceCount = fogDeviceCount;
         for (int clientDevice : serviceDicovery.keySet()) {
             for (Pair serviceData : serviceDicovery.get(clientDevice)) {
-                sendNow(clientDevice, FogEvents.UPDATE_SERVICE_DISCOVERY, serviceData);
+                if (Config.SIMULATION_MODE == "DYNAMIC") {
+                    transmitServiceDiscoveryData(clientDevice, serviceData);
+                } else if (Config.SIMULATION_MODE == "STATIC")
+                    sendNow(clientDevice, FogEvents.UPDATE_SERVICE_DISCOVERY, serviceData);
             }
         }
-        List<PlacementRequest> toRemove = new ArrayList<>();
-        for (int prId : completedPlacementRequests) {
-            for (PlacementRequest pr : placementRequests) {
-                if (pr.getPlacementRequestId() == prId)
-                    toRemove.add(pr);
-            }
-        }
-        placementRequests.removeAll(toRemove);
 
-        send(getId(), Config.PLACEMENT_INTERVAL, FogEvents.PROCESS_PRS);
+        for (PlacementRequest pr : placementRequestStatus.keySet()) {
+            if (placementRequestStatus.get(pr) != -1) {
+                if (Config.SIMULATION_MODE == "DYNAMIC")
+                    transmitPR(pr, placementRequestStatus.get(pr));
+
+                else if (Config.SIMULATION_MODE == "STATIC")
+                    sendNow(placementRequestStatus.get(pr), FogEvents.RECEIVE_PR, pr);
+
+            }
+        }
+
+        if (Config.PR_PROCESSING_MODE == Config.PERIODIC)
+            send(getId(), Config.PLACEMENT_INTERVAL, FogEvents.PROCESS_PRS);
+        else if (Config.PR_PROCESSING_MODE == Config.SEQUENTIAL && !this.placementRequests.isEmpty())
+            sendNow(getId(), FogEvents.PROCESS_PRS);
     }
-
 
     public boolean setClientModulesToBeDeplyed(Application app, String moduleName) {
         if (!clientModulesToBeDeployed.keySet().contains(app)) {
@@ -468,25 +523,28 @@ public class ClusteredFogDevice extends FogDevice {
         if (!appToModulesMap.containsKey(appId)) {
             appToModulesMap.put(appId, new ArrayList<String>());
         }
-        appToModulesMap.get(appId).add(module.getName());
-        processVmCreate(ev, false);
-        boolean result = getVmAllocationPolicy().allocateHostForVm(module);
-        if (result) {
-            getVmList().add(module);
-            if (module.isBeingInstantiated()) {
-                module.setBeingInstantiated(false);
+        if (!appToModulesMap.get(appId).contains(module.getName())) {
+            appToModulesMap.get(appId).add(module.getName());
+            processVmCreate(ev, false);
+            boolean result = getVmAllocationPolicy().allocateHostForVm(module);
+            if (result) {
+                getVmList().add(module);
+                if (module.isBeingInstantiated()) {
+                    module.setBeingInstantiated(false);
+                }
+                initializePeriodicTuples(module);
+                module.updateVmProcessing(CloudSim.clock(), getVmAllocationPolicy().getHost(module).getVmScheduler()
+                        .getAllocatedMipsForVm(module));
+
+                // if client module remove from map
+                if (module.getName().equals("client" + appId))
+                    clientModulesToBeDeployed.remove(applicationMap.get(appId));
+
+                System.out.println("Module " + module.getName() + "created on " + getName() + " under Launch module");
+                Logger.debug("Module deploy success", "Module " + module.getName() + " placement on " + getName() + " successful. vm id : " + module.getId());
+            } else {
+                Logger.error("Module deploy error", "Module " + module.getName() + " placement on " + getName() + " failed");
             }
-            initializePeriodicTuples(module);
-            module.updateVmProcessing(CloudSim.clock(), getVmAllocationPolicy().getHost(module).getVmScheduler()
-                    .getAllocatedMipsForVm(module));
-
-            // if client module remove from map
-            if (module.getName().equals("client" + appId))
-                clientModulesToBeDeployed.remove(applicationMap.get(appId));
-
-            Logger.debug("Module deploy success", "Module " + module.getName() + " placement on " + getName() + " successful. vm id : " + module.getId());
-        } else {
-            Logger.error("Module deploy error", "Module " + module.getName() + " placement on " + getName() + " failed");
         }
     }
 
@@ -498,4 +556,149 @@ public class ClusteredFogDevice extends FogDevice {
     public int getFonId() {
         return fonID;
     }
+
+    /**
+     * Used by Client Devices to generate management tuple with pr and send it to FON
+     *
+     * @param placementRequest
+     */
+    private void transmitPR(PlacementRequest placementRequest) {
+        transmitPR(placementRequest, fonID);
+    }
+
+    private void transmitPR(PlacementRequest placementRequest, Integer deviceId) {
+        ManagementTuple prTuple = new ManagementTuple(placementRequest.getApplicationId(), FogUtils.generateTupleId(), ManagementTuple.NONE, ManagementTuple.PLACEMENT_REQUEST);
+        prTuple.setData(placementRequest);
+        prTuple.setDestinationDeviceId(deviceId);
+        sendNow(getId(), FogEvents.MANAGEMENT_TUPLE_ARRIVAL, prTuple);
+    }
+
+    private void transmitServiceDiscoveryData(int clientDevice, Pair serviceData) {
+        ManagementTuple sdTuple = new ManagementTuple(FogUtils.generateTupleId(), ManagementTuple.NONE, ManagementTuple.SERVICE_DISCOVERY_INFO);
+        sdTuple.setServiceDiscoveryInfor(serviceData);
+        sdTuple.setDestinationDeviceId(clientDevice);
+        sendNow(getId(), FogEvents.MANAGEMENT_TUPLE_ARRIVAL, sdTuple);
+    }
+
+    private void transmitModulesToDeply(int deviceID, Map<Application, List<ModuleLaunchConfig>> applicationListMap) {
+        ManagementTuple moduleTuple = new ManagementTuple(FogUtils.generateTupleId(), ManagementTuple.NONE, ManagementTuple.DEPLOYMENTREQUEST);
+        moduleTuple.setDeployementSet(applicationListMap);
+        moduleTuple.setDestinationDeviceId(deviceID);
+        sendNow(getId(), FogEvents.MANAGEMENT_TUPLE_ARRIVAL, moduleTuple);
+    }
+
+    private void processManagementTuple(SimEvent ev) {
+        ManagementTuple tuple = (ManagementTuple) ev.getData();
+        if (tuple.getDestinationDeviceId() == getId()) {
+            if (tuple.managementTupleType == ManagementTuple.PLACEMENT_REQUEST) {
+                sendNow(getId(), FogEvents.RECEIVE_PR, tuple.getPlacementRequest());
+            } else if (tuple.managementTupleType == ManagementTuple.SERVICE_DISCOVERY_INFO) {
+                sendNow(getId(), FogEvents.UPDATE_SERVICE_DISCOVERY, tuple.getServiceDiscoveryInfor());
+            } else if (tuple.managementTupleType == ManagementTuple.DEPLOYMENTREQUEST) {
+                deployModules(tuple.getDeployementSet());
+            } else if (tuple.managementTupleType == ManagementTuple.RESOURCE_UPDATE) {
+                sendNow(getId(), FogEvents.UPDATE_RESOURCE_INFO, tuple.getResourceData());
+            }
+        } else if (tuple.getDestinationDeviceId() != -1) {
+            int nextDeviceToSend = routingTable.get(tuple.getDestinationDeviceId());
+            if (nextDeviceToSend == parentId)
+                sendUp(tuple);
+            else if (childrenIds.contains(nextDeviceToSend))
+                sendDown(tuple, nextDeviceToSend);
+            else if (clusterNodeIds.contains(nextDeviceToSend))
+                sendToCluster(tuple, nextDeviceToSend);
+            else
+                Logger.error("Routing error", "Routing table of " + getName() + "does not contain next device for destination Id" + tuple.getDestinationDeviceId());
+        } else
+            Logger.error("Routing error", "Management tuple destination id is -1");
+    }
+
+    private void deployModules(Map<Application, List<ModuleLaunchConfig>> deployementSet) {
+        for (Application app : deployementSet.keySet()) {
+            //ACTIVE_APP_UPDATE
+            sendNow(getId(), FogEvents.ACTIVE_APP_UPDATE, app);
+            //APP_SUBMIT
+            sendNow(getId(), FogEvents.APP_SUBMIT, app);
+            for (ModuleLaunchConfig moduleLaunchConfig : deployementSet.get(app)) {
+                String microserviceName = moduleLaunchConfig.getModule().getName();
+                //LAUNCH_MODULE
+                if (Config.SIMULATION_MODE == "STATIC") {
+                    sendNow(getId(), FogEvents.LAUNCH_MODULE, new AppModule(app.getModuleByName(microserviceName)));
+                } else if (Config.SIMULATION_MODE == "DYNAMIC") {
+                    send(getId(), Config.MODULE_DEPLYMENT_TIME, FogEvents.LAUNCH_MODULE, new AppModule(app.getModuleByName(microserviceName)));
+                }
+                sendNow(getId(), FogEvents.LAUNCH_MODULE_INSTANCE, moduleLaunchConfig);
+            }
+        }
+    }
+
+    /**
+     * Updating the number of modules of an application module on this device
+     *
+     * @param ev instance of SimEvent containing the module and no of instances
+     */
+    protected void updateModuleInstanceCount(SimEvent ev) {
+        ModuleLaunchConfig config = (ModuleLaunchConfig) ev.getData();
+        String appId = config.getModule().getAppId();
+        String moduleName = config.getModule().getName();
+        if (!moduleInstanceCount.containsKey(appId)) {
+            Map<String, Integer> m = new HashMap<>();
+            m.put(moduleName, config.getInstanceCount());
+            moduleInstanceCount.put(appId, m);
+        } else if (!moduleInstanceCount.get(appId).containsKey(moduleName)) {
+            moduleInstanceCount.get(appId).put(moduleName, config.getInstanceCount());
+        } else {
+            int count = config.getInstanceCount() + moduleInstanceCount.get(appId).get(moduleName);
+            moduleInstanceCount.get(appId).put(moduleName, count);
+        }
+
+        // in FONs resource availability is updated by placement algorithm
+        if (getDeviceType() != FON) {
+            double mips = getControllerComponent().getAvailableResource(getId(), ControllerComponent.CPU) - (config.getModule().getMips() * config.getInstanceCount());
+            getControllerComponent().updateResources(getId(), ControllerComponent.CPU, mips);
+            double ram = getControllerComponent().getAvailableResource(getId(), ControllerComponent.RAM) - (config.getModule().getRam() * config.getInstanceCount());
+            getControllerComponent().updateResources(getId(), ControllerComponent.RAM, ram);
+            double storage = getControllerComponent().getAvailableResource(getId(), ControllerComponent.STORAGE) - (config.getModule().getSize() * config.getInstanceCount());
+            getControllerComponent().updateResources(getId(), ControllerComponent.STORAGE, storage);
+        }
+        if (isInCluster && Config.ENABLE_RESOURCE_DATA_SHARING) {
+            for (Integer deviceId : clusterNodeIds) {
+                ManagementTuple managementTuple = new ManagementTuple(FogUtils.generateTupleId(), ManagementTuple.NONE, ManagementTuple.RESOURCE_UPDATE);
+                Pair<Integer, Map<String, Double>> data = new Pair<>(getId(), getControllerComponent().resourceAvailability.get(getId()));
+                managementTuple.setResourceData(data);
+                managementTuple.setDestinationDeviceId(deviceId);
+                sendNow(getId(), FogEvents.MANAGEMENT_TUPLE_ARRIVAL, managementTuple);
+            }
+        }
+    }
+
+    protected void sendDownFreeLink(Tuple tuple, int childId) {
+        if (tuple instanceof ManagementTuple) {
+            double networkDelay = tuple.getCloudletFileSize() / getDownlinkBandwidth();
+            setSouthLinkBusy(true);
+            double latency = getChildToLatencyMap().get(childId);
+            send(getId(), networkDelay, FogEvents.UPDATE_SOUTH_TUPLE_QUEUE);
+            send(childId, networkDelay + latency + ((ManagementTuple) tuple).processingDelay, FogEvents.MANAGEMENT_TUPLE_ARRIVAL, tuple);
+            //todo
+//            if (Config.ENABLE_NETWORK_USAGE_AT_PLACEMENT)
+//                NetworkUsageMonitor.sendingManagementTuple(latency, tuple.getCloudletFileSize());
+        } else
+            super.sendDownFreeLink(tuple, childId);
+    }
+
+    protected void sendUpFreeLink(Tuple tuple) {
+        if (tuple instanceof ManagementTuple) {
+            double networkDelay = tuple.getCloudletFileSize() / getUplinkBandwidth();
+            setNorthLinkBusy(true);
+            send(getId(), networkDelay, FogEvents.UPDATE_NORTH_TUPLE_QUEUE);
+            send(parentId, networkDelay + getUplinkLatency() + ((ManagementTuple) tuple).processingDelay, FogEvents.MANAGEMENT_TUPLE_ARRIVAL, tuple);
+            //todo
+//            if (Config.ENABLE_NETWORK_USAGE_AT_PLACEMENT)
+//                NetworkUsageMonitor.sendingManagementTuple(getUplinkLatency(), tuple.getCloudletFileSize());
+        } else {
+            super.sendUpFreeLink(tuple);
+        }
+
+    }
+
 }

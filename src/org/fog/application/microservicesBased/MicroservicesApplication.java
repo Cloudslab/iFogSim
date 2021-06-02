@@ -13,9 +13,11 @@ import org.fog.scheduler.TupleScheduler;
 import org.fog.utils.FogUtils;
 import org.fog.utils.GeoCoverage;
 
+import java.awt.image.RenderedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Samodha Pallewatta.
@@ -23,6 +25,10 @@ import java.util.List;
 public class MicroservicesApplication extends Application {
 
     QoSProfile qoSProfile = null;
+
+    protected Map<String,List<String>> specialPlacementInfo = new HashMap<>(); // module name to placement device staring with...
+
+    protected DAG dag;
 
     public static MicroservicesApplication createApplication(String appId, int userId) {
         return new MicroservicesApplication(appId, userId);
@@ -175,4 +181,32 @@ public class MicroservicesApplication extends Application {
         return qoSProfile;
     }
 
+    public void setSpecialPlacementInfo(String moduleName,String device){
+        if(specialPlacementInfo.containsKey(moduleName))
+            specialPlacementInfo.get(moduleName).add(device);
+        else {
+            List<String> devices = new ArrayList<>();
+            devices.add(device);
+            specialPlacementInfo.put(moduleName,devices);
+        }
+    }
+
+    public Map<String,List<String>> getSpecialPlacementInfo(){
+        return specialPlacementInfo;
+    }
+
+    public void createDAG(){
+        List<String> moduleNames=new ArrayList<>();
+        for(AppModule module:getModules()){
+            moduleNames.add(module.getName());		}
+        dag = new DAG(moduleNames);
+        for(AppEdge edge:getEdges()){
+            if(edge.getDirection()== Tuple.UP)
+                dag.addEdge(edge.getSource(),edge.getDestination());
+        }
+    }
+
+    public DAG getDAG() {
+        return dag;
+    }
 }

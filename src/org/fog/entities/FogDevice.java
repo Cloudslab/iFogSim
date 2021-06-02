@@ -807,6 +807,7 @@ public class FogDevice extends PowerDatacenter {
 		
 		module.updateVmProcessing(CloudSim.clock(), getVmAllocationPolicy().getHost(module).getVmScheduler()
 				.getAllocatedMipsForVm(module));
+
 	}
 	
 	protected void processModuleTermination(SimEvent ev){
