@@ -80,8 +80,9 @@ public class TranslationServiceFog {
 			//
 			MobilityDataParser dataObject = new MobilityDataParser();
 			locator = new LocationHandler(dataObject);
-			
-			createMobileUser(broker.getId(), appId);
+
+			String datasetReference = References.dataset_reference;
+			createMobileUser(broker.getId(), appId, datasetReference);
 			createFogDevices(broker.getId(), appId);
 			
 			
@@ -110,12 +111,12 @@ public class TranslationServiceFog {
 		}
 	}
 
-	private static void createMobileUser(int userId, String appId) throws IOException {
+	private static void createMobileUser(int userId, String appId, String datasetReference) throws IOException {
 		
 		for(int id=1; id<=numberOfMobileUser;id++)
 			userMobilityPattern.put(id, References.DIRECTIONAL_MOBILITY);
 		
-		locator.parseUserInfo(userMobilityPattern);
+		locator.parseUserInfo(userMobilityPattern, datasetReference);
 		
 		List<String> mobileUserDataIds = locator.getMobileUserDataId();
 		

@@ -29,7 +29,7 @@ public class LocationHandler {
 	
 	public static double calculateDistance(Location loc1, Location loc2) {
 
-	    final int R = 6371; // Radius of the earth
+	    final int R = 6371; // Radius of the earth in Kilometers
 
 	    double latDistance = Math.toRadians(loc1.latitude - loc2.latitude);
 	    double lonDistance = Math.toRadians(loc1.longitude - loc2.longitude);
@@ -135,9 +135,9 @@ public class LocationHandler {
 		return getDataObject().levelwiseResources.get(levelNo);
 	}
 
-	public void parseUserInfo(Map<Integer, Integer> userMobilityPattern) throws IOException {
+	public void parseUserInfo(Map<Integer, Integer> userMobilityPattern, String datasetReference) throws IOException {
 		// TODO Auto-generated method stub
-		getDataObject().parseUserData(userMobilityPattern);
+		getDataObject().parseUserData(userMobilityPattern, datasetReference);
 	}
 
 	public void parseResourceInfo() throws NumberFormatException, IOException {
