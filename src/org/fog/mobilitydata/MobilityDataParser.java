@@ -65,6 +65,7 @@ public class MobilityDataParser {
 
             Map<Double, Location> tempUserLocationInfo = new HashMap<Double, Location>();
             BufferedReader csvReader = new BufferedReader(new FileReader(datasetReference + userID + ".csv"));
+            System.out.println("The Mobility dataset used in this simulation for user: " + userID + " is: " + datasetReference + userID + ".csv");
             String row;
             double eventTime = References.INIT_TIME;
             while ((row = csvReader.readLine()) != null) {

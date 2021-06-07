@@ -28,6 +28,7 @@ import org.fog.utils.FogUtils;
 import org.fog.utils.TimeKeeper;
 import org.fog.utils.distribution.DeterministicDistribution;
 
+import java.io.File;
 import java.io.IOException;
 
 import org.json.simple.parser.ParseException;
@@ -52,8 +53,8 @@ public class TranslationServiceFog_RandomMobility {
     static int numberOfMobileUser = 1;
 
     // if random mobility generator for users is True, new random dataset will be created for each user
-    static boolean randomMobility_generator = true;
-
+    static boolean randomMobility_generator = true; // To use random datasets
+    static boolean renewDataset = false; // To overwrite existing random datasets
 
     public static void main(String[] args) {
 
@@ -77,10 +78,12 @@ public class TranslationServiceFog_RandomMobility {
             //
             MobilityDataParser dataObject = new MobilityDataParser();
             locator = new LocationHandler(dataObject);
+
             String datasetReference = References.dataset_reference;
+
             if (randomMobility_generator) {
-                datasetReference = References.dataset_reference1;
-                createRandomMobilityDatasets(References.random_walk_mobility_model);
+                datasetReference = References.dataset_random;
+                createRandomMobilityDatasets(References.random_walk_mobility_model, datasetReference, renewDataset);
             }
 
             createMobileUser(broker.getId(), appId, datasetReference);
@@ -111,11 +114,11 @@ public class TranslationServiceFog_RandomMobility {
         }
     }
 
-    private static void createRandomMobilityDatasets(int mobilityModel) throws IOException, ParseException {
+    private static void createRandomMobilityDatasets(int mobilityModel, String datasetReference, boolean renewDataset) throws IOException, ParseException {
         RandomMobilityGenerator randMobilityGenerator = new RandomMobilityGenerator();
         for (int i = 0; i < numberOfMobileUser; i++) {
-            randMobilityGenerator.createRandomData(mobilityModel, i + 1);
 
+                randMobilityGenerator.createRandomData(mobilityModel, i + 1, datasetReference, renewDataset);
         }
     }
 
