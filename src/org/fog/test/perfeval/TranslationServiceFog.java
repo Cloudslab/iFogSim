@@ -76,6 +76,7 @@ public class TranslationServiceFog {
 			
 			Application application = createApplication(appId, broker.getId());
 			application.setUserId(broker.getId());
+
 			
 			//
 			MobilityDataParser dataObject = new MobilityDataParser();

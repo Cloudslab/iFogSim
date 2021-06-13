@@ -26,17 +26,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0e1b565e-a2db-46af-8d70-8d9b4ae4f6ae" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/org/fog/mobilitydata/Clustering.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/org/fog/placement/ClusteringController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/org/fog/test/perfeval/TranslationServiceFog_RandomMobility_Clustering.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/production/iFogSim2/org/fog/mobilitydata/MobilityDataParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/output/production/iFogSim2/org/fog/mobilitydata/MobilityDataParser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/production/iFogSim2/org/fog/mobilitydata/RandomMobilityGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/output/production/iFogSim2/org/fog/mobilitydata/RandomMobilityGenerator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/production/iFogSim2/org/fog/mobilitydata/References.class" beforeDir="false" afterPath="$PROJECT_DIR$/output/production/iFogSim2/org/fog/mobilitydata/References.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/production/iFogSim2/org/fog/test/perfeval/TranslationServiceFog$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/output/production/iFogSim2/org/fog/test/perfeval/TranslationServiceFog$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/production/iFogSim2/org/fog/test/perfeval/TranslationServiceFog$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/output/production/iFogSim2/org/fog/test/perfeval/TranslationServiceFog$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/production/iFogSim2/org/fog/test/perfeval/TranslationServiceFog.class" beforeDir="false" afterPath="$PROJECT_DIR$/output/production/iFogSim2/org/fog/test/perfeval/TranslationServiceFog.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/output/production/iFogSim2/org/fog/test/perfeval/TranslationServiceFog_RandomMobility$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/output/production/iFogSim2/org/fog/test/perfeval/TranslationServiceFog_RandomMobility$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/output/production/iFogSim2/org/fog/test/perfeval/TranslationServiceFog_RandomMobility$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/output/production/iFogSim2/org/fog/test/perfeval/TranslationServiceFog_RandomMobility$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/output/production/iFogSim2/org/fog/test/perfeval/TranslationServiceFog_RandomMobility.class" beforeDir="false" afterPath="$PROJECT_DIR$/output/production/iFogSim2/org/fog/test/perfeval/TranslationServiceFog_RandomMobility.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/production/iFogSim2/org/fog/utils/Config.class" beforeDir="false" afterPath="$PROJECT_DIR$/output/production/iFogSim2/org/fog/utils/Config.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/production/iFogSim2/org/fog/utils/FogEvents.class" beforeDir="false" afterPath="$PROJECT_DIR$/output/production/iFogSim2/org/fog/utils/FogEvents.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/fog/entities/FogDevice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/fog/entities/FogDevice.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/org/fog/mobilitydata/MobilityDataParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/fog/mobilitydata/MobilityDataParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/fog/mobilitydata/RandomMobilityGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/fog/mobilitydata/RandomMobilityGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/fog/mobilitydata/References.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/fog/mobilitydata/References.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/fog/placement/LocationHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/fog/placement/LocationHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/fog/test/perfeval/TranslationServiceFog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/fog/test/perfeval/TranslationServiceFog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/org/fog/test/perfeval/TranslationServiceFog_RandomMobility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/fog/test/perfeval/TranslationServiceFog_RandomMobility.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/fog/utils/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/fog/utils/Config.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/fog/utils/FogEvents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/fog/utils/FogEvents.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +66,17 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/org/fog/entities/FogDevice.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/org/fog/test/perfeval/TranslationServiceFog_RandomMobility_Clustering.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/org/fog/mobilitydata/RandomMobilityGenerator.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="ProjectId" id="1tOg3bHT6zlczFRw7eikqoWXikI" />
@@ -81,12 +99,14 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.fog.mobilitydata" />
+      <recent name="org.fog.placement" />
       <recent name="org.fog.test.perfeval" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.TranslationServiceFog_RandomMobility">
-    <configuration name="MicroservicesAppSample1" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.fog.test.microservices.MicroservicesAppSample1" />
+  <component name="RunManager" selected="Application.TranslationServiceFog_RandomMobility_Clustering">
+    <configuration name="MicroserviceAppSample2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.fog.test.microservices.MicroserviceAppSample2" />
       <module name="iFogSim2" />
       <extension name="coverage">
         <pattern>
@@ -98,12 +118,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TranslationServiceFog" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.fog.test.perfeval.TranslationServiceFog" />
+    <configuration name="Microservice_DynamicClustering" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.fog.test.perfeval.Microservice_DynamicClustering" />
       <module name="iFogSim2" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="org.fog.test.perfeval.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MicroservicesAppSample1" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.fog.test.microservices.MicroservicesAppSample1" />
+      <module name="iFogSim2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.fog.test.microservices.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -124,23 +157,42 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration name="TranslationServiceFog_RandomMobility_Clustering" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.fog.test.perfeval.TranslationServiceFog_RandomMobility_Clustering" />
+      <module name="iFogSim2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.fog.test.perfeval.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+        <pattern>
+          <option name="PATTERN" value="org.fog.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.TranslationServiceFog_RandomMobility" />
-        <item itemvalue="Application.TranslationServiceFog" />
+        <item itemvalue="Application.TranslationServiceFog_RandomMobility_Clustering" />
+        <item itemvalue="Application.Microservice_DynamicClustering" />
         <item itemvalue="Application.MicroservicesAppSample1" />
-        <item itemvalue="Application.TranslationServiceFog" />
+        <item itemvalue="Application.MicroserviceAppSample2" />
         <item itemvalue="Application.TranslationServiceFog_RandomMobility" />
       </list>
     </recent_temporary>
@@ -159,6 +211,7 @@
       <workItem from="1622645367917" duration="2145000" />
       <workItem from="1622780335522" duration="134000" />
       <workItem from="1622781999769" duration="38347000" />
+      <workItem from="1623477349094" duration="44944000" />
     </task>
     <servers />
   </component>
@@ -193,14 +246,9 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/org/fog/mobilitydata/MobilityDataParser.java</url>
-          <line>63</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/org/fog/mobilitydata/RandomMobilityGenerator.java</url>
-          <line>153</line>
-          <option name="timeStamp" value="4" />
+          <url>file://$PROJECT_DIR$/src/org/fog/mobilitydata/Clustering.java</url>
+          <line>75</line>
+          <option name="timeStamp" value="35" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -42,6 +42,8 @@ public class FogEvents {
     //---------------------------------------------
     public static final int TRANSMIT_PR = BASE + 35;
     public static final int MANAGEMENT_TUPLE_ARRIVAL = BASE + 36;
-    public static final int UPDATE_RESOURCE_INFO = BASE+37 ;
+    public static final int UPDATE_RESOURCE_INFO = BASE + 37;
+    //---------------------------------------------
+    public static final int START_DYNAMIC_CLUSTERING = BASE + 38;
 
 }

@@ -17,30 +17,25 @@ import org.fog.entities.*;
 import org.fog.mobilitydata.MobilityDataParser;
 import org.fog.mobilitydata.RandomMobilityGenerator;
 import org.fog.mobilitydata.References;
-import org.fog.placement.LocationHandler;
-import org.fog.placement.MobilityController;
-import org.fog.placement.ModuleMapping;
-import org.fog.placement.ModulePlacementMobileEdgewards;
+import org.fog.placement.*;
 import org.fog.policy.AppModuleAllocationPolicy;
 import org.fog.scheduler.StreamOperatorScheduler;
+import org.fog.utils.Config;
 import org.fog.utils.FogLinearPowerModel;
 import org.fog.utils.FogUtils;
 import org.fog.utils.TimeKeeper;
 import org.fog.utils.distribution.DeterministicDistribution;
-
-import java.io.File;
-import java.io.IOException;
-
 import org.json.simple.parser.ParseException;
 
+import java.io.IOException;
 import java.util.*;
 
 /**
- * Simulation setup for IoT Drone With Random Mobility
+ * Simulation setup for IoT Drone With Random Mobility & Dynamic Clustering
  *
  * @author Mohammad Goudarzi
  */
-public class TranslationServiceFog_RandomMobility {
+public class TranslationServiceFog_RandomMobility_Clustering {
     static List<FogDevice> fogDevices = new ArrayList<FogDevice>();
     static List<Sensor> sensors = new ArrayList<Sensor>();
     static List<Actuator> actuators = new ArrayList<Actuator>();
@@ -55,6 +50,7 @@ public class TranslationServiceFog_RandomMobility {
     // if random mobility generator for users is True, new random dataset will be created for each user
     static boolean randomMobility_generator = true; // To use random datasets
     static boolean renewDataset = false; // To overwrite existing random datasets
+    static List<Integer> clusteringLevels = new ArrayList<Integer>(); // The selected fog layers for clustering
 
     public static void main(String[] args) {
 
@@ -90,18 +86,21 @@ public class TranslationServiceFog_RandomMobility {
             createFogDevices(broker.getId(), appId);
 
 
-
             //
 
             ModuleMapping moduleMapping = ModuleMapping.createModuleMapping(); // initializing a module mapping
 
             moduleMapping.addModuleToDevice("storageModule", "cloud");
 
-            MobilityController controller = new MobilityController("master-controller", fogDevices, sensors,
-                    actuators, locator);
-
-
-
+            ClusteringController controller;
+            if (Config.ENABLE_DYNAMIC_CLUSTERING) {
+                clusteringLevels.add(2);
+                controller = new ClusteringController("master-controller", fogDevices, sensors,
+                        actuators, locator, clusteringLevels);
+            } else {
+                controller = new ClusteringController("master-controller", fogDevices, sensors,
+                        actuators, locator);
+            }
             controller.submitApplication(application, 0, (new ModulePlacementMobileEdgewards(fogDevices, sensors, actuators, application, moduleMapping)));
 
             TimeKeeper.getInstance().setSimulationStartTime(Calendar.getInstance().getTimeInMillis());
@@ -121,7 +120,7 @@ public class TranslationServiceFog_RandomMobility {
         RandomMobilityGenerator randMobilityGenerator = new RandomMobilityGenerator();
         for (int i = 0; i < numberOfMobileUser; i++) {
 
-                randMobilityGenerator.createRandomData(mobilityModel, i + 1, datasetReference, renewDataset);
+            randMobilityGenerator.createRandomData(mobilityModel, i + 1, datasetReference, renewDataset);
         }
     }
 
@@ -138,6 +137,7 @@ public class TranslationServiceFog_RandomMobility {
             FogDevice mobile = addMobile("mobile_" + i, userId, appId, References.NOT_SET); // adding mobiles to the physical topology. Smartphones have been modeled as fog devices as well.
             mobile.setUplinkLatency(2); // latency of connection between the smartphone and proxy server is 2 ms
             locator.linkDataWithInstance(mobile.getId(), mobileUserDataIds.get(i));
+            mobile.setLevel(3);
 
             fogDevices.add(mobile);
         }
@@ -158,11 +158,13 @@ public class TranslationServiceFog_RandomMobility {
 
         locator.parseResourceInfo();
 
+
         if (locator.getLevelWiseResources(locator.getLevelID("Cloud")).size() == 1) {
 
             FogDevice cloud = createFogDevice("cloud", 44800, 40000, 100, 10000, 0.01, 16 * 103, 16 * 83.25); // creates the fog device Cloud at the apex of the hierarchy with level=0
             cloud.setParentId(References.NOT_SET);
             locator.linkDataWithInstance(cloud.getId(), locator.getLevelWiseResources(locator.getLevelID("Cloud")).get(0));
+            cloud.setLevel(0);
             fogDevices.add(cloud);
 
             for (int i = 0; i < locator.getLevelWiseResources(locator.getLevelID("Proxy")).size(); i++) {
@@ -171,6 +173,7 @@ public class TranslationServiceFog_RandomMobility {
                 locator.linkDataWithInstance(proxy.getId(), locator.getLevelWiseResources(locator.getLevelID("Proxy")).get(i));
                 proxy.setParentId(cloud.getId()); // setting Cloud as parent of the Proxy Server
                 proxy.setUplinkLatency(100); // latency of connection from Proxy Server to the Cloud is 100 ms
+                proxy.setLevel(1);
                 fogDevices.add(proxy);
 
             }
@@ -181,6 +184,7 @@ public class TranslationServiceFog_RandomMobility {
                 locator.linkDataWithInstance(gateway.getId(), locator.getLevelWiseResources(locator.getLevelID("Gateway")).get(i));
                 gateway.setParentId(locator.determineParent(gateway.getId(), References.SETUP_TIME));
                 gateway.setUplinkLatency(4);
+                gateway.setLevel(2);
                 fogDevices.add(gateway);
             }
 

@@ -22,6 +22,11 @@ public class LocationHandler {
 		instanceToDataId = new HashMap<Integer, String>();
 		
 	}
+
+	public LocationHandler() {
+		// TODO Auto-generated constructor stub
+
+	}
 	
 	public MobilityDataParser getDataObject(){
 		return dataObject;
