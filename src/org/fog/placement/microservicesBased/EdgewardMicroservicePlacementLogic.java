@@ -7,7 +7,7 @@
 //import org.fog.application.Application;
 //import org.fog.entities.FogDevice;
 //import org.fog.entities.Tuple;
-//import org.fog.entities.microservicesBased.ClusteredFogDevice;
+//import org.fog.entities.microservicesBased.FogDeviceM;
 //import org.fog.entities.microservicesBased.ControllerComponent;
 //import org.fog.entities.microservicesBased.PlacementRequest;
 //import org.fog.utils.Logger;
@@ -127,7 +127,7 @@
 //                    }
 //
 //                    //service discovery info propagation
-//                    List<Integer> clientDevices = getClientServiceNodeIds(application, microserviceName, placementRequest.getMappedMicroservices(), placement.get(prID));
+//                    List<Integer> clientDevices = getClientServiceNodeIds(application, microserviceName, placementRequest.getPlacedMicroservices(), placement.get(prID));
 //                    for (int clientDevice : clientDevices) {
 //                        if (serviceDiscoveryInfo.containsKey(clientDevice))
 //                            serviceDiscoveryInfo.get(clientDevice).add(new Pair<>(microserviceName, deviceID));
@@ -209,7 +209,7 @@
 //                // todo make this consistant
 //                String microserviceID = generateMicroserviceIds(placementRequest.getPlacementRequestId(), microservice.getName(), application.getAppId());
 ////                todo check if this is correct
-////                if (!placementRequest.getMappedMicroservices().keySet().contains(microservice.getName())) {
+////                if (!placementRequest.getPlacedMicroservices().keySet().contains(microservice.getName())) {
 //                microservicesIdentifierList.add(microserviceID);
 //                mForPrMap.put(microserviceID, placementRequest.getPlacementRequestId());
 ////                }
@@ -268,9 +268,9 @@
 //            Application app = applicationInfo.get(placementRequest.getApplicationId());
 //            // client module is already placed
 //            //todo make it okay for others as well. Not just client module
-//            for (String placed : placementRequest.getMappedMicroservices().keySet()) {
+//            for (String placed : placementRequest.getPlacedMicroservices().keySet()) {
 //                placedModules.add(placed);
-//                int deviceId = placementRequest.getMappedMicroservices().get(placed);
+//                int deviceId = placementRequest.getPlacedMicroservices().get(placed);
 //                getCurrentCpuLoad().put(deviceId, getModule(placed, app).getMips() + getCurrentCpuLoad().get(deviceId));
 //                String uniqueID = generateMicroserviceIds(placementRequest.getPlacementRequestId(), placed, app.getAppId());
 //                if (currentModuleMap.get(deviceId).containsKey(placed))
@@ -288,7 +288,7 @@
 //
 //            for (Integer deviceId : path) {
 //                FogDevice device = getFogDeviceById(deviceId);
-//                if (((ClusteredFogDevice) device).getDeviceType().equals(ClusteredFogDevice.CLIENT))
+//                if (((FogDeviceM) device).getDeviceType().equals(FogDeviceM.CLIENT))
 //                    continue;
 //                /*
 //                 * Getting the list of modules ready to be placed on current device on path

@@ -4,10 +4,11 @@ import org.apache.commons.math3.util.Pair;
 import org.fog.application.AppEdge;
 import org.fog.application.AppModule;
 import org.fog.application.Application;
+import org.fog.application.microservicesBased.MicroservicesApplication;
 import org.fog.entities.FogDevice;
 import org.fog.entities.Tuple;
-import org.fog.entities.microservicesBased.ClusteredFogDevice;
 import org.fog.entities.microservicesBased.ControllerComponent;
+import org.fog.entities.microservicesBased.FogDeviceM;
 import org.fog.entities.microservicesBased.PlacementRequest;
 import org.fog.utils.Logger;
 import org.fog.utils.ModuleLaunchConfig;
@@ -34,6 +35,8 @@ public class ClusteredMicroservicePlacementLogic implements MicroservicePlacemen
     protected Map<Integer, Map<String, Double>> currentModuleLoadMap = new HashMap<>();
     protected Map<Integer, Map<String, Integer>> currentModuleInstanceNum = new HashMap<>();
 
+    Map<Integer, Map<String, Integer>> mappedMicroservices = new HashMap<>();
+    ; //mappedMicroservice
 
     public ClusteredMicroservicePlacementLogic(int fonID) {
         setFONId(fonID);
@@ -86,7 +89,19 @@ public class ClusteredMicroservicePlacementLogic implements MicroservicePlacemen
     private PlacementLogicOutput generatePlacementMap() {
         Map<Integer, Map<String, Integer>> placement = new HashMap<>();
         for (PlacementRequest placementRequest : placementRequests) {
-            placement.put(placementRequest.getPlacementRequestId(), placementRequest.getMappedMicroservices());
+            List<String> toRemove = new ArrayList<>();
+            //placement should include newly placed ones
+            for (String microservice : mappedMicroservices.get(placementRequest.getPlacementRequestId()).keySet()) {
+                if (placementRequest.getPlacedMicroservices().containsKey(microservice))
+                    toRemove.add(microservice);
+                else
+                    placementRequest.getPlacedMicroservices().put(microservice, mappedMicroservices.get(placementRequest.getPlacementRequestId()).get(microservice));
+            }
+            for (String microservice : toRemove)
+                mappedMicroservices.get(placementRequest.getPlacementRequestId()).remove(microservice);
+
+            //update placed modules in placement request as well
+            placement.put(placementRequest.getPlacementRequestId(), mappedMicroservices.get(placementRequest.getPlacementRequestId()));
         }
 
         //todo it assumed that modules are not shared among applications.
@@ -107,7 +122,7 @@ public class ClusteredMicroservicePlacementLogic implements MicroservicePlacemen
                     int deviceID = placement.get(prID).get(microserviceName);
 
                     //service discovery info propagation
-                    List<Integer> clientDevices = getClientServiceNodeIds(application, microserviceName, placementRequest.getMappedMicroservices(), placement.get(prID));
+                    List<Integer> clientDevices = getClientServiceNodeIds(application, microserviceName, placementRequest.getPlacedMicroservices(), placement.get(prID));
                     for (int clientDevice : clientDevices) {
                         if (serviceDiscoveryInfo.containsKey(clientDevice))
                             serviceDiscoveryInfo.get(clientDevice).add(new Pair<>(microserviceName, deviceID));
@@ -195,34 +210,50 @@ public class ClusteredMicroservicePlacementLogic implements MicroservicePlacemen
     }
 
     public void mapModules() {
-        //update based on initially placed microservice
-//        for (PlacementRequest pr : placementRequests) {
-//            List<String> placedModules = new ArrayList<String>();
-//            Application app = applicationInfo.get(pr.getApplicationId());
-//            for (String placed : pr.getMappedMicroservices().keySet()) {
-//                placedModules.add(placed);
-//                moduleToApp.put(placed,app.getAppId());
-//                int deviceId = pr.getMappedMicroservices().get(placed);
-//                getCurrentCpuLoad().put(deviceId, getModule(placed, app).getMips() + getCurrentCpuLoad().get(deviceId));
-//                if (!currentModuleMap.get(deviceId).contains(placed))
-//                    currentModuleMap.get(deviceId).add(placed);
-//
-//                if (!currentModuleLoadMap.get(deviceId).containsKey(placed))
-//                    currentModuleLoadMap.get(deviceId).put(placed, getModule(placed, app).getMips());
-//                else
-//                    currentModuleLoadMap.get(deviceId).put(placed, getModule(placed, app).getMips() + currentModuleLoadMap.get(deviceId).get(placed));
-//
-//                if (!currentModuleInstanceNum.get(deviceId).containsKey(placed))
-//                    currentModuleInstanceNum.get(deviceId).put(placed, 1);
-//                else
-//                    currentModuleInstanceNum.get(deviceId).put(placed, currentModuleInstanceNum.get(deviceId).get(placed) + 1);
-//            }
-//        }
-
         Map<PlacementRequest, Integer> deviceToPlace = new HashMap<>();
         //initiate with the  parent of the client device for this
         for (PlacementRequest placementRequest : placementRequests) {
             deviceToPlace.put(placementRequest, getDevice(placementRequest.getGatewayDeviceId()).getParentId());
+
+            // already placed modules
+            mappedMicroservices.put(placementRequest.getPlacementRequestId(), new HashMap<>(placementRequest.getPlacedMicroservices()));
+
+            //special modules  - predefined cloud placements
+            MicroservicesApplication app = (MicroservicesApplication) applicationInfo.get(placementRequest.getApplicationId());
+            for (String microservice : app.getSpecialPlacementInfo().keySet()) {
+                for (String deviceName : app.getSpecialPlacementInfo().get(microservice)) {
+                    FogDevice device = getDeviceByName(deviceName);
+                    int deviceId = device.getId();
+
+                    if (getModule(microservice, app).getMips() + getCurrentCpuLoad().get(deviceId) <= resourceAvailability.get(deviceId).get(ControllerComponent.CPU)) {
+                        Logger.debug("ModulePlacementEdgeward", "Placement of operator " + microservice + " on device " + device.getName() + " successful.");
+                        getCurrentCpuLoad().put(deviceId, getModule(microservice, app).getMips() + getCurrentCpuLoad().get(deviceId));
+                        System.out.println("Placement of operator " + microservice + " on device " + device.getName() + " successful.");
+
+                        moduleToApp.put(microservice, app.getAppId());
+
+                        if (!currentModuleMap.get(deviceId).contains(microservice))
+                            currentModuleMap.get(deviceId).add(microservice);
+
+                        mappedMicroservices.get(placementRequest.getPlacementRequestId()).put(microservice, deviceId);
+
+                        //currentModuleLoad
+                        if (!currentModuleLoadMap.get(deviceId).containsKey(microservice))
+                            currentModuleLoadMap.get(deviceId).put(microservice, getModule(microservice, app).getMips());
+                        else
+                            currentModuleLoadMap.get(deviceId).put(microservice, getModule(microservice, app).getMips() + currentModuleLoadMap.get(deviceId).get(microservice));
+
+
+                        //currentModuleInstance
+                        if (!currentModuleInstanceNum.get(deviceId).containsKey(microservice))
+                            currentModuleInstanceNum.get(deviceId).put(microservice, 1);
+                        else
+                            currentModuleInstanceNum.get(deviceId).put(microservice, currentModuleInstanceNum.get(deviceId).get(microservice) + 1);
+
+                        break;
+                    }
+                }
+            }
         }
 
         Map<PlacementRequest, Integer> clusterNode = new HashMap<>();
@@ -234,7 +265,7 @@ public class ClusteredMicroservicePlacementLogic implements MicroservicePlacemen
             if (toPlace.isEmpty()) {
                 for (PlacementRequest placementRequest : placementRequests) {
                     Application app = applicationInfo.get(placementRequest.getApplicationId());
-                    List<String> modulesToPlace = getModulesToPlace(placementRequest.getMappedMicroservices().keySet(), app);
+                    List<String> modulesToPlace = getModulesToPlace(mappedMicroservices.get(placementRequest.getPlacementRequestId()).keySet(), app);
                     if (modulesToPlace.isEmpty())
                         placementCompleteCount++;
                     else
@@ -261,7 +292,7 @@ public class ClusteredMicroservicePlacementLogic implements MicroservicePlacemen
                                 if (!currentModuleMap.get(deviceId).contains(microservice))
                                     currentModuleMap.get(deviceId).add(microservice);
 
-                                placementRequest.getMappedMicroservices().put(microservice, deviceId);
+                                mappedMicroservices.get(placementRequest.getPlacementRequestId()).put(microservice, deviceId);
 
                                 //currentModuleLoad
                                 if (!currentModuleLoadMap.get(deviceId).containsKey(microservice))
@@ -283,8 +314,10 @@ public class ClusteredMicroservicePlacementLogic implements MicroservicePlacemen
                             toPlace.get(placementRequest).remove(m);
                         }
                         if (!toPlace.get(placementRequest).isEmpty()) {
-                            if (((ClusteredFogDevice) device).isInCluster()) {
+                            if (((FogDeviceM) device).isInCluster()) {
+                                // -1 indicates it's a cluster placement
                                 deviceToPlace.put(placementRequest, -1);
+                                // a device of the cluster to identify the cluster
                                 clusterNode.put(placementRequest, deviceId);
                             } else {
                                 deviceToPlace.put(placementRequest, device.getParentId());
@@ -297,7 +330,7 @@ public class ClusteredMicroservicePlacementLogic implements MicroservicePlacemen
                     if (toPlace.containsKey(placementRequest)) {
                         int clusterDeviceId = clusterNode.get(placementRequest);
                         FogDevice device = getDevice(clusterDeviceId);
-                        List<Integer> clusterDeviceIds = ((ClusteredFogDevice) device).getClusterNodeIds();
+                        List<Integer> clusterDeviceIds = ((FogDeviceM) device).getClusterMembers();
                         List<Integer> sortedClusterDevices = new ArrayList<>();
                         for (Integer id : clusterDeviceIds) {
                             //sort list from min to max
@@ -337,7 +370,7 @@ public class ClusteredMicroservicePlacementLogic implements MicroservicePlacemen
                                     if (!currentModuleMap.get(id).contains(microservice))
                                         currentModuleMap.get(id).add(microservice);
 
-                                    placementRequest.getMappedMicroservices().put(microservice, id);
+                                    mappedMicroservices.get(placementRequest.getPlacementRequestId()).put(microservice, id);
 
                                     moduleToApp.put(microservice, app.getAppId());
 
@@ -374,6 +407,14 @@ public class ClusteredMicroservicePlacementLogic implements MicroservicePlacemen
             }
         }
 
+    }
+
+    private FogDevice getDeviceByName(String deviceName) {
+        for (FogDevice f : fogDevices) {
+            if (f.getName().equals(deviceName))
+                return f;
+        }
+        return null;
     }
 
     public Map<Integer, Double> getCurrentCpuLoad() {

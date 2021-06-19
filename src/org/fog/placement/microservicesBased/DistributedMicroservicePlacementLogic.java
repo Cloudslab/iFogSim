@@ -7,7 +7,7 @@ import org.fog.application.Application;
 import org.fog.application.microservicesBased.MicroservicesApplication;
 import org.fog.entities.FogDevice;
 import org.fog.entities.Tuple;
-import org.fog.entities.microservicesBased.ClusteredFogDevice;
+import org.fog.entities.microservicesBased.FogDeviceM;
 import org.fog.entities.microservicesBased.ControllerComponent;
 import org.fog.entities.microservicesBased.PlacementRequest;
 import org.fog.utils.Logger;
@@ -85,7 +85,7 @@ public class DistributedMicroservicePlacementLogic implements MicroservicePlacem
     private PlacementLogicOutput generatePlacementMap() {
         Map<Integer, Map<String, Integer>> placement = new HashMap<>();
         for (PlacementRequest placementRequest : placementRequests) {
-            placement.put(placementRequest.getPlacementRequestId(), placementRequest.getMappedMicroservices());
+            placement.put(placementRequest.getPlacementRequestId(), placementRequest.getPlacedMicroservices());
         }
 
         Map<Integer, Map<Application, List<ModuleLaunchConfig>>> perDevice = new HashMap<>();
@@ -103,7 +103,7 @@ public class DistributedMicroservicePlacementLogic implements MicroservicePlacem
                     int deviceID = placement.get(prID).get(microserviceName);
 
                     //service discovery info propagation
-                    List<Integer> clientDevices = getClientServiceNodeIds(application, microserviceName, placementRequest.getMappedMicroservices(), placement.get(prID));
+                    List<Integer> clientDevices = getClientServiceNodeIds(application, microserviceName, placementRequest.getPlacedMicroservices(), placement.get(prID));
                     for (int clientDevice : clientDevices) {
                         if (serviceDiscoveryInfo.containsKey(clientDevice))
                             serviceDiscoveryInfo.get(clientDevice).add(new Pair<>(microserviceName, deviceID));
@@ -147,7 +147,7 @@ public class DistributedMicroservicePlacementLogic implements MicroservicePlacem
         for (PlacementRequest placementRequest : placementRequests) {
             MicroservicesApplication app = (MicroservicesApplication) applicationInfo.get(placementRequest.getApplicationId());
             List<String> failedMicroservices = new ArrayList<>();
-            List<String> modulesToPlace = getMicroservicesToPlace(app, placementRequest.getMappedMicroservices(), failedMicroservices, fogDevice.getName());
+            List<String> modulesToPlace = getMicroservicesToPlace(app, placementRequest.getPlacedMicroservices(), failedMicroservices, fogDevice.getName());
             while (!modulesToPlace.isEmpty()) {
                 for (String microservice : modulesToPlace) {
                     //try to place or add to failed list, add to mapped modules
@@ -164,7 +164,7 @@ public class DistributedMicroservicePlacementLogic implements MicroservicePlacem
                         if (!currentModuleMap.contains(microservice))
                             currentModuleMap.add(microservice);
 
-                        placementRequest.getMappedMicroservices().put(microservice, fogDevice.getId());
+                        placementRequest.getPlacedMicroservices().put(microservice, fogDevice.getId());
 
                         //currentModuleLoad
                         if (!currentModuleLoadMap.containsKey(microservice))
@@ -182,12 +182,12 @@ public class DistributedMicroservicePlacementLogic implements MicroservicePlacem
                     }
 
                 }
-                modulesToPlace = getMicroservicesToPlace(app, placementRequest.getMappedMicroservices(), failedMicroservices, fogDevice.getName());
+                modulesToPlace = getMicroservicesToPlace(app, placementRequest.getPlacedMicroservices(), failedMicroservices, fogDevice.getName());
             }
 
             if (!failedMicroservices.isEmpty()) {
                 //check for cluster placement or send to parent
-                if (((ClusteredFogDevice) fogDevice).isInCluster()) {
+                if (((FogDeviceM) fogDevice).isInCluster()) {
                     int deviceId = placeWithinCluster(failedMicroservices, app);
                     if (deviceId != -1)
                         prStatus.put(placementRequest, deviceId);
@@ -209,7 +209,7 @@ public class DistributedMicroservicePlacementLogic implements MicroservicePlacem
     private boolean allModulesPlaced(MicroservicesApplication app, PlacementRequest placementRequest) {
         List<String> microservicesToPlace = new LinkedList<>();
         for (AppModule module : app.getModules()) {
-            if (!placementRequest.getMappedMicroservices().keySet().contains(module.getName())) {
+            if (!placementRequest.getPlacedMicroservices().keySet().contains(module.getName())) {
                 microservicesToPlace.add(module.getName());
                 return false;
             }
@@ -218,7 +218,7 @@ public class DistributedMicroservicePlacementLogic implements MicroservicePlacem
     }
 
     private int placeWithinCluster(List<String> failedMicroservices, MicroservicesApplication app) {
-        List<Integer> clusterDeviceIds = ((ClusteredFogDevice) fogDevice).getClusterNodeIds();
+        List<Integer> clusterDeviceIds = ((FogDeviceM) fogDevice).getClusterMembers();
         if (clusterDeviceIds.isEmpty())
             return -1;
         List<Integer> sortedClusterDevices = new ArrayList<>();

@@ -14,7 +14,7 @@ import org.fog.utils.distribution.Distribution;
  */
 public class SensorM extends Sensor {
 
-    private int transmissionStartDelay = Config.TRANSMISSION_START_DELAY;
+    private int transmissionStartDelay = MicroservicePlacementConfig.TRANSMISSION_START_DELAY;
 
     public SensorM(String name, int userId, String appId, int gatewayDeviceId, double latency, Application application, GeoLocation geoLocation, Distribution transmitDistribution, int cpuLength, int nwLength, String tupleType, String destModuleName) {
         super(name, userId, appId, gatewayDeviceId, latency, geoLocation, transmitDistribution, cpuLength, nwLength, tupleType, destModuleName);

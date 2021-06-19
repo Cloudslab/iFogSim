@@ -15,22 +15,6 @@ public class Config {
 	public static double FOG_DEVICE_COST_PER_BW = 0.0;
 	public static double MAX_VALUE = 1000000.0;
 
-	// For periodic placement
-	public static final double PLACEMENT_INTERVAL = 50;
-
-	// simulation modes - STATIC - 1(placement happens before simulation start)  DYNAMIC - 2(placement happens after simulation starts)
-	public static String SIMULATION_MODE = "DYNAMIC";
-
-	//Placement Request Processing Mode
-	public static String PERIODIC = "Periodic";
-	public static String SEQUENTIAL = "Sequential";
-	public static String PR_PROCESSING_MODE = SEQUENTIAL;
-
-	//Resource info sharing among cluster nodes
-	public static Boolean ENABLE_RESOURCE_DATA_SHARING = true;
-	public static double MODULE_DEPLYMENT_TIME = 200;
-	public static final int TRANSMISSION_START_DELAY = 500;
-
 	//Dynamic Clustering
 	public static Boolean ENABLE_DYNAMIC_CLUSTERING = true;
 	public static double Node_Communication_RANGE = 300.0; // In terms of meter

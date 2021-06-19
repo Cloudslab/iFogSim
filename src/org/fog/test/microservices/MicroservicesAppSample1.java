@@ -16,7 +16,7 @@ import org.fog.application.Application;
 import org.fog.application.microservicesBased.MicroservicesApplication;
 import org.fog.application.selectivity.FractionalSelectivity;
 import org.fog.entities.*;
-import org.fog.entities.microservicesBased.ClusteredFogDevice;
+import org.fog.entities.microservicesBased.FogDeviceM;
 import org.fog.entities.microservicesBased.PlacementRequest;
 import org.fog.entities.microservicesBased.SensorM;
 import org.fog.placement.microservicesBased.MicroservicesController;
@@ -41,9 +41,9 @@ public class MicroservicesAppSample1 {
 
     static boolean CLOUD = false;
 
-    static int l3FogNodes = 2; // proxy server
-    static Integer[] l2FogNodesPerL3 = new Integer[]{3,3};        // GW devices
-    static Integer[] l1FogNodesPerL2 = new Integer[]{3,2,1, 2, 3, 1};   // eg : client end devices ( mobiles )
+    static int proxyServers = 2; // proxy server
+    static Integer[] gatewayDevices = new Integer[]{3,3};        // GW devices
+    static Integer[] mobilesPerL2 = new Integer[]{3,2,1, 2, 3, 1};   // eg : client end devices ( mobiles )
     private static int l2Num = 0; // fog adding l1 nodes
     static Integer deviceNum = 0;
 
@@ -69,6 +69,7 @@ public class MicroservicesAppSample1 {
      * SIMULATION_MODE -> dynamic
      * PR_PROCESSING_MODE -> SEQUENTIAL
      * ENABLE_RESOURCE_DATA_SHARING -> true
+     * DYNAMIC_CLUSTERING -> false
      */
     public static void main(String[] args) {
 
@@ -99,32 +100,27 @@ public class MicroservicesAppSample1 {
              */
             createFogDevices(broker.getId());
 
-            connectWithLatencies();
-
-            List<String> clusterLevelIdentifier = new ArrayList<>();
-            clusterLevelIdentifier.add("L2");
-            for (String id : clusterLevelIdentifier)
-                createClusterConnections(id, fogDevices, clusterLatency);
+            List<Integer> clusterLevelIdentifier = new ArrayList<>();
+            clusterLevelIdentifier.add(2);
 
             Map<Integer, List<FogDevice>> monitored = new HashMap<>();
             for (FogDevice f : fogDevices) {
-                if (((ClusteredFogDevice) f).getDeviceType() == ClusteredFogDevice.FON || ((ClusteredFogDevice) f).getDeviceType() == ClusteredFogDevice.CLOUD) {
+                if (((FogDeviceM) f).getDeviceType() == FogDeviceM.FON || ((FogDeviceM) f).getDeviceType() == FogDeviceM.CLOUD) {
                     List<FogDevice> fogDevices = new ArrayList<>();
                     fogDevices.add(f);
                     monitored.put(f.getId(), fogDevices);
-                    ((ClusteredFogDevice) f).setFonID(f.getId());
+                    ((FogDeviceM) f).setFonID(f.getId());
                 }
-                if(((ClusteredFogDevice) f).getDeviceType() == ClusteredFogDevice.CLIENT ){
-                    ((ClusteredFogDevice) f).setFonID(f.getParentId());
+                if(((FogDeviceM) f).getDeviceType() == FogDeviceM.CLIENT ){
+                    ((FogDeviceM) f).setFonID(f.getParentId());
                 }
-
             }
 
             /**
              * Central controller for performing preprocessing functions
              */
             int placementAlgo = PlacementLogicFactory.DISTRIBUTED_MICROSERVICES_PLACEMENT;
-            MicroservicesController microservicesController = new MicroservicesController("controller", fogDevices, sensors, applications, placementAlgo, monitored);
+            MicroservicesController microservicesController = new MicroservicesController("controller", fogDevices, sensors, applications, clusterLevelIdentifier,clusterLatency, placementAlgo,monitored);
 
 
             // generate placement requests
@@ -158,17 +154,17 @@ public class MicroservicesAppSample1 {
      * @param userId
      */
     private static void createFogDevices(int userId) {
-        FogDevice cloud = createFogDevice("cloud", 80000000, 49152000, 100, 12500000, 0, 0.01, 16 * 103, 16 * 83.25, ClusteredFogDevice.CLOUD); // creates the fog device Cloud at the apex of the hierarchy with level=0
+        FogDevice cloud = createFogDevice("cloud", 80000000, 49152000, 100, 12500000, 0, 0.01, 16 * 103, 16 * 83.25, FogDeviceM.CLOUD); // creates the fog device Cloud at the apex of the hierarchy with level=0
         cloud.setParentId(-1);
 
-        for (int i = 0; i < l3FogNodes; i++) {
-            FogDevice proxy = createFogDevice("proxy-server-" + i, 10000, 8192, 12500000, 1250000, 1, 0.0, 107.339, 83.4333, ClusteredFogDevice.FON); // creates the fog device Proxy Server (level=1)
+        for (int i = 0; i < proxyServers; i++) {
+            FogDevice proxy = createFogDevice("proxy-server-" + i, 10000, 8192, 12500000, 1250000, 1, 0.0, 107.339, 83.4333, FogDeviceM.FON); // creates the fog device Proxy Server (level=1)
             proxy.setParentId(cloud.getId()); // setting Cloud as parent of the Proxy Server
             proxy.setUplinkLatency(150); // latency of connection from Proxy Server to the Cloud is 150 ms
             fogDevices.add(cloud);
             fogDevices.add(proxy);
 
-            for (int j = 0; j < l2FogNodesPerL3[i]; j++) {
+            for (int j = 0; j < gatewayDevices[i]; j++) {
                 FogDevice l2 = addL2Devices(j + "", userId, proxy.getId(), l2Num);
                 l2Num++;
             }
@@ -179,15 +175,15 @@ public class MicroservicesAppSample1 {
         FogDevice dept;
         if (diffResource) {
             int pos = deviceNum % 2;
-            dept = createFogDevice("L2-" + id, cpus[pos], ram[pos], 1250000, 18750, 3, 0.0, 107.339, 83.4333, ClusteredFogDevice.FON);
+            dept = createFogDevice("L2-" + id, cpus[pos], ram[pos], 1250000, 18750, 2, 0.0, 107.339, 83.4333, FogDeviceM.FON);
             deviceNum = deviceNum + 1;
         } else {
-            dept = createFogDevice("L2-" + id, 2800, 2048, 1250000, 18750, 3, 0.0, 107.339, 83.4333, ClusteredFogDevice.FON);
+            dept = createFogDevice("L2-" + id, 2800, 2048, 1250000, 18750, 2, 0.0, 107.339, 83.4333, FogDeviceM.FON);
         }
         fogDevices.add(dept);
         dept.setParentId(parentId);
         dept.setUplinkLatency(30); // latency of connection between gateways and proxy server is 4 ms
-        for (int i = 0; i < l1FogNodesPerL2[parentPosition]; i++) {
+        for (int i = 0; i < mobilesPerL2[parentPosition]; i++) {
             String mobileId = id + "-" + i;
             FogDevice mobile = addMobile(mobileId, userId, dept.getId()); // adding mobiles to the physical topology. Smartphones have been modeled as fog devices as well.
             mobile.setUplinkLatency(20); // latency of connection between the smartphone and proxy server is 4 ms
@@ -202,7 +198,7 @@ public class MicroservicesAppSample1 {
         String appId = application.getAppId();
         double throughput = 200;
 
-        FogDevice mobile = createFogDevice("m-" + id, 1000, 2048, 18750, 250, 3, 0, 87.53, 82.44, ClusteredFogDevice.CLIENT);
+        FogDevice mobile = createFogDevice("m-" + id, 1000, 2048, 18750, 250, 3, 0, 87.53, 82.44, FogDeviceM.CLIENT);
         mobile.setParentId(parentId);
 
         Sensor eegSensor = new SensorM("s-" + id, "ECG", userId, appId, application, new DeterministicDistribution(1000 / (throughput / 9 * 10))); // inter-transmission time of EEG sensor follows a deterministic distribution
@@ -236,8 +232,8 @@ public class MicroservicesAppSample1 {
      * @param idlePower
      * @return
      */
-    private static ClusteredFogDevice createFogDevice(String nodeName, long mips,
-                                                      int ram, long upBw, long downBw, int level, double ratePerMips, double busyPower, double idlePower, String deviceType) {
+    private static FogDeviceM createFogDevice(String nodeName, long mips,
+                                              int ram, long upBw, long downBw, int level, double ratePerMips, double busyPower, double idlePower, String deviceType) {
 
         List<Pe> peList = new ArrayList<Pe>();
 
@@ -277,9 +273,9 @@ public class MicroservicesAppSample1 {
                 arch, os, vmm, host, time_zone, cost, costPerMem,
                 costPerStorage, costPerBw);
 
-        ClusteredFogDevice fogdevice = null;
+        FogDeviceM fogdevice = null;
         try {
-            fogdevice = new ClusteredFogDevice(nodeName, characteristics,
+            fogdevice = new FogDeviceM(nodeName, characteristics,
                     new AppModuleAllocationPolicy(hostList), storageList, 10, upBw, downBw, 1250000, 0, ratePerMips, deviceType);
         } catch (Exception e) {
             e.printStackTrace();
@@ -311,13 +307,13 @@ public class MicroservicesAppSample1 {
             for (FogDevice fogDevice : fogDevicesByParent.get(parentId)) {
                 List<Integer> clusterNodeIdsTemp = new ArrayList<>(clusterNodeIds);
                 clusterNodeIds.remove((Object) fogDevice.getId());
-                ((ClusteredFogDevice) fogDevice).setClusterNodeIds(clusterNodeIds);
+                ((FogDeviceM) fogDevice).setClusterMembers(clusterNodeIds);
                 Map<Integer, Double> latencyMap = new HashMap<>();
                 for (int id : clusterNodeIds) {
                     latencyMap.put(id, clusterLatency);
                 }
-                ((ClusteredFogDevice) fogDevice).setClusterNodeToLatency(latencyMap);
-                ((ClusteredFogDevice) fogDevice).setInCluster(true);
+                ((FogDeviceM) fogDevice).setClusterMembersToLatencyMap(latencyMap);
+                ((FogDeviceM) fogDevice).setInCluster(true);
                 clusterNodeIds = clusterNodeIdsTemp;
 
             }
