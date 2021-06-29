@@ -27,7 +27,7 @@ import org.fog.entities.FogDevice;
 import org.fog.entities.FogDeviceCharacteristics;
 import org.fog.entities.Sensor;
 import org.fog.entities.Tuple;
-import org.fog.mobilitydata.MobilityDataParser;
+import org.fog.mobilitydata.DataParser;
 import org.fog.mobilitydata.References;
 import org.fog.placement.LocationHandler;
 import org.fog.placement.MobilityController;
@@ -79,7 +79,7 @@ public class TranslationServiceFog {
 
 			
 			//
-			MobilityDataParser dataObject = new MobilityDataParser();
+			DataParser dataObject = new DataParser();
 			locator = new LocationHandler(dataObject);
 
 			String datasetReference = References.dataset_reference;

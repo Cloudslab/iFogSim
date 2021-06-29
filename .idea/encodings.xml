@@ -1,43 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding" addBOMForNewFiles="with NO BOM">
-    <file url="file://$PROJECT_DIR$/src/org/fog/application/microservicesBased/QoSProfile.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/org/fog/placement/microservicesBased/BenchMark01/ObjectiveFunction.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/org/fog/placement/microservicesBased/BenchMark01/ParameterFunctions.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/org/fog/placement/microservicesBased/BenchMark01/Particle.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/org/fog/placement/microservicesBased/BenchMark01/ParticleHistory.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/org/fog/placement/microservicesBased/BenchMark01/PositionVector.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/org/fog/placement/microservicesBased/BenchMark01/Swarm.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/org/fog/placement/microservicesBased/BenchMark02/Chromosome.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/org/fog/placement/microservicesBased/BenchMark02/ObjectiveFunction.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/org/fog/placement/microservicesBased/BenchMark02/Population.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/org/fog/placement/microservicesBased/DPSO/ObjectiveFunction.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/org/fog/placement/microservicesBased/DPSO/ParameterFunctions.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/org/fog/placement/microservicesBased/DPSO/Particle.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/org/fog/placement/microservicesBased/DPSO/ParticleHistory.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/org/fog/placement/microservicesBased/DPSO/PositionVector.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/org/fog/placement/microservicesBased/DPSO/Swarm.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/org/fog/placement/microservicesBased/DPSO/VelocityVector.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/org/fog/placement/microservicesBased/SCLPSO/ObjectiveFunction.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/org/fog/placement/microservicesBased/SCLPSO/ParameterFunctions.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/org/fog/placement/microservicesBased/SCLPSO/Particle.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/org/fog/placement/microservicesBased/SCLPSO/ParticleHistory.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/org/fog/placement/microservicesBased/SCLPSO/PositionVector.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/org/fog/placement/microservicesBased/SCLPSO/Swarm.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/org/fog/placement/microservicesBased/SCLPSO/VelocityMatrix.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/org/fog/placement/microservicesBased/SCLPSOtest/ObjectiveFunction.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/org/fog/placement/microservicesBased/SCLPSOtest/ParameterFunctions.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/org/fog/placement/microservicesBased/SCLPSOtest/Particle.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/org/fog/placement/microservicesBased/SCLPSOtest/ParticleHistory.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/org/fog/placement/microservicesBased/SCLPSOtest/PositionVector.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/org/fog/placement/microservicesBased/SCLPSOtest/Swarm.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/org/fog/placement/microservicesBased/SCLPSOtest/VelocityMatrix.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/org/fog/placement/microservicesBased/SPSO/ObjectiveFunction.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/org/fog/placement/microservicesBased/SPSO/ParameterFunctions.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/org/fog/placement/microservicesBased/SPSO/Particle.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/org/fog/placement/microservicesBased/SPSO/ParticleHistory.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/org/fog/placement/microservicesBased/SPSO/PositionVector.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/org/fog/placement/microservicesBased/SPSO/Swarm.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/src/org/fog/placement/microservicesBased/SPSO/VelocityMatrix.java" charset="windows-1252" />
-  </component>
+  <component name="Encoding" addBOMForNewFiles="with NO BOM" />
 </project>

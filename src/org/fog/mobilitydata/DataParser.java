@@ -12,7 +12,7 @@ import java.util.Properties;
 import java.util.Random;
 
 
-public class MobilityDataParser {
+public class DataParser {
     public Map<String, Location> resourceLocationData = new HashMap<String, Location>();
     public Map<String, Integer> levelID = new HashMap<String, Integer>();
     public Map<Integer, ArrayList<String>> levelwiseResources = new HashMap<Integer, ArrayList<String>>();
@@ -20,7 +20,7 @@ public class MobilityDataParser {
     public Map<String, Map<Double, Location>> usersLocation = new HashMap<String, Map<Double, Location>>();
 
 
-    public MobilityDataParser() {
+    public DataParser() {
         File configFile = new File(".\\dataset\\config.properties");
         try {
             FileReader reader = new FileReader(configFile);

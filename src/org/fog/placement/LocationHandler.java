@@ -6,17 +6,17 @@ import java.util.List;
 import java.util.Map;
 
 import org.fog.mobilitydata.Location;
-import org.fog.mobilitydata.MobilityDataParser;
+import org.fog.mobilitydata.DataParser;
 import org.fog.mobilitydata.References;
 import org.fog.utils.Config;
 
 public class LocationHandler {
 	
-	public MobilityDataParser dataObject;
+	public DataParser dataObject;
 	public Map<Integer, String> instanceToDataId;
 	
 
-	public LocationHandler(MobilityDataParser dataObject) {
+	public LocationHandler(DataParser dataObject) {
 		// TODO Auto-generated constructor stub
 		this.dataObject = dataObject;
 		instanceToDataId = new HashMap<Integer, String>();
@@ -28,7 +28,7 @@ public class LocationHandler {
 
 	}
 	
-	public MobilityDataParser getDataObject(){
+	public DataParser getDataObject(){
 		return dataObject;
 	}
 	

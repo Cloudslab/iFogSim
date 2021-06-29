@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 /**
  * Created by Samodha Pallewatta on 7/31/2020.
  */
-public class MicroservicesMobilityController extends MicroservicesController {
+public class MicroservicesMobilityClusteringController extends MicroservicesController {
 
     private LocationHandler locator;
     private Map<Integer, Integer> parentReference;
@@ -40,7 +40,7 @@ public class MicroservicesMobilityController extends MicroservicesController {
      * @param sensors
      * @param applications
      */
-    public MicroservicesMobilityController(String name, List<FogDevice> fogDevices, List<Sensor> sensors, List<Application> applications, List<Integer> clusterLevel, Double clusterLatency, int placementLogic, LocationHandler locator) {
+    public MicroservicesMobilityClusteringController(String name, List<FogDevice> fogDevices, List<Sensor> sensors, List<Application> applications, List<Integer> clusterLevel, Double clusterLatency, int placementLogic, LocationHandler locator) {
         super(name, fogDevices, sensors, applications, clusterLevel, clusterLatency, placementLogic);
 
         setLocator(locator);
@@ -50,7 +50,7 @@ public class MicroservicesMobilityController extends MicroservicesController {
 
     }
 
-    public MicroservicesMobilityController(String name, List<FogDevice> fogDevices, List<Sensor> sensors, List<Application> applications, List<Integer> clusterLevel, Double clusterLatency, int placementLogic, Map<Integer, List<FogDevice>> monitored, LocationHandler locator) {
+    public MicroservicesMobilityClusteringController(String name, List<FogDevice> fogDevices, List<Sensor> sensors, List<Application> applications, List<Integer> clusterLevel, Double clusterLatency, int placementLogic, Map<Integer, List<FogDevice>> monitored, LocationHandler locator) {
 
         super(name, fogDevices, sensors, applications, clusterLevel, clusterLatency, placementLogic, monitored);
 

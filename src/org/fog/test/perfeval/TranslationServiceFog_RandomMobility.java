@@ -14,7 +14,7 @@ import org.fog.application.AppLoop;
 import org.fog.application.Application;
 import org.fog.application.selectivity.FractionalSelectivity;
 import org.fog.entities.*;
-import org.fog.mobilitydata.MobilityDataParser;
+import org.fog.mobilitydata.DataParser;
 import org.fog.mobilitydata.RandomMobilityGenerator;
 import org.fog.mobilitydata.References;
 import org.fog.placement.LocationHandler;
@@ -28,7 +28,6 @@ import org.fog.utils.FogUtils;
 import org.fog.utils.TimeKeeper;
 import org.fog.utils.distribution.DeterministicDistribution;
 
-import java.io.File;
 import java.io.IOException;
 
 import org.json.simple.parser.ParseException;
@@ -76,7 +75,7 @@ public class TranslationServiceFog_RandomMobility {
             application.setUserId(broker.getId());
 
             //
-            MobilityDataParser dataObject = new MobilityDataParser();
+            DataParser dataObject = new DataParser();
             locator = new LocationHandler(dataObject);
 
             String datasetReference = References.dataset_reference;

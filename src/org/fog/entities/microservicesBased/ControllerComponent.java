@@ -17,7 +17,7 @@ public class ControllerComponent {
 
     protected LoadBalancer loadBalancer;
     protected MicroservicePlacementLogic microservicePlacementLogic = null;
-    protected ServiceDiscoveryInfo serviceDiscoveryInfo;
+    protected ServiceDiscovery serviceDiscoveryInfo;
 
     protected int deviceId;
 
@@ -61,7 +61,7 @@ public class ControllerComponent {
         this.microservicePlacementLogic = mPlacement;
         this.resourceAvailability = resourceAvailability;
         setDeviceId(deviceId);
-        serviceDiscoveryInfo = new ServiceDiscoveryInfo(deviceId);
+        serviceDiscoveryInfo = new ServiceDiscovery(deviceId);
     }
 
     /**
@@ -72,7 +72,7 @@ public class ControllerComponent {
     public ControllerComponent(Integer deviceId, LoadBalancer loadBalancer) {
         this.loadBalancer = loadBalancer;
         setDeviceId(deviceId);
-        serviceDiscoveryInfo = new ServiceDiscoveryInfo(deviceId);
+        serviceDiscoveryInfo = new ServiceDiscovery(deviceId);
     }
 
     /**
@@ -128,11 +128,11 @@ public class ControllerComponent {
     }
 }
 
-class ServiceDiscoveryInfo {
+class ServiceDiscovery {
     protected Map<String, List<Integer>> serviceDiscoveryInfo = new HashMap<>();
     int deviceId ;
 
-    public ServiceDiscoveryInfo(Integer deviceId) {
+    public ServiceDiscovery(Integer deviceId) {
         this.deviceId =deviceId;
     }
 

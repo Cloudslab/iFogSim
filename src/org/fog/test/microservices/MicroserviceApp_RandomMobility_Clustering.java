@@ -19,11 +19,11 @@ import org.fog.entities.*;
 import org.fog.entities.microservicesBased.FogDeviceM;
 import org.fog.entities.microservicesBased.PlacementRequest;
 import org.fog.entities.microservicesBased.SensorM;
-import org.fog.mobilitydata.MobilityDataParser;
+import org.fog.mobilitydata.DataParser;
 import org.fog.mobilitydata.RandomMobilityGenerator;
 import org.fog.mobilitydata.References;
 import org.fog.placement.LocationHandler;
-import org.fog.placement.microservicesBased.MicroservicesMobilityController;
+import org.fog.placement.microservicesBased.MicroservicesMobilityClusteringController;
 import org.fog.placement.microservicesBased.PlacementLogicFactory;
 import org.fog.policy.AppModuleAllocationPolicy;
 import org.fog.scheduler.StreamOperatorScheduler;
@@ -91,7 +91,7 @@ public class MicroserviceApp_RandomMobility_Clustering {
             applications.add(microservicesApplication);
 
             //
-            MobilityDataParser dataObject = new MobilityDataParser();
+            DataParser dataObject = new DataParser();
             locator = new LocationHandler(dataObject);
 
             String datasetReference = References.dataset_reference;
@@ -122,7 +122,7 @@ public class MicroserviceApp_RandomMobility_Clustering {
             clusterLevelIdentifier.add(2);
 
             int placementAlgo = PlacementLogicFactory.CLUSTERED_MICROSERVICES_PLACEMENT;
-            MicroservicesMobilityController microservicesController = new MicroservicesMobilityController("controller", fogDevices, sensors, appList, clusterLevelIdentifier, 2.0, placementAlgo, locator);
+            MicroservicesMobilityClusteringController microservicesController = new MicroservicesMobilityClusteringController("controller", fogDevices, sensors, appList, clusterLevelIdentifier, 2.0, placementAlgo, locator);
 
 
             // generate placement requests

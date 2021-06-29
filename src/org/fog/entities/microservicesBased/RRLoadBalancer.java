@@ -10,7 +10,7 @@ import java.util.Map;
 public class RRLoadBalancer implements LoadBalancer {
     protected Map<String, Integer> loadBalancerPosition = new HashMap();
 
-    public int getDeviceId(String microservice, ServiceDiscoveryInfo serviceDiscoveryInfo) {
+    public int getDeviceId(String microservice, ServiceDiscovery serviceDiscoveryInfo) {
         if (loadBalancerPosition.containsKey(microservice) && serviceDiscoveryInfo.getServiceDiscoveryInfo().containsKey(microservice)) {
             int pos = loadBalancerPosition.get(microservice);
             if (pos + 1 > serviceDiscoveryInfo.getServiceDiscoveryInfo().get(microservice).size() - 1)
