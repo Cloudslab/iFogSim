@@ -1,20 +1,15 @@
 package org.fog.mobilitydata;
 
-import org.cloudbus.cloudsim.Log;
 import org.cloudbus.cloudsim.core.CloudSim;
 import org.fog.entities.FogDevice;
-import org.fog.entities.microservicesBased.ClusteredFogDevice;
 import org.fog.placement.LocationHandler;
 import org.fog.utils.Config;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.ParseException;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 /**
