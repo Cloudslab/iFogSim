@@ -20,5 +20,5 @@ public class Config {
 	public static double Node_Communication_RANGE = 300.0; // In terms of meter
 	public static double clusteringLatency = 2.0; //milisecond
 
-	
+	public static final int TRANSMISSION_START_DELAY = 0;
 }

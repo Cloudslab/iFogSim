@@ -13,20 +13,17 @@ import org.cloudbus.cloudsim.sdn.overbooking.PeProvisionerOverbooking;
 import org.fog.application.AppEdge;
 import org.fog.application.AppLoop;
 import org.fog.application.Application;
-import org.fog.application.microservicesBased.MicroservicesApplication;
-import org.fog.application.microservicesBased.QoSProfile;
+import org.fog.application.Application2;
 import org.fog.application.selectivity.FractionalSelectivity;
 import org.fog.entities.*;
 import org.fog.entities.microservicesBased.FogDeviceM;
 import org.fog.entities.microservicesBased.PlacementRequest;
-import org.fog.entities.microservicesBased.SensorM;
 import org.fog.placement.microservicesBased.MicroservicesController;
 import org.fog.placement.microservicesBased.PlacementLogicFactory;
 import org.fog.policy.AppModuleAllocationPolicy;
 import org.fog.scheduler.StreamOperatorScheduler;
 import org.fog.utils.FogLinearPowerModel;
 import org.fog.utils.FogUtils;
-import org.fog.utils.Logger;
 import org.fog.utils.TimeKeeper;
 import org.fog.utils.distribution.DeterministicDistribution;
 import org.json.simple.JSONArray;
@@ -126,7 +123,7 @@ public class MicroserviceAppSample2 {
                 appList.add(application);
 
             int placementAlgo = PlacementLogicFactory.CLUSTERED_MICROSERVICES_PLACEMENT;
-            MicroservicesController microservicesController = new MicroservicesController("controller", fogDevices, sensors, appList, clusterLevelIdentifier,clusterLatency,placementAlgo);
+            MicroservicesController microservicesController = new MicroservicesController("controller", fogDevices, sensors, appList, clusterLevelIdentifier, clusterLatency, placementAlgo);
 
 
             // generate placement requests
@@ -227,18 +224,15 @@ public class MicroserviceAppSample2 {
 
     private static FogDevice addMobile(String id, int userId, int parentId) {
 
-        MicroservicesApplication application = (MicroservicesApplication) applications.get(appNum % appCount);
+        Application2 application = (Application2) applications.get(appNum % appCount);
         String appId = application.getAppId();
         double throughput = 200;
-        for (int loopId : application.getQoSProfile().getQoSRequirementsPerService().keySet()) {
-            throughput = application.getQoSProfile().getQoSRequirementsPerService().get(loopId).get(QoSProfile.THORUGHPUT);
-            break;
-        }
 
         FogDevice mobile = createFogDevice("m-" + id, 1000, 2048, 18750, 250, 3, 0, 87.53, 82.44, FogDeviceM.CLIENT);
         mobile.setParentId(parentId);
 
-        Sensor eegSensor = new SensorM("s-" + id, "sensor" + appId, userId, appId, application, new DeterministicDistribution(1000 / (throughput / 9 * 10))); // inter-transmission time of EEG sensor follows a deterministic distribution
+        Sensor2 eegSensor = new Sensor2("s-" + id, "sensor" + appId, userId, appId, new DeterministicDistribution(1000 / (throughput / 9 * 10))); // inter-transmission time of EEG sensor follows a deterministic distribution
+        eegSensor.setApp(application);
         sensors.add(eegSensor);
 
         Actuator display = new Actuator("a-" + id, userId, appId, "actuator" + appId);
@@ -328,7 +322,7 @@ public class MicroserviceAppSample2 {
 
         String appId = (String) applicationParameters.get("appId");
         int userId = Math.toIntExact((long) applicationParameters.get("userId"));
-        MicroservicesApplication application = MicroservicesApplication.createApplication(appId, userId); // creates an empty application model (empty directed graph)
+        Application2 application = Application2.createApplication(appId, userId); // creates an empty application model (empty directed graph)
 
         String client = "client" + appId;
         String mService1 = "mService1" + appId;
@@ -396,18 +390,6 @@ public class MicroserviceAppSample2 {
         }};
         application.setLoops(loops);
 
-        QoSProfile qoSProfile = new QoSProfile(appId);
-        qoSProfile.addQoSPerLoop(loop1, QoSProfile.MAKE_SPAN, (Double) applicationParameters.get("latency1"));
-        // todo add budget
-        qoSProfile.addQoSPerLoop(loop1, QoSProfile.BUDGET, (Double) applicationParameters.get("budget1"));
-        qoSProfile.addQoSPerLoop(loop1, QoSProfile.THORUGHPUT, (Long) applicationParameters.get("throughput"));
-
-//        qoSProfile.addQoSPerLoop(loop2, QoSProfile.MAKE_SPAN, (Double) applicationParameters.get("latency2"));
-//        // todo add budget
-//        qoSProfile.addQoSPerLoop(loop2, QoSProfile.BUDGET, (Double) applicationParameters.get("budget2"));
-//        qoSProfile.addQoSPerLoop(loop2, QoSProfile.THORUGHPUT, (Long) applicationParameters.get("throughput"));
-
-        application.setQoSProfile(qoSProfile);
         return application;
     }
 

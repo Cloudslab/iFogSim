@@ -13,12 +13,11 @@ import org.cloudbus.cloudsim.sdn.overbooking.PeProvisionerOverbooking;
 import org.fog.application.AppEdge;
 import org.fog.application.AppLoop;
 import org.fog.application.Application;
-import org.fog.application.microservicesBased.MicroservicesApplication;
+import org.fog.application.Application2;
 import org.fog.application.selectivity.FractionalSelectivity;
 import org.fog.entities.*;
 import org.fog.entities.microservicesBased.FogDeviceM;
 import org.fog.entities.microservicesBased.PlacementRequest;
-import org.fog.entities.microservicesBased.SensorM;
 import org.fog.placement.microservicesBased.MicroservicesController;
 import org.fog.placement.microservicesBased.PlacementLogicFactory;
 import org.fog.policy.AppModuleAllocationPolicy;
@@ -42,8 +41,8 @@ public class MicroservicesAppSample1 {
     static boolean CLOUD = false;
 
     static int proxyServers = 2; // proxy server
-    static Integer[] gatewayDevices = new Integer[]{3,3};        // GW devices
-    static Integer[] mobilesPerL2 = new Integer[]{3,2,1, 2, 3, 1};   // eg : client end devices ( mobiles )
+    static Integer[] gatewayDevices = new Integer[]{3, 3};        // GW devices
+    static Integer[] mobilesPerL2 = new Integer[]{3, 2, 1, 2, 3, 1};   // eg : client end devices ( mobiles )
     private static int l2Num = 0; // fog adding l1 nodes
     static Integer deviceNum = 0;
 
@@ -111,7 +110,7 @@ public class MicroservicesAppSample1 {
                     monitored.put(f.getId(), fogDevices);
                     ((FogDeviceM) f).setFonID(f.getId());
                 }
-                if(((FogDeviceM) f).getDeviceType() == FogDeviceM.CLIENT ){
+                if (((FogDeviceM) f).getDeviceType() == FogDeviceM.CLIENT) {
                     ((FogDeviceM) f).setFonID(f.getParentId());
                 }
             }
@@ -120,7 +119,7 @@ public class MicroservicesAppSample1 {
              * Central controller for performing preprocessing functions
              */
             int placementAlgo = PlacementLogicFactory.DISTRIBUTED_MICROSERVICES_PLACEMENT;
-            MicroservicesController microservicesController = new MicroservicesController("controller", fogDevices, sensors, applications, clusterLevelIdentifier,clusterLatency, placementAlgo,monitored);
+            MicroservicesController microservicesController = new MicroservicesController("controller", fogDevices, sensors, applications, clusterLevelIdentifier, clusterLatency, placementAlgo, monitored);
 
 
             // generate placement requests
@@ -194,17 +193,18 @@ public class MicroservicesAppSample1 {
 
     private static FogDevice addMobile(String id, int userId, int parentId) {
 
-        MicroservicesApplication application = (MicroservicesApplication) applications.get(0);
+        Application2 application = (Application2) applications.get(0);
         String appId = application.getAppId();
         double throughput = 200;
 
         FogDevice mobile = createFogDevice("m-" + id, 1000, 2048, 18750, 250, 3, 0, 87.53, 82.44, FogDeviceM.CLIENT);
         mobile.setParentId(parentId);
 
-        Sensor eegSensor = new SensorM("s-" + id, "ECG", userId, appId, application, new DeterministicDistribution(1000 / (throughput / 9 * 10))); // inter-transmission time of EEG sensor follows a deterministic distribution
+        Sensor eegSensor = new Sensor2("s-" + id, "ECG", userId, appId, new DeterministicDistribution(1000 / (throughput / 9 * 10))); // inter-transmission time of EEG sensor follows a deterministic distribution
+        eegSensor.setApp(application);
         sensors.add(eegSensor);
 
-        Actuator display = new Actuator("a-" + id, userId, appId,"DISPLAY" );
+        Actuator display = new Actuator("a-" + id, userId, appId, "DISPLAY");
         actuators.add(display);
 
         eegSensor.setGatewayDeviceId(mobile.getId());
@@ -313,7 +313,7 @@ public class MicroservicesAppSample1 {
                     latencyMap.put(id, clusterLatency);
                 }
                 ((FogDeviceM) fogDevice).setClusterMembersToLatencyMap(latencyMap);
-                ((FogDeviceM) fogDevice).setInCluster(true);
+                ((FogDeviceM) fogDevice).setIsInCluster(true);
                 clusterNodeIds = clusterNodeIdsTemp;
 
             }
@@ -335,7 +335,7 @@ public class MicroservicesAppSample1 {
 
     private static Application createApplication(String appId, int userId) {
 
-        MicroservicesApplication application = MicroservicesApplication.createApplication(appId, userId); // creates an empty application model (empty directed graph)
+        Application2 application = Application2.createApplication(appId, userId); // creates an empty application model (empty directed graph)
 
         /*
          * Adding modules (vertices) to the application model (directed graph)

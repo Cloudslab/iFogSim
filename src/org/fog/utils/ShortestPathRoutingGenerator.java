@@ -2,6 +2,7 @@ package org.fog.utils;
 
 import org.apache.commons.math3.util.Pair;
 import org.fog.entities.FogDevice;
+import org.fog.entities.FogDevice2;
 import org.fog.entities.microservicesBased.FogDeviceM;
 
 import java.util.HashMap;
@@ -129,7 +130,7 @@ public class ShortestPathRoutingGenerator {
     private static double directlyConnectedDist(FogDevice rFog, FogDevice cFog) {
         int parent = rFog.getParentId();
         List<Integer> children = rFog.getChildrenIds();
-        List<Integer> cluster = rFog.getClusterMembers();
+        List<Integer> cluster = ((FogDevice2)rFog).getClusterMembers();
         if (cFog.getId() == parent) {
             return rFog.getUplinkLatency();
         } else if (children != null && children.contains(cFog.getId())) {

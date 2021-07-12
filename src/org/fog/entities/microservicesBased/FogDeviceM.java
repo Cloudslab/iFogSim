@@ -9,9 +9,7 @@ import org.cloudbus.cloudsim.core.SimEvent;
 import org.fog.application.AppEdge;
 import org.fog.application.AppModule;
 import org.fog.application.Application;
-import org.fog.entities.FogDevice;
-import org.fog.entities.FogDeviceCharacteristics;
-import org.fog.entities.Tuple;
+import org.fog.entities.*;
 import org.fog.placement.microservicesBased.MicroservicePlacementLogic;
 import org.fog.placement.microservicesBased.PlacementLogicOutput;
 import org.fog.utils.*;
@@ -22,7 +20,7 @@ import java.util.*;
 /**
  * Created by Samodha Pallewatta
  */
-public class FogDeviceM extends FogDevice {
+public class FogDeviceM extends FogDevice2 {
 
     /**
      * Device type (1.client device 2.FCN 3.FON 4.Cloud)
@@ -70,9 +68,6 @@ public class FogDeviceM extends FogDevice {
     @Override
     protected void processOtherEvent(SimEvent ev) {
         switch (ev.getTag()) {
-            case FogEvents.UPDATE_CLUSTER_TUPLE_QUEUE:
-                updateClusterTupleQueue();
-                break;
             case FogEvents.PROCESS_PRS:
                 processPlacementRequests();
                 break;
@@ -114,25 +109,6 @@ public class FogDeviceM extends FogDevice {
             sendNow(getId(), FogEvents.PROCESS_PRS);
     }
 
-
-    public void setInCluster(boolean incluster) {
-        isInCluster = incluster;
-    }
-
-    public boolean isInCluster() {
-        return isInCluster;
-    }
-
-
-    private void updateClusterTupleQueue() {
-        if (!getClusterTupleQueue().isEmpty()) {
-            Pair<Tuple, Integer> pair = getClusterTupleQueue().poll();
-            sendThroughFreeClusterLink(pair.getFirst(), pair.getSecond());
-        } else {
-            setClusterLinkBusy(false);
-        }
-    }
-
     private void sendThroughFreeClusterLink(Tuple tuple, Integer clusterNodeID) {
         double networkDelay = tuple.getCloudletFileSize() / getClusterLinkBandwidth();
         setClusterLinkBusy(true);
@@ -172,7 +148,7 @@ public class FogDeviceM extends FogDevice {
 
     protected void processTupleArrival(SimEvent ev) {
 
-        TupleM tuple = (TupleM) ev.getData();
+        Tuple2 tuple = (Tuple2) ev.getData();
 
         Logger.debug(getName(), "Received tuple " + tuple.getCloudletId() + "with tupleType = " + tuple.getTupleType() + "\t| Source : " +
                 CloudSim.getEntityName(ev.getSource()) + "|Dest : " + CloudSim.getEntityName(ev.getDestination()));
@@ -215,7 +191,7 @@ public class FogDeviceM extends FogDevice {
             if (tuple.getDirection() == Tuple.UP) {
                 int destination = controllerComponent.getDestinationDeviceId(tuple.getDestModuleName());
                 if (destination == -1) {
-                    System.out.println("Service DiscoveryInfo missing. Tuple routing stopped for : "+tuple.getDestModuleName());
+                    System.out.println("Service DiscoveryInfo missing. Tuple routing stopped for : " + tuple.getDestModuleName());
                     return;
                 }
                 tuple.setDestinationDeviceId(destination);
@@ -476,7 +452,7 @@ public class FogDeviceM extends FogDevice {
                 Logger.error("Module deploy error", "Module " + module.getName() + " placement on " + getName() + " failed");
                 System.out.println("Module " + module.getName() + " placement on " + getName() + " failed");
             }
-        }else{
+        } else {
             System.out.println("Module " + module.getName() + " already deplyed on" + getName());
         }
     }
@@ -490,7 +466,7 @@ public class FogDeviceM extends FogDevice {
 
         sendNow(getId(), FogEvents.APP_SUBMIT, app);
         sendNow(getId(), FogEvents.LAUNCH_MODULE, appModule);
-        ModuleLaunchConfig moduleLaunchConfig = new ModuleLaunchConfig(appModule,1);
+        ModuleLaunchConfig moduleLaunchConfig = new ModuleLaunchConfig(appModule, 1);
         sendNow(getId(), FogEvents.LAUNCH_MODULE_INSTANCE, moduleLaunchConfig);
 
         NetworkUsageMonitor.sendingModule((double) object.get("delay"), appModule.getSize());
@@ -506,7 +482,7 @@ public class FogDeviceM extends FogDevice {
         NetworkUsageMonitor.sendingModule((double) object.get("delay"), appModule.getSize());
         MigrationDelayMonitor.setMigrationDelay((double) object.get("delay"));
 
-        if(moduleInstanceCount.containsKey(appModule.getAppId()) && moduleInstanceCount.get(appModule.getAppId()).containsKey(appModule.getName())) {
+        if (moduleInstanceCount.containsKey(appModule.getAppId()) && moduleInstanceCount.get(appModule.getAppId()).containsKey(appModule.getName())) {
             int moduleCount = moduleInstanceCount.get(appModule.getAppId()).get(appModule.getName());
             if (moduleCount > 1)
                 moduleInstanceCount.get(appModule.getAppId()).put(appModule.getName(), moduleCount - 1);

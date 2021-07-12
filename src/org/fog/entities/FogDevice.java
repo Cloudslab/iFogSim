@@ -15,7 +15,6 @@ import org.fog.application.AppEdge;
 import org.fog.application.AppLoop;
 import org.fog.application.AppModule;
 import org.fog.application.Application;
-import org.fog.mobilitydata.Clustering;
 import org.fog.policy.AppModuleAllocationPolicy;
 import org.fog.scheduler.StreamOperatorScheduler;
 import org.fog.utils.*;
@@ -79,14 +78,7 @@ public class FogDevice extends PowerDatacenter {
     protected double totalCost;
 
     protected Map<String, Map<String, Integer>> moduleInstanceCount;
-    protected List<Integer> clusterMembers = new ArrayList<Integer>();
-    protected boolean isInCluster = false;
-    protected boolean selfCluster = false; // IF there is only one fog device in one cluster without any sibling
-    protected Map<Integer, Double> clusterMembersToLatencyMap; // latency to other cluster members
 
-    protected Queue<Pair<Tuple, Integer>> clusterTupleQueue;// tuple and destination cluster device ID
-    protected boolean isClusterLinkBusy; //Flag denoting whether the link connecting to cluster from this FogDevice is busy
-    protected double clusterLinkBandwidth;
 
     public FogDevice(
             String name,
@@ -140,8 +132,6 @@ public class FogDevice extends PowerDatacenter {
         setModuleInstanceCount(new HashMap<String, Map<String, Integer>>());
         setChildToLatencyMap(new HashMap<Integer, Double>());
 
-        clusterTupleQueue = new LinkedList<>();
-        setClusterLinkBusy(false);
     }
 
     public FogDevice(
@@ -286,10 +276,6 @@ public class FogDevice extends PowerDatacenter {
                 break;
             case FogEvents.RESOURCE_MGMT:
                 manageResources(ev);
-                break;
-            case FogEvents.START_DYNAMIC_CLUSTERING:
-                //This message is received by the devices to start their clustering
-                processClustering(this.getParentId(), this.getId(), ev);
                 break;
             default:
                 break;
@@ -1072,46 +1058,9 @@ public class FogDevice extends PowerDatacenter {
         this.moduleInstanceCount = moduleInstanceCount;
     }
 
-    public List<String> getPlacedAppModulesPerApplication(String appId){
+    public List<String> getPlacedAppModulesPerApplication(String appId) {
         return appToModulesMap.get(appId);
     }
-
-    public void setClusterMembers(List clusterList) {
-        this.clusterMembers = clusterList;
-    }
-
-    public void addClusterMember(int clusterMemberId) {
-        this.clusterMembers.add(clusterMemberId);
-    }
-
-    public List<Integer> getClusterMembers() {
-        return this.clusterMembers;
-    }
-
-    public void setIsInCluster(Boolean bool) {
-        this.isInCluster = bool;
-    }
-
-    public void setSelfCluster(Boolean bool) {
-        this.selfCluster = bool;
-    }
-
-    public Boolean getIsInCluster() {
-        return this.isInCluster;
-    }
-
-    public Boolean getSelfCluster() {
-        return this.selfCluster;
-    }
-
-    public void setClusterMembersToLatencyMap(Map<Integer, Double> clusterMembersToLatencyMap) {
-        this.clusterMembersToLatencyMap = clusterMembersToLatencyMap;
-    }
-
-    public Map<Integer, Double> getClusterMembersToLatencyMap() {
-        return this.clusterMembersToLatencyMap;
-    }
-
 
     public void removeChild(int childId) {
         // TODO Auto-generated method stub
@@ -1125,45 +1074,5 @@ public class FogDevice extends PowerDatacenter {
         }
     }
 
-    private void processClustering(int parentId, int nodeId, SimEvent ev) {
-        JSONObject objectLocator = (JSONObject) ev.getData();
-        Clustering cms = new Clustering();
-        cms.createClusterMembers(this.getParentId(), this.getId(), objectLocator);
-    }
-
-    public double getClusterLinkBandwidth() {
-        return clusterLinkBandwidth;
-    }
-
-    protected void setClusterLinkBandwidth(double clusterLinkBandwidth) {
-        this.clusterLinkBandwidth = clusterLinkBandwidth;
-    }
-
-    protected void sendToCluster(Tuple tuple, int clusterNodeID) {
-        if (getClusterMembers().contains(clusterNodeID)) {
-            if (!isClusterLinkBusy) {
-                sendThroughFreeClusterLink(tuple, clusterNodeID);
-            } else {
-                clusterTupleQueue.add(new Pair<Tuple, Integer>(tuple, clusterNodeID));
-            }
-        }
-    }
-
-    private void sendThroughFreeClusterLink(Tuple tuple, Integer clusterNodeID) {
-        double networkDelay = tuple.getCloudletFileSize() / getClusterLinkBandwidth();
-        setClusterLinkBusy(true);
-        double latency = (getClusterMembersToLatencyMap()).get(clusterNodeID);
-        send(getId(), networkDelay, FogEvents.UPDATE_CLUSTER_TUPLE_QUEUE);
-        send(clusterNodeID, networkDelay + latency, FogEvents.TUPLE_ARRIVAL, tuple);
-        NetworkUsageMonitor.sendingTuple(latency, tuple.getCloudletFileSize());
-    }
-
-    protected void setClusterLinkBusy(boolean busy) {
-        this.isClusterLinkBusy = busy;
-    }
-
-    public Queue<Pair<Tuple, Integer>> getClusterTupleQueue() {
-        return clusterTupleQueue;
-    }
 
 }

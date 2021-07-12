@@ -4,7 +4,7 @@ import org.apache.commons.math3.util.Pair;
 import org.fog.application.AppEdge;
 import org.fog.application.AppModule;
 import org.fog.application.Application;
-import org.fog.application.microservicesBased.MicroservicesApplication;
+import org.fog.application.Application2;
 import org.fog.entities.FogDevice;
 import org.fog.entities.Tuple;
 import org.fog.entities.microservicesBased.ControllerComponent;
@@ -219,7 +219,7 @@ public class ClusteredMicroservicePlacementLogic implements MicroservicePlacemen
             mappedMicroservices.put(placementRequest.getPlacementRequestId(), new HashMap<>(placementRequest.getPlacedMicroservices()));
 
             //special modules  - predefined cloud placements
-            MicroservicesApplication app = (MicroservicesApplication) applicationInfo.get(placementRequest.getApplicationId());
+            Application2 app = (Application2) applicationInfo.get(placementRequest.getApplicationId());
             for (String microservice : app.getSpecialPlacementInfo().keySet()) {
                 for (String deviceName : app.getSpecialPlacementInfo().get(microservice)) {
                     FogDevice device = getDeviceByName(deviceName);
@@ -314,7 +314,7 @@ public class ClusteredMicroservicePlacementLogic implements MicroservicePlacemen
                             toPlace.get(placementRequest).remove(m);
                         }
                         if (!toPlace.get(placementRequest).isEmpty()) {
-                            if (((FogDeviceM) device).isInCluster()) {
+                            if (((FogDeviceM) device).getIsInCluster()) {
                                 // -1 indicates it's a cluster placement
                                 deviceToPlace.put(placementRequest, -1);
                                 // a device of the cluster to identify the cluster

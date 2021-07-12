@@ -1,63 +1,37 @@
-package org.fog.application.microservicesBased;
+package org.fog.application;
 
 import org.apache.commons.math3.util.Pair;
 import org.cloudbus.cloudsim.UtilizationModelFull;
-import org.fog.application.AppEdge;
-import org.fog.application.AppLoop;
-import org.fog.application.AppModule;
-import org.fog.application.Application;
+import org.fog.application.microservicesBased.DAG;
 import org.fog.application.selectivity.SelectivityModel;
 import org.fog.entities.Tuple;
-import org.fog.entities.microservicesBased.TupleM;
-import org.fog.scheduler.TupleScheduler;
+import org.fog.entities.Tuple2;
 import org.fog.utils.FogUtils;
 import org.fog.utils.GeoCoverage;
 
-import java.awt.image.RenderedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by Samodha Pallewatta.
- */
-public class MicroservicesApplication extends Application {
 
-    QoSProfile qoSProfile = null;
+public class Application2 extends Application {
 
-    protected Map<String,List<String>> specialPlacementInfo = new HashMap<>(); // module name to placement device staring with...
+    protected Map<String, List<String>> specialPlacementInfo = new HashMap<>(); // module name to placement device staring with...
 
     protected DAG dag;
 
-    public static MicroservicesApplication createApplication(String appId, int userId) {
-        return new MicroservicesApplication(appId, userId);
+    public static Application2 createApplication(String appId, int userId) {
+        return new Application2(appId, userId);
     }
 
-    public MicroservicesApplication(String appId, int userId) {
+    public Application2(String appId, int userId) {
         super(appId, userId);
     }
 
-    public MicroservicesApplication(String appId, List<AppModule> modules, List<AppEdge> edges, List<AppLoop> loops, GeoCoverage geoCoverage) {
+    public Application2(String appId, List<AppModule> modules, List<AppEdge> edges, List<AppLoop> loops, GeoCoverage geoCoverage) {
         super(appId, modules, edges, loops, geoCoverage);
     }
-
-    /**
-     * @param moduleName
-     * @param ram
-     * @param mips
-     * @param size
-     */
-    public void addAppModule(String moduleName, int ram, int mips, int size) {
-        long bw = 1000;
-        String vmm = "Xen";
-
-        AppModule module = new AppModule(FogUtils.generateEntityId(), moduleName, getAppId(), getUserId(),
-                mips, ram, bw, size, vmm, new TupleScheduler(mips, 1), new HashMap<Pair<String, String>, SelectivityModel>());
-
-        getModules().add(module);
-    }
-
 
     @Override
     public List<Tuple> getResultantTuples(String moduleName, Tuple inputTuple, int sourceDeviceId, int sourceModuleId) {
@@ -74,7 +48,7 @@ public class MicroservicesApplication extends Application {
                     //TODO check if the edge is ACTUATOR, then create multiple tuples
                     if (edge.getEdgeType() == AppEdge.ACTUATOR) {
                         //for(Integer actuatorId : module.getActuatorSubscriptions().get(edge.getTupleType())){
-                        TupleM tuple = new TupleM(getAppId(), FogUtils.generateTupleId(), edge.getDirection(),
+                        Tuple2 tuple = new Tuple2(getAppId(), FogUtils.generateTupleId(), edge.getDirection(),
                                 (long) (edge.getTupleCpuLength()),
                                 inputTuple.getNumberOfPes(),
                                 (long) (edge.getTupleNwLength()),
@@ -97,7 +71,7 @@ public class MicroservicesApplication extends Application {
                         tuples.add(tuple);
                         //}
                     } else {
-                        TupleM tuple = new TupleM(getAppId(), FogUtils.generateTupleId(), edge.getDirection(),
+                        Tuple2 tuple = new Tuple2(getAppId(), FogUtils.generateTupleId(), edge.getDirection(),
                                 (long) (edge.getTupleCpuLength()),
                                 inputTuple.getNumberOfPes(),
                                 (long) (edge.getTupleNwLength()),
@@ -114,7 +88,7 @@ public class MicroservicesApplication extends Application {
                         tuple.setDirection(edge.getDirection());
                         tuple.setTupleType(edge.getTupleType());
                         tuple.setSourceModuleId(sourceModuleId);
-                        tuple.setTraversedMicroservices(((TupleM) inputTuple).getTraversed());
+                        tuple.setTraversedMicroservices(((Tuple2) inputTuple).getTraversed());
                         tuples.add(tuple);
                     }
                 }
@@ -128,7 +102,7 @@ public class MicroservicesApplication extends Application {
         AppModule module = getModuleByName(edge.getSource());
         if (edge.getEdgeType() == AppEdge.ACTUATOR) {
             for (Integer actuatorId : module.getActuatorSubscriptions().get(edge.getTupleType())) {
-                TupleM tuple = new TupleM(getAppId(), FogUtils.generateTupleId(), edge.getDirection(),
+                Tuple2 tuple = new Tuple2(getAppId(), FogUtils.generateTupleId(), edge.getDirection(),
                         (long) (edge.getTupleCpuLength()),
                         1,
                         (long) (edge.getTupleNwLength()),
@@ -150,7 +124,7 @@ public class MicroservicesApplication extends Application {
                 return tuple;
             }
         } else {
-            TupleM tuple = new TupleM(getAppId(), FogUtils.generateTupleId(), edge.getDirection(),
+            Tuple2 tuple = new Tuple2(getAppId(), FogUtils.generateTupleId(), edge.getDirection(),
                     (long) (edge.getTupleCpuLength()),
                     1,
                     (long) (edge.getTupleNwLength()),
@@ -173,40 +147,35 @@ public class MicroservicesApplication extends Application {
         return null;
     }
 
-    public void setQoSProfile(QoSProfile qoSProfile) {
-        this.qoSProfile = qoSProfile;
-    }
-
-    public QoSProfile getQoSProfile() {
-        return qoSProfile;
-    }
-
-    public void setSpecialPlacementInfo(String moduleName,String device){
-        if(specialPlacementInfo.containsKey(moduleName))
+    public void setSpecialPlacementInfo(String moduleName, String device) {
+        if (specialPlacementInfo.containsKey(moduleName))
             specialPlacementInfo.get(moduleName).add(device);
         else {
             List<String> devices = new ArrayList<>();
             devices.add(device);
-            specialPlacementInfo.put(moduleName,devices);
+            specialPlacementInfo.put(moduleName, devices);
         }
     }
 
-    public Map<String,List<String>> getSpecialPlacementInfo(){
+    public Map<String, List<String>> getSpecialPlacementInfo() {
         return specialPlacementInfo;
     }
 
-    public void createDAG(){
-        List<String> moduleNames=new ArrayList<>();
-        for(AppModule module:getModules()){
-            moduleNames.add(module.getName());		}
+    public void createDAG() {
+        List<String> moduleNames = new ArrayList<>();
+        for (AppModule module : getModules()) {
+            moduleNames.add(module.getName());
+        }
         dag = new DAG(moduleNames);
-        for(AppEdge edge:getEdges()){
-            if(edge.getDirection()== Tuple.UP)
-                dag.addEdge(edge.getSource(),edge.getDestination());
+        for (AppEdge edge : getEdges()) {
+            if (edge.getDirection() == Tuple.UP)
+                dag.addEdge(edge.getSource(), edge.getDestination());
         }
     }
 
     public DAG getDAG() {
         return dag;
     }
+
+
 }

@@ -9,7 +9,7 @@ public class MicroservicePlacementConfig {
     //Placement Request Processing Mode
     public static String PERIODIC = "Periodic";
     public static String SEQUENTIAL = "Sequential";
-    public static String PR_PROCESSING_MODE = SEQUENTIAL;
+    public static String PR_PROCESSING_MODE = PERIODIC;
 
     // For periodic placement
     public static final double PLACEMENT_INTERVAL = 50;
@@ -17,6 +17,6 @@ public class MicroservicePlacementConfig {
     //Resource info sharing among cluster nodes
     public static Boolean ENABLE_RESOURCE_DATA_SHARING = false;
     public static double MODULE_DEPLYMENT_TIME = 0.0;
-    public static final int TRANSMISSION_START_DELAY = 0;
+
 
 }

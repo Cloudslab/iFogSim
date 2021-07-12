@@ -152,8 +152,8 @@ public class MicroservicesController extends SimEntity {
 
     protected void shareResourceDataAmongClusterNodes() {
         for (FogDevice f : fogDevices) {
-            if (((FogDeviceM) f).isInCluster()) {
-                for (int deviceId : f.getClusterMembers()) {
+            if (((FogDeviceM) f).getIsInCluster()) {
+                for (int deviceId : ((FogDeviceM) f).getClusterMembers()) {
                     Pair<Integer, Map<String, Double>> resources = new Pair<>(f.getId(), ((FogDeviceM) f).getResourceAvailabilityOfDevice());
                     sendNow(deviceId, FogEvents.UPDATE_RESOURCE_INFO, resources);
                 }
@@ -421,7 +421,7 @@ public class MicroservicesController extends SimEntity {
                     latencyMap.put(id, clusterLatency);
                 }
                 ((FogDeviceM) fogDevice).setClusterMembersToLatencyMap(latencyMap);
-                ((FogDeviceM) fogDevice).setInCluster(true);
+                ((FogDeviceM) fogDevice).setIsInCluster(true);
                 clusterNodeIds = clusterNodeIdsTemp;
 
             }
@@ -435,7 +435,7 @@ public class MicroservicesController extends SimEntity {
         HashMap<String, List<FogDeviceM>> clusters = new HashMap<>();
         for (FogDevice f : fogDevices) {
             FogDeviceM cDevice = (FogDeviceM) f;
-            if (cDevice.isInCluster()) {
+            if (cDevice.getIsInCluster()) {
                 FogDevice parent = getFogDeviceById(cDevice.getParentId());
                 if (clusters.containsKey(parent.getName()))
                     clusters.get(parent.getName()).add(cDevice);

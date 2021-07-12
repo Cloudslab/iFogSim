@@ -1,40 +1,31 @@
-package org.fog.entities.microservicesBased;
+package org.fog.entities;
 
 import org.cloudbus.cloudsim.UtilizationModelFull;
 import org.cloudbus.cloudsim.core.CloudSim;
 import org.fog.application.AppEdge;
-import org.fog.application.Application;
-import org.fog.entities.Sensor;
-import org.fog.entities.Tuple;
 import org.fog.utils.*;
 import org.fog.utils.distribution.Distribution;
 
-/**
- * Created by Samodha Pallewatta on 7/26/2020.
- */
-public class SensorM extends Sensor {
+public class Sensor2 extends Sensor {
 
-    private int transmissionStartDelay = MicroservicePlacementConfig.TRANSMISSION_START_DELAY;
+    private int transmissionStartDelay = Config.TRANSMISSION_START_DELAY;
 
-    public SensorM(String name, int userId, String appId, int gatewayDeviceId, double latency, Application application, GeoLocation geoLocation, Distribution transmitDistribution, int cpuLength, int nwLength, String tupleType, String destModuleName) {
+    public Sensor2(String name, int userId, String appId, int gatewayDeviceId, double latency, GeoLocation geoLocation, Distribution transmitDistribution, int cpuLength, int nwLength, String tupleType, String destModuleName) {
         super(name, userId, appId, gatewayDeviceId, latency, geoLocation, transmitDistribution, cpuLength, nwLength, tupleType, destModuleName);
-        setApp(application);
     }
 
-    public SensorM(String name, int userId, String appId, int gatewayDeviceId, double latency, Application application, GeoLocation geoLocation, Distribution transmitDistribution, String tupleType) {
+    public Sensor2(String name, int userId, String appId, int gatewayDeviceId, double latency, GeoLocation geoLocation, Distribution transmitDistribution, String tupleType) {
         super(name, userId, appId, gatewayDeviceId, latency, geoLocation, transmitDistribution, tupleType);
-        setApp(application);
     }
 
-    public SensorM(String name, String tupleType, int userId, String appId, Application application, Distribution transmitDistribution) {
+    public Sensor2(String name, String tupleType, int userId, String appId, Distribution transmitDistribution) {
         super(name, tupleType, userId, appId, transmitDistribution);
-        setApp(application);
     }
 
     @Override
     public void startEntity() {
         send(getGatewayDeviceId(), CloudSim.getMinTimeBetweenEvents(), FogEvents.SENSOR_JOINED, getGeoLocation());
-        send(getId(), getTransmitDistribution().getNextValue()+transmissionStartDelay, FogEvents.EMIT_TUPLE);
+        send(getId(), getTransmitDistribution().getNextValue() + transmissionStartDelay, FogEvents.EMIT_TUPLE);
     }
 
     public void transmit() {
@@ -46,7 +37,7 @@ public class SensorM extends Sensor {
         long cpuLength = (long) _edge.getTupleCpuLength();
         long nwLength = (long) _edge.getTupleNwLength();
 
-        TupleM tuple = new TupleM(getAppId(), FogUtils.generateTupleId(), Tuple.UP, cpuLength, 1, nwLength, getOutputSize(),
+        Tuple2 tuple = new Tuple2(getAppId(), FogUtils.generateTupleId(), Tuple.UP, cpuLength, 1, nwLength, getOutputSize(),
                 new UtilizationModelFull(), new UtilizationModelFull(), new UtilizationModelFull());
         tuple.setUserId(getUserId());
         tuple.setTupleType(getTupleType());

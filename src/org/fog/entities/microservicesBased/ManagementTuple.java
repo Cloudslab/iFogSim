@@ -3,6 +3,7 @@ package org.fog.entities.microservicesBased;
 import org.apache.commons.math3.util.Pair;
 import org.cloudbus.cloudsim.UtilizationModelFull;
 import org.fog.application.Application;
+import org.fog.entities.Tuple2;
 import org.fog.utils.ModuleLaunchConfig;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.Map;
 /**
  * Created by Samodha Pallewatta on 9/2/2019.
  */
-public class ManagementTuple extends TupleM {
+public class ManagementTuple extends Tuple2 {
 
     // management tuples are routed by device id, so direction doesn't matter/
     public static final int NONE = -1;
