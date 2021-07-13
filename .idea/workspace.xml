@@ -3,184 +3,20 @@
   <component name="ChangeListManager">
     <list default="true" id="38d6f99d-c191-4a46-8687-c12ef5e08616" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/application/Application.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/application/Application.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/application/microservicesBased/MicroservicesApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/application/microservicesBased/QoSProfile.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/entities/microservicesBased/FogDeviceM$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/entities/microservicesBased/FogDeviceM$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/entities/microservicesBased/FogDeviceM.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/entities/microservicesBased/FogDeviceM.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/entities/microservicesBased/ManagementTuple.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/entities/microservicesBased/ManagementTuple.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/entities/microservicesBased/SensorM.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/entities/microservicesBased/TupleM.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/placement/microservicesBased/ClusteredMicroservicePlacementLogic.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/placement/microservicesBased/ClusteredMicroservicePlacementLogic.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/placement/microservicesBased/DistributedMicroservicePlacementLogic.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/placement/microservicesBased/DistributedMicroservicePlacementLogic.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/test/microservices/MicroserviceAppSample2$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/test/microservices/MicroserviceAppSample2$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/test/microservices/MicroserviceAppSample2$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/test/microservices/MicroserviceAppSample2$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/test/microservices/MicroserviceAppSample2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/test/microservices/MicroserviceAppSample2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/test/microservices/MicroserviceApp_RandomMobility_Clustering$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/test/microservices/MicroserviceApp_RandomMobility_Clustering$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/test/microservices/MicroserviceApp_RandomMobility_Clustering$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/test/microservices/MicroserviceApp_RandomMobility_Clustering$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/test/microservices/MicroserviceApp_RandomMobility_Clustering.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/test/microservices/MicroserviceApp_RandomMobility_Clustering.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/test/microservices/MicroservicesAppSample1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/test/microservices/MicroservicesAppSample1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/iFogSim2/META-INF/iFogSim2.kotlin_module" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/test/perfeval/TranslationServiceFog_RandomMobility$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/test/perfeval/TranslationServiceFog_RandomMobility$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/test/perfeval/TranslationServiceFog_RandomMobility$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/test/perfeval/TranslationServiceFog_RandomMobility$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/test/perfeval/TranslationServiceFog_RandomMobility.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/test/perfeval/TranslationServiceFog_RandomMobility.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/utils/Config.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/utils/Config.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/fog/application/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/fog/application/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/fog/application/microservicesBased/MicroservicesApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/fog/application/microservicesBased/QoSProfile.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/fog/entities/FogDevice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/fog/entities/FogDevice.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/fog/entities/microservicesBased/FogDeviceM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/fog/entities/microservicesBased/FogDeviceM.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/fog/entities/microservicesBased/ManagementTuple.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/fog/entities/microservicesBased/ManagementTuple.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/fog/entities/microservicesBased/SensorM.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/fog/entities/microservicesBased/TupleM.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/fog/mobilitydata/Clustering.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/fog/mobilitydata/Clustering.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/fog/placement/microservicesBased/ClusteredMicroservicePlacementLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/fog/placement/microservicesBased/ClusteredMicroservicePlacementLogic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/fog/placement/microservicesBased/DistributedMicroservicePlacementLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/fog/placement/microservicesBased/DistributedMicroservicePlacementLogic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/fog/placement/microservicesBased/MicroservicesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/fog/placement/microservicesBased/MicroservicesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/fog/test/microservices/MicroserviceAppSample2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/fog/test/microservices/MicroserviceAppSample2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/fog/test/microservices/MicroserviceApp_RandomMobility_Clustering.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/fog/test/microservices/MicroserviceApp_RandomMobility_Clustering.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/fog/test/microservices/MicroservicesAppSample1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/fog/test/microservices/MicroservicesAppSample1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/fog/utils/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/fog/utils/Config.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/fog/utils/MicroservicePlacementConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/fog/utils/MicroservicePlacementConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/fog/utils/ShortestPathRoutingGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/fog/utils/ShortestPathRoutingGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/test/perfeval/TranslationServiceFog_RandomMobility_Clustering$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/test/perfeval/TranslationServiceFog_RandomMobility_Clustering$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/test/perfeval/TranslationServiceFog_RandomMobility_Clustering$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/test/perfeval/TranslationServiceFog_RandomMobility_Clustering$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/test/perfeval/TranslationServiceFog_RandomMobility_Clustering.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/test/perfeval/TranslationServiceFog_RandomMobility_Clustering.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/fog/test/perfeval/TranslationServiceFog_RandomMobility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/fog/test/perfeval/TranslationServiceFog_RandomMobility.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/fog/test/perfeval/TranslationServiceFog_RandomMobility_Clustering.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/fog/test/perfeval/TranslationServiceFog_RandomMobility_Clustering.java" afterDir="false" />
     </list>
-    <ignored path="$PROJECT_DIR$/out/" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/fog/placement/microservicesBased/MicroservicesMobilityClusteringController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="145">
-              <caret line="188" column="22" selection-start-line="188" selection-start-column="22" selection-end-line="188" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/fog/placement/ClusteringController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="223" column="22" selection-start-line="223" selection-start-column="22" selection-end-line="223" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/fog/utils/ShortestPathRoutingGenerator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="129">
-              <caret line="132" column="50" selection-start-line="132" selection-start-column="50" selection-end-line="132" selection-end-column="50" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/fog/placement/microservicesBased/DistributedMicroservicePlacementLogic.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="38">
-              <caret line="227" column="45" lean-forward="true" selection-start-line="227" selection-start-column="45" selection-end-line="227" selection-end-column="45" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/fog/test/microservices/MicroserviceApp_RandomMobility_Clustering.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="106">
-              <caret line="52" column="13" selection-start-line="52" selection-start-column="13" selection-end-line="52" selection-end-column="13" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/org/fog/utils/MicroservicePlacementConfig.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="161">
-              <caret line="11" column="54" selection-start-line="11" selection-start-column="54" selection-end-line="11" selection-end-column="54" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/fog/mobilitydata/Clustering.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1462">
-              <caret line="86" column="61" selection-start-line="86" selection-start-column="61" selection-end-line="86" selection-end-column="61" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/fog/placement/MobilityController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="145">
-              <caret line="196" column="22" selection-start-line="196" selection-start-column="22" selection-end-line="196" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/fog/entities/FogDevice2.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="169">
-              <caret line="92" column="82" lean-forward="true" selection-start-line="92" selection-start-column="82" selection-end-line="92" selection-end-column="82" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#528#537#0" expanded="true" />
-                <element signature="e#2554#2555#0" expanded="true" />
-                <element signature="e#2603#2604#0" expanded="true" />
-                <element signature="e#2660#2661#0" expanded="true" />
-                <element signature="e#2716#2717#0" expanded="true" />
-                <element signature="e#2764#2765#0" expanded="true" />
-                <element signature="e#2806#2807#0" expanded="true" />
-                <element signature="e#2854#2855#0" expanded="true" />
-                <element signature="e#2893#2894#0" expanded="true" />
-                <element signature="e#2941#2942#0" expanded="true" />
-                <element signature="e#2980#2981#0" expanded="true" />
-                <element signature="e#3019#3020#0" expanded="true" />
-                <element signature="e#3058#3059#0" expanded="true" />
-                <element signature="e#3097#3098#0" expanded="true" />
-                <element signature="e#3136#3137#0" expanded="true" />
-                <element signature="e#3377#3378#0" expanded="true" />
-                <element signature="e#3431#3432#0" expanded="true" />
-                <element signature="e#4278#4279#0" expanded="true" />
-                <element signature="e#4321#4322#0" expanded="true" />
-                <element signature="e#5726#5727#0" expanded="true" />
-                <element signature="e#5771#5772#0" expanded="true" />
-                <element signature="e#5836#5837#0" expanded="true" />
-                <element signature="e#5876#5877#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/fog/entities/FogDevice.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="148">
-              <caret line="1062" column="5" selection-start-line="1062" selection-start-column="5" selection-end-line="1062" selection-end-column="5" />
-              <folding>
-                <element signature="e#39947#39979#1" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -206,6 +42,11 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/org/fog/entities/FogDevice.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/org/fog/test/perfeval/TranslationServiceFog_RandomMobility_Clustering.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/org/fog/mobilitydata/RandomMobilityGenerator.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -352,19 +193,7 @@
       <recent name="org.fog.entities" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
-  <component name="RunManager" selected="Application.MicroserviceApp_RandomMobility_Clustering">
+  <component name="RunManager" selected="Application.TranslationServiceFog_RandomMobility">
     <configuration name="MicroserviceAppSample2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.fog.test.microservices.MicroserviceAppSample2" />
       <module name="iFogSim2" />
@@ -404,19 +233,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TranslationServiceFog" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.fog.test.perfeval.TranslationServiceFog" />
-      <module name="iFogSim2" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.fog.test.perfeval.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="TranslationServiceFog_RandomMobility" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.fog.test.perfeval.TranslationServiceFog_RandomMobility" />
       <module name="iFogSim2" />
@@ -430,13 +246,37 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TranslationServiceFog_RandomMobility_Clustering" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.fog.test.perfeval.TranslationServiceFog_RandomMobility_Clustering" />
+      <module name="iFogSim2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.fog.test.perfeval.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.TranslationServiceFog_RandomMobility" />
         <item itemvalue="Application.MicroserviceApp_RandomMobility_Clustering" />
+        <item itemvalue="Application.TranslationServiceFog_RandomMobility_Clustering" />
         <item itemvalue="Application.MicroservicesAppSample1" />
         <item itemvalue="Application.MicroserviceAppSample2" />
-        <item itemvalue="Application.TranslationServiceFog_RandomMobility" />
-        <item itemvalue="Application.TranslationServiceFog" />
       </list>
     </recent_temporary>
   </component>
@@ -485,17 +325,33 @@
       <window_info anchor="right" id="Palette&#9;" order="7" />
     </layout>
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/org/fog/placement/microservicesBased/DistributedMicroservicePlacementLogic.java</url>
           <line>231</line>
-          <properties />
           <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/iFogSim2$MicroservicesAppSample1.ic" NAME="MicroservicesAppSample1 Coverage Results" MODIFIED="1622646692452" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>org.fog.test.microservices.*</FILTER>
+    </SUITE>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
