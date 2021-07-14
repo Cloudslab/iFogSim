@@ -16,7 +16,7 @@ import org.fog.application.Application;
 import org.fog.application.Application2;
 import org.fog.application.selectivity.FractionalSelectivity;
 import org.fog.entities.*;
-import org.fog.entities.microservicesBased.FogDeviceM;
+import org.fog.entities.microservicesBased.MicroserviceFogDevice;
 import org.fog.entities.microservicesBased.PlacementRequest;
 import org.fog.mobilitydata.DataParser;
 import org.fog.mobilitydata.RandomMobilityGenerator;
@@ -169,7 +169,7 @@ public class MicroserviceApp_RandomMobility_Clustering {
 
         if (locator.getLevelWiseResources(locator.getLevelID("Cloud")).size() == 1) {
 
-            FogDevice cloud = createFogDevice("cloud", 44800, 40000, 100, 10000, 0.01, 16 * 103, 16 * 83.25, FogDeviceM.CLOUD); // creates the fog device Cloud at the apex of the hierarchy with level=0
+            FogDevice cloud = createFogDevice("cloud", 44800, 40000, 100, 10000, 0.01, 16 * 103, 16 * 83.25, MicroserviceFogDevice.CLOUD); // creates the fog device Cloud at the apex of the hierarchy with level=0
             cloud.setParentId(References.NOT_SET);
             locator.linkDataWithInstance(cloud.getId(), locator.getLevelWiseResources(locator.getLevelID("Cloud")).get(0));
             cloud.setLevel(0);
@@ -177,7 +177,7 @@ public class MicroserviceApp_RandomMobility_Clustering {
 
             for (int i = 0; i < locator.getLevelWiseResources(locator.getLevelID("Proxy")).size(); i++) {
 
-                FogDevice proxy = createFogDevice("proxy-server_" + i, 2800, 4000, 10000, 10000, 0.0, 107.339, 83.4333, FogDeviceM.FON); // creates the fog device Proxy Server (level=1)
+                FogDevice proxy = createFogDevice("proxy-server_" + i, 2800, 4000, 10000, 10000, 0.0, 107.339, 83.4333, MicroserviceFogDevice.FON); // creates the fog device Proxy Server (level=1)
                 locator.linkDataWithInstance(proxy.getId(), locator.getLevelWiseResources(locator.getLevelID("Proxy")).get(i));
                 proxy.setParentId(cloud.getId()); // setting Cloud as parent of the Proxy Server
                 proxy.setUplinkLatency(100); // latency of connection from Proxy Server to the Cloud is 100 ms
@@ -188,7 +188,7 @@ public class MicroserviceApp_RandomMobility_Clustering {
 
             for (int i = 0; i < locator.getLevelWiseResources(locator.getLevelID("Gateway")).size(); i++) {
 
-                FogDevice gateway = createFogDevice("gateway_" + i, 2800, 4000, 10000, 10000, 0.0, 107.339, 83.4333, FogDeviceM.FCN);
+                FogDevice gateway = createFogDevice("gateway_" + i, 2800, 4000, 10000, 10000, 0.0, 107.339, 83.4333, MicroserviceFogDevice.FCN);
                 locator.linkDataWithInstance(gateway.getId(), locator.getLevelWiseResources(locator.getLevelID("Gateway")).get(i));
                 gateway.setParentId(locator.determineParent(gateway.getId(), References.SETUP_TIME));
                 gateway.setUplinkLatency(4);
@@ -232,8 +232,8 @@ public class MicroserviceApp_RandomMobility_Clustering {
      * @param idlePower
      * @return
      */
-    private static FogDeviceM createFogDevice(String nodeName, long mips,
-                                              int ram, long upBw, long downBw, double ratePerMips, double busyPower, double idlePower, String deviceType) {
+    private static MicroserviceFogDevice createFogDevice(String nodeName, long mips,
+                                                         int ram, long upBw, long downBw, double ratePerMips, double busyPower, double idlePower, String deviceType) {
 
         List<Pe> peList = new ArrayList<Pe>();
 
@@ -273,9 +273,9 @@ public class MicroserviceApp_RandomMobility_Clustering {
                 arch, os, vmm, host, time_zone, cost, costPerMem,
                 costPerStorage, costPerBw);
 
-        FogDeviceM fogdevice = null;
+        MicroserviceFogDevice fogdevice = null;
         try {
-            fogdevice = new FogDeviceM(nodeName, characteristics,
+            fogdevice = new MicroserviceFogDevice(nodeName, characteristics,
                     new AppModuleAllocationPolicy(hostList), storageList, 10, upBw, downBw, 1250000, 0, ratePerMips, deviceType);
         } catch (Exception e) {
             e.printStackTrace();
@@ -285,7 +285,7 @@ public class MicroserviceApp_RandomMobility_Clustering {
     }
 
     private static FogDevice addMobile(String name, int userId, String appId, int parentId) {
-        FogDevice mobile = createFogDevice(name, 500, 20, 1000, 270, 0, 87.53, 82.44, FogDeviceM.CLIENT);
+        FogDevice mobile = createFogDevice(name, 500, 20, 1000, 270, 0, 87.53, 82.44, MicroserviceFogDevice.CLIENT);
         mobile.setParentId(parentId);
         //locator.setInitialLocation(name,drone.getId());
         Sensor2 mobileSensor = new Sensor2("sensor-" + name, "M-SENSOR", userId, appId, new DeterministicDistribution(SENSOR_TRANSMISSION_TIME)); // inter-transmission time of EEG sensor follows a deterministic distribution

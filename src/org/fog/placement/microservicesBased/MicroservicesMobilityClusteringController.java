@@ -9,7 +9,7 @@ import org.fog.application.Application;
 import org.fog.entities.FogDevice;
 import org.fog.entities.Sensor;
 import org.fog.entities.Tuple;
-import org.fog.entities.microservicesBased.FogDeviceM;
+import org.fog.entities.microservicesBased.MicroserviceFogDevice;
 import org.fog.entities.microservicesBased.PlacementRequest;
 import org.fog.mobilitydata.References;
 import org.fog.placement.LocationHandler;
@@ -235,14 +235,14 @@ public class MicroservicesMobilityClusteringController extends MicroservicesCont
         for (FogDevice f : fogDevices) {
             if (f.getId() != fogDevice.getId()) {
                 // for mobile device update all to parent
-                ((FogDeviceM) fogDevice).updateRoutingTable(f.getId(), fogDevice.getParentId());
+                ((MicroserviceFogDevice) fogDevice).updateRoutingTable(f.getId(), fogDevice.getParentId());
 
                 ////for other update route to mobile based on route to parent
-                int nextId = ((FogDeviceM) f).getRoutingTable().get(fogDevice.getParentId());
+                int nextId = ((MicroserviceFogDevice) f).getRoutingTable().get(fogDevice.getParentId());
                 if (f.getId() != nextId)
-                    ((FogDeviceM) f).updateRoutingTable(fogDevice.getId(), nextId);
+                    ((MicroserviceFogDevice) f).updateRoutingTable(fogDevice.getId(), nextId);
                 else
-                    ((FogDeviceM) f).updateRoutingTable(fogDevice.getId(), fogDevice.getId());
+                    ((MicroserviceFogDevice) f).updateRoutingTable(fogDevice.getId(), fogDevice.getId());
             }
         }
     }

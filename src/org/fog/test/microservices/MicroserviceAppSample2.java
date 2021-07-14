@@ -16,7 +16,7 @@ import org.fog.application.Application;
 import org.fog.application.Application2;
 import org.fog.application.selectivity.FractionalSelectivity;
 import org.fog.entities.*;
-import org.fog.entities.microservicesBased.FogDeviceM;
+import org.fog.entities.microservicesBased.MicroserviceFogDevice;
 import org.fog.entities.microservicesBased.PlacementRequest;
 import org.fog.placement.microservicesBased.MicroservicesController;
 import org.fog.placement.microservicesBased.PlacementLogicFactory;
@@ -184,11 +184,11 @@ public class MicroserviceAppSample2 {
      * @param userId
      */
     private static void createFogDevices(int userId) {
-        FogDevice cloud = createFogDevice("cloud", 80000000, 49152000, 100, 12500000, 0, 0.01, 16 * 103, 16 * 83.25, FogDeviceM.CLOUD); // creates the fog device Cloud at the apex of the hierarchy with level=0
+        FogDevice cloud = createFogDevice("cloud", 80000000, 49152000, 100, 12500000, 0, 0.01, 16 * 103, 16 * 83.25, MicroserviceFogDevice.CLOUD); // creates the fog device Cloud at the apex of the hierarchy with level=0
         cloud.setParentId(-1);
 
         for (int i = 0; i < l3FogNodes; i++) {
-            FogDevice proxy = createFogDevice("proxy-server-" + i, 10000, 8192, 12500000, 1250000, 1, 0.0, 107.339, 83.4333, FogDeviceM.FON); // creates the fog device Proxy Server (level=1)
+            FogDevice proxy = createFogDevice("proxy-server-" + i, 10000, 8192, 12500000, 1250000, 1, 0.0, 107.339, 83.4333, MicroserviceFogDevice.FON); // creates the fog device Proxy Server (level=1)
             proxy.setParentId(cloud.getId()); // setting Cloud as parent of the Proxy Server
             proxy.setUplinkLatency(150); // latency of connection from Proxy Server to the Cloud is 150 ms
             fogDevices.add(cloud);
@@ -205,10 +205,10 @@ public class MicroserviceAppSample2 {
         FogDevice dept;
         if (diffResource) {
             int pos = deviceNum % 2;
-            dept = createFogDevice("L2-" + id, cpus[pos], ram[pos], 1250000, 18750, 2, 0.0, 107.339, 83.4333, FogDeviceM.FCN);
+            dept = createFogDevice("L2-" + id, cpus[pos], ram[pos], 1250000, 18750, 2, 0.0, 107.339, 83.4333, MicroserviceFogDevice.FCN);
             deviceNum = deviceNum + 1;
         } else {
-            dept = createFogDevice("L2-" + id, 2800, 2048, 1250000, 18750, 2, 0.0, 107.339, 83.4333, FogDeviceM.FCN);
+            dept = createFogDevice("L2-" + id, 2800, 2048, 1250000, 18750, 2, 0.0, 107.339, 83.4333, MicroserviceFogDevice.FCN);
         }
         fogDevices.add(dept);
         dept.setParentId(parentId);
@@ -228,7 +228,7 @@ public class MicroserviceAppSample2 {
         String appId = application.getAppId();
         double throughput = 200;
 
-        FogDevice mobile = createFogDevice("m-" + id, 1000, 2048, 18750, 250, 3, 0, 87.53, 82.44, FogDeviceM.CLIENT);
+        FogDevice mobile = createFogDevice("m-" + id, 1000, 2048, 18750, 250, 3, 0, 87.53, 82.44, MicroserviceFogDevice.CLIENT);
         mobile.setParentId(parentId);
 
         Sensor2 eegSensor = new Sensor2("s-" + id, "sensor" + appId, userId, appId, new DeterministicDistribution(1000 / (throughput / 9 * 10))); // inter-transmission time of EEG sensor follows a deterministic distribution
@@ -263,8 +263,8 @@ public class MicroserviceAppSample2 {
      * @param idlePower
      * @return
      */
-    private static FogDeviceM createFogDevice(String nodeName, long mips,
-                                              int ram, long upBw, long downBw, int level, double ratePerMips, double busyPower, double idlePower, String deviceType) {
+    private static MicroserviceFogDevice createFogDevice(String nodeName, long mips,
+                                                         int ram, long upBw, long downBw, int level, double ratePerMips, double busyPower, double idlePower, String deviceType) {
 
         List<Pe> peList = new ArrayList<Pe>();
 
@@ -304,9 +304,9 @@ public class MicroserviceAppSample2 {
                 arch, os, vmm, host, time_zone, cost, costPerMem,
                 costPerStorage, costPerBw);
 
-        FogDeviceM fogdevice = null;
+        MicroserviceFogDevice fogdevice = null;
         try {
-            fogdevice = new FogDeviceM(nodeName, characteristics,
+            fogdevice = new MicroserviceFogDevice(nodeName, characteristics,
                     new AppModuleAllocationPolicy(hostList), storageList, 10, upBw, downBw, 1250000, 0, ratePerMips, deviceType);
         } catch (Exception e) {
             e.printStackTrace();

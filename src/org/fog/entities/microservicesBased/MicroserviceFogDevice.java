@@ -20,7 +20,7 @@ import java.util.*;
 /**
  * Created by Samodha Pallewatta
  */
-public class FogDeviceM extends FogDevice2 {
+public class MicroserviceFogDevice extends FogDevice2 {
 
     /**
      * Device type (1.client device 2.FCN 3.FON 4.Cloud)
@@ -50,7 +50,7 @@ public class FogDeviceM extends FogDevice2 {
 
     protected List<PlacementRequest> placementRequests = new ArrayList<>();
 
-    public FogDeviceM(String name, FogDeviceCharacteristics characteristics, VmAllocationPolicy vmAllocationPolicy, List<Storage> storageList, double schedulingInterval, double uplinkBandwidth, double downlinkBandwidth, double clusterLinkBandwidth, double uplinkLatency, double ratePerMips, String deviceType) throws Exception {
+    public MicroserviceFogDevice(String name, FogDeviceCharacteristics characteristics, VmAllocationPolicy vmAllocationPolicy, List<Storage> storageList, double schedulingInterval, double uplinkBandwidth, double downlinkBandwidth, double clusterLinkBandwidth, double uplinkLatency, double ratePerMips, String deviceType) throws Exception {
         super(name, characteristics, vmAllocationPolicy, storageList, schedulingInterval, uplinkBandwidth, downlinkBandwidth, uplinkLatency, ratePerMips);
         setClusterLinkBandwidth(clusterLinkBandwidth);
         setDeviceType(deviceType);
@@ -127,11 +127,11 @@ public class FogDeviceM extends FogDevice2 {
     }
 
     protected void setDeviceType(String deviceType) {
-        if (deviceType.equals(FogDeviceM.CLIENT) || deviceType.equals(FogDeviceM.FCN) ||
-                deviceType.equals(FogDeviceM.FON) || deviceType.equals(FogDeviceM.CLOUD))
+        if (deviceType.equals(MicroserviceFogDevice.CLIENT) || deviceType.equals(MicroserviceFogDevice.FCN) ||
+                deviceType.equals(MicroserviceFogDevice.FON) || deviceType.equals(MicroserviceFogDevice.CLOUD))
             this.deviceType = deviceType;
         else
-            Logger.error("Incompatible Device Type", "Device type not included in device type enums in FogDeviceM class");
+            Logger.error("Incompatible Device Type", "Device type not included in device type enums in MicroserviceFogDevice class");
     }
 
     public String getDeviceType() {
@@ -153,7 +153,7 @@ public class FogDeviceM extends FogDevice2 {
         Logger.debug(getName(), "Received tuple " + tuple.getCloudletId() + "with tupleType = " + tuple.getTupleType() + "\t| Source : " +
                 CloudSim.getEntityName(ev.getSource()) + "|Dest : " + CloudSim.getEntityName(ev.getDestination()));
 
-        if (deviceType.equals(FogDeviceM.CLOUD)) {
+        if (deviceType.equals(MicroserviceFogDevice.CLOUD)) {
             updateCloudTraffic();
         }
 
@@ -181,7 +181,7 @@ public class FogDeviceM extends FogDevice2 {
             }
         }
 
-        if (deviceType.equals(FogDeviceM.CLOUD) && tuple.getDestModuleName() == null) {
+        if (deviceType.equals(MicroserviceFogDevice.CLOUD) && tuple.getDestModuleName() == null) {
             sendNow(getControllerId(), FogEvents.TUPLE_FINISHED, null);
         }
 
@@ -274,7 +274,7 @@ public class FogDeviceM extends FogDevice2 {
      * Both cloud and FON participates in placement process
      */
     public void initializeController(LoadBalancer loadBalancer, MicroservicePlacementLogic mPlacement, Map<Integer, Map<String, Double>> resourceAvailability, Map<String, Application> applications, List<FogDevice> fogDevices) {
-        if (getDeviceType() == FogDeviceM.FON || getDeviceType() == FogDeviceM.CLOUD) {
+        if (getDeviceType() == MicroserviceFogDevice.FON || getDeviceType() == MicroserviceFogDevice.CLOUD) {
             controllerComponent = new ControllerComponent(getId(), loadBalancer, mPlacement, resourceAvailability, applications, fogDevices);
         } else
             Logger.error("Controller init failed", "FON controller initialized for device " + getName() + " of type " + getDeviceType());
@@ -284,7 +284,7 @@ public class FogDeviceM extends FogDevice2 {
      * FCN and Client devices
      */
     public void initializeController(LoadBalancer loadBalancer) {
-        if (getDeviceType() != FogDeviceM.FON) {
+        if (getDeviceType() != MicroserviceFogDevice.FON) {
             controllerComponent = new ControllerComponent(getId(), loadBalancer);
             controllerComponent.updateResources(getId(), ControllerComponent.CPU, getHost().getTotalMips());
             controllerComponent.updateResources(getId(), ControllerComponent.RAM, getHost().getRam());
@@ -332,8 +332,8 @@ public class FogDeviceM extends FogDevice2 {
         int fogDeviceCount = 0;
         StringBuilder placementString = new StringBuilder();
         for (int deviceID : perDevice.keySet()) {
-            FogDeviceM f = (FogDeviceM) CloudSim.getEntity(deviceID);
-            if (!f.getDeviceType().equals(FogDeviceM.CLOUD))
+            MicroserviceFogDevice f = (MicroserviceFogDevice) CloudSim.getEntity(deviceID);
+            if (!f.getDeviceType().equals(MicroserviceFogDevice.CLOUD))
                 fogDeviceCount++;
             placementString.append(CloudSim.getEntity(deviceID).getName() + " : ");
             for (Application app : perDevice.get(deviceID).keySet()) {

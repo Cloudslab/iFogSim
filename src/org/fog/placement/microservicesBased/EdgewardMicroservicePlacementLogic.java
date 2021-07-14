@@ -7,7 +7,7 @@
 //import org.fog.application.Application;
 //import org.fog.entities.FogDevice;
 //import org.fog.entities.Tuple;
-//import org.fog.entities.microservicesBased.FogDeviceM;
+//import org.fog.entities.microservicesBased.MicroserviceFogDevice;
 //import org.fog.entities.microservicesBased.ControllerComponent;
 //import org.fog.entities.microservicesBased.PlacementRequest;
 //import org.fog.utils.Logger;
@@ -288,7 +288,7 @@
 //
 //            for (Integer deviceId : path) {
 //                FogDevice device = getFogDeviceById(deviceId);
-//                if (((FogDeviceM) device).getDeviceType().equals(FogDeviceM.CLIENT))
+//                if (((MicroserviceFogDevice) device).getDeviceType().equals(MicroserviceFogDevice.CLIENT))
 //                    continue;
 //                /*
 //                 * Getting the list of modules ready to be placed on current device on path

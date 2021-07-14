@@ -3,7 +3,7 @@ package org.fog.utils;
 import org.apache.commons.math3.util.Pair;
 import org.fog.entities.FogDevice;
 import org.fog.entities.FogDevice2;
-import org.fog.entities.microservicesBased.FogDeviceM;
+import org.fog.entities.microservicesBased.MicroserviceFogDevice;
 
 import java.util.HashMap;
 import java.util.List;
@@ -136,7 +136,7 @@ public class ShortestPathRoutingGenerator {
         } else if (children != null && children.contains(cFog.getId())) {
             return rFog.getChildToLatencyMap().get(cFog.getId());
         } else if (cluster != null && cluster.contains(cFog.getId())) {
-            return ((FogDeviceM) rFog).getClusterMembersToLatencyMap().get(cFog.getId());
+            return ((MicroserviceFogDevice) rFog).getClusterMembersToLatencyMap().get(cFog.getId());
         }
         return -1;
     }

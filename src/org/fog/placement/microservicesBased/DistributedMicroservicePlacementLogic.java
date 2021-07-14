@@ -8,7 +8,7 @@ import org.fog.application.Application2;
 import org.fog.entities.FogDevice;
 import org.fog.entities.Tuple;
 import org.fog.entities.microservicesBased.ControllerComponent;
-import org.fog.entities.microservicesBased.FogDeviceM;
+import org.fog.entities.microservicesBased.MicroserviceFogDevice;
 import org.fog.entities.microservicesBased.PlacementRequest;
 import org.fog.utils.Logger;
 import org.fog.utils.ModuleLaunchConfig;
@@ -187,7 +187,7 @@ public class DistributedMicroservicePlacementLogic implements MicroservicePlacem
 
             if (!failedMicroservices.isEmpty()) {
                 //check for cluster placement or send to parent
-                if (((FogDeviceM) fogDevice).getIsInCluster()) {
+                if (((MicroserviceFogDevice) fogDevice).getIsInCluster()) {
                     int deviceId = placeWithinCluster(failedMicroservices, app);
                     if (deviceId != -1)
                         prStatus.put(placementRequest, deviceId);
@@ -218,7 +218,7 @@ public class DistributedMicroservicePlacementLogic implements MicroservicePlacem
     }
 
     private int placeWithinCluster(List<String> failedMicroservices, Application2 app) {
-        List<Integer> clusterDeviceIds = ((FogDeviceM) fogDevice).getClusterMembers();
+        List<Integer> clusterDeviceIds = ((MicroserviceFogDevice) fogDevice).getClusterMembers();
         if (clusterDeviceIds.isEmpty())
             return -1;
         List<Integer> sortedClusterDevices = new ArrayList<>();

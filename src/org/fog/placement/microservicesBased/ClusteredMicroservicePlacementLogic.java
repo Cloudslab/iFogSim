@@ -8,7 +8,7 @@ import org.fog.application.Application2;
 import org.fog.entities.FogDevice;
 import org.fog.entities.Tuple;
 import org.fog.entities.microservicesBased.ControllerComponent;
-import org.fog.entities.microservicesBased.FogDeviceM;
+import org.fog.entities.microservicesBased.MicroserviceFogDevice;
 import org.fog.entities.microservicesBased.PlacementRequest;
 import org.fog.utils.Logger;
 import org.fog.utils.ModuleLaunchConfig;
@@ -314,7 +314,7 @@ public class ClusteredMicroservicePlacementLogic implements MicroservicePlacemen
                             toPlace.get(placementRequest).remove(m);
                         }
                         if (!toPlace.get(placementRequest).isEmpty()) {
-                            if (((FogDeviceM) device).getIsInCluster()) {
+                            if (((MicroserviceFogDevice) device).getIsInCluster()) {
                                 // -1 indicates it's a cluster placement
                                 deviceToPlace.put(placementRequest, -1);
                                 // a device of the cluster to identify the cluster
@@ -330,7 +330,7 @@ public class ClusteredMicroservicePlacementLogic implements MicroservicePlacemen
                     if (toPlace.containsKey(placementRequest)) {
                         int clusterDeviceId = clusterNode.get(placementRequest);
                         FogDevice device = getDevice(clusterDeviceId);
-                        List<Integer> clusterDeviceIds = ((FogDeviceM) device).getClusterMembers();
+                        List<Integer> clusterDeviceIds = ((MicroserviceFogDevice) device).getClusterMembers();
                         List<Integer> sortedClusterDevices = new ArrayList<>();
                         for (Integer id : clusterDeviceIds) {
                             //sort list from min to max
