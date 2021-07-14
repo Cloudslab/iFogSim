@@ -291,7 +291,7 @@ public class MicroserviceApp_RandomMobility_Clustering {
         Sensor2 mobileSensor = new Sensor2("sensor-" + name, "M-SENSOR", userId, appId, new DeterministicDistribution(SENSOR_TRANSMISSION_TIME)); // inter-transmission time of EEG sensor follows a deterministic distribution
         mobileSensor.setApp(applications.get(0));
         sensors.add(mobileSensor);
-        Actuator mobileDisplay = new Actuator("actuator-" + name, userId, appId, "M-DISPLAY");
+        Actuator2 mobileDisplay = new Actuator2("actuator-" + name, userId, appId, "M-DISPLAY");
         actuators.add(mobileDisplay);
 
         mobileSensor.setGatewayDeviceId(mobile.getId());

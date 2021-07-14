@@ -1,28 +1,19 @@
 package org.fog.application;
 
+import org.apache.commons.math3.util.Pair;
 import org.cloudbus.cloudsim.CloudletScheduler;
-import org.cloudbus.cloudsim.power.PowerVm;
+import org.fog.application.selectivity.SelectivityModel;
+
+import java.util.Map;
 
 
-public class AppModule2 extends PowerVm {
+public class AppModule2 extends AppModule {
 
+    public AppModule2(int id, String name, String appId, int userId, double mips, int ram, long bw, long size, String vmm, CloudletScheduler cloudletScheduler, Map<Pair<String, String>, SelectivityModel> selectivityMap) {
+        super(id, name, appId, userId, mips, ram, bw, size, vmm, cloudletScheduler, selectivityMap);
+    }
 
-    /**
-     * Instantiates a new power vm.
-     *
-     * @param id                 the id
-     * @param userId             the user id
-     * @param mips               the mips
-     * @param pesNumber          the pes number
-     * @param ram                the ram
-     * @param bw                 the bw
-     * @param size               the size
-     * @param priority           the priority
-     * @param vmm                the vmm
-     * @param cloudletScheduler  the cloudlet scheduler
-     * @param schedulingInterval the scheduling interval
-     */
-    public AppModule2(int id, int userId, double mips, int pesNumber, int ram, long bw, long size, int priority, String vmm, CloudletScheduler cloudletScheduler, double schedulingInterval) {
-        super(id, userId, mips, pesNumber, ram, bw, size, priority, vmm, cloudletScheduler, schedulingInterval);
+    public AppModule2(AppModule operator) {
+        super(operator);
     }
 }

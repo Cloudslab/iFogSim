@@ -6,8 +6,8 @@ import org.fog.application.microservicesBased.DAG;
 import org.fog.application.selectivity.SelectivityModel;
 import org.fog.entities.Tuple;
 import org.fog.entities.Tuple2;
+import org.fog.scheduler.TupleScheduler;
 import org.fog.utils.FogUtils;
-import org.fog.utils.GeoCoverage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,8 +29,29 @@ public class Application2 extends Application {
         super(appId, userId);
     }
 
-    public Application2(String appId, List<AppModule> modules, List<AppEdge> edges, List<AppLoop> loops, GeoCoverage geoCoverage) {
-        super(appId, modules, edges, loops, geoCoverage);
+    @Override
+    public void addAppModule(String moduleName, int ram) {
+        int mips = 1000;
+        long size = 10000;
+        long bw = 1000;
+        String vmm = "Xen";
+
+        AppModule2 module = new AppModule2(FogUtils.generateEntityId(), moduleName, getAppId(), getUserId(),
+                mips, ram, bw, size, vmm, new TupleScheduler(mips, 1), new HashMap<Pair<String, String>, SelectivityModel>());
+
+        getModules().add(module);
+
+    }
+
+    @Override
+    public void addAppModule(String moduleName, int ram, int mips, int size) {
+        long bw = 1000;
+        String vmm = "Xen";
+
+        AppModule2 module = new AppModule2(FogUtils.generateEntityId(), moduleName, getAppId(), getUserId(),
+                mips, ram, bw, size, vmm, new TupleScheduler(mips, 1), new HashMap<Pair<String, String>, SelectivityModel>());
+
+        getModules().add(module);
     }
 
     @Override

@@ -204,7 +204,7 @@ public class MicroservicesAppSample1 {
         eegSensor.setApp(application);
         sensors.add(eegSensor);
 
-        Actuator display = new Actuator("a-" + id, userId, appId, "DISPLAY");
+        Actuator2 display = new Actuator2("a-" + id, userId, appId, "DISPLAY");
         actuators.add(display);
 
         eegSensor.setGatewayDeviceId(mobile.getId());
