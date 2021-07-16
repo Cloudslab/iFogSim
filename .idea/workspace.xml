@@ -1,32 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="38d6f99d-c191-4a46-8687-c12ef5e08616" name="Default Changelist" comment="Renamed to MicroserviceFogDevice">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_14_2021_6_32_AM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_14_2021_6_32_AM__Default_Changelist_.xml" afterDir="false" />
+    <list default="true" id="38d6f99d-c191-4a46-8687-c12ef5e08616" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/application/AppModule2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/application/AppModule2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/application/Application2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/application/Application2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/entities/Actuator2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/entities/Actuator2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/entities/microservicesBased/FogDeviceM$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/entities/microservicesBased/FogDeviceM.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/placement/microservicesBased/ClusteredMicroservicePlacementLogic.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/placement/microservicesBased/ClusteredMicroservicePlacementLogic.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/placement/microservicesBased/DistributedMicroservicePlacementLogic.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/placement/microservicesBased/DistributedMicroservicePlacementLogic.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/placement/microservicesBased/MicroservicesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/placement/microservicesBased/MicroservicesController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/placement/microservicesBased/MicroservicesMobilityClusteringController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/placement/microservicesBased/MicroservicesMobilityClusteringController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/test/microservices/MicroserviceAppSample2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/test/microservices/MicroserviceAppSample2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/test/microservices/MicroserviceApp_RandomMobility_Clustering.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/test/microservices/MicroserviceApp_RandomMobility_Clustering.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/test/microservices/MicroservicesAppSample1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/test/microservices/MicroservicesAppSample1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/utils/ShortestPathRoutingGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/iFogSim2/org/fog/utils/ShortestPathRoutingGenerator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/fog/entities/microservicesBased/FogDeviceM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/fog/entities/microservicesBased/MicroserviceFogDevice.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/fog/placement/microservicesBased/ClusteredMicroservicePlacementLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/fog/placement/microservicesBased/ClusteredMicroservicePlacementLogic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/fog/placement/microservicesBased/DistributedMicroservicePlacementLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/fog/placement/microservicesBased/DistributedMicroservicePlacementLogic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/fog/placement/microservicesBased/EdgewardMicroservicePlacementLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/fog/placement/microservicesBased/EdgewardMicroservicePlacementLogic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/fog/placement/microservicesBased/MicroservicesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/fog/placement/microservicesBased/MicroservicesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/fog/placement/microservicesBased/MicroservicesMobilityClusteringController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/fog/placement/microservicesBased/MicroservicesMobilityClusteringController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/fog/test/microservices/MicroserviceAppSample2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/fog/test/microservices/MicroserviceAppSample2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/fog/test/microservices/MicroserviceApp_RandomMobility_Clustering.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/fog/test/microservices/MicroserviceApp_RandomMobility_Clustering.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/fog/test/microservices/MicroservicesAppSample1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/fog/test/microservices/MicroservicesAppSample1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/fog/utils/ShortestPathRoutingGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/fog/utils/ShortestPathRoutingGenerator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,14 +11,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/org/fog/test/microservices/MicroserviceAppSample2.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
-              <caret line="245" column="36" selection-start-line="245" selection-start-column="36" selection-end-line="245" selection-end-column="36" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="221">
+              <caret line="13" column="35" lean-forward="true" selection-start-line="13" selection-start-column="35" selection-end-line="13" selection-end-column="35" />
             </state>
           </provider>
         </entry>
@@ -56,14 +29,32 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/org/fog/application/Application2.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="251">
-              <caret line="46" column="61" selection-start-line="46" selection-start-column="61" selection-end-line="46" selection-end-column="61" />
+            <state relative-caret-position="64">
+              <caret line="35" column="23" lean-forward="true" selection-start-line="35" selection-start-column="23" selection-end-line="35" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/fog/placement/microservicesBased/MicroservicesController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/fog/placement/ClusteringController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
             </state>
           </provider>
         </entry>
@@ -288,7 +279,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1626228232714" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1626437346960" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -406,10 +397,28 @@
       <option name="presentableId" value="Default" />
       <updated>1624949343028</updated>
     </task>
+    <task id="LOCAL-00001" summary="Renamed to MicroserviceFogDevice">
+      <created>1626228455213</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1626228455214</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="-1088" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1913646" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -421,12 +430,12 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.38353196" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3997833" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39943343" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.27735645" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="8" visible="true" weight="0.5308776" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.41218132" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.32936078" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.57204765" />
@@ -451,6 +460,14 @@
               </option>
               <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
                 <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
               </option>
             </State>
           </value>
@@ -650,13 +667,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/fog/placement/microservicesBased/MicroservicesController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="26" column="33" lean-forward="true" selection-start-line="26" selection-start-column="33" selection-end-line="26" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/fog/mobilitydata/Clustering.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1462">
@@ -724,13 +734,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/fog/placement/ClusteringController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="223" column="22" selection-start-line="223" selection-start-column="22" selection-end-line="223" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/fog/utils/ShortestPathRoutingGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="129">
@@ -755,23 +758,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/fog/application/Application.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-42">
-          <caret line="38" column="7" selection-start-line="38" selection-start-column="7" selection-end-line="38" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/fog/test/microservices/MicroserviceAppSample2.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="245" column="36" selection-start-line="245" selection-start-column="36" selection-end-line="245" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/fog/test/microservices/MicroserviceApp_RandomMobility_Clustering.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="115">
@@ -789,13 +775,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/fog/placement/ClusteringController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/fog/placement/microservicesBased/MicroservicesController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/fog/application/Application2.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
-          <caret line="46" column="61" selection-start-line="46" selection-start-column="61" selection-end-line="46" selection-end-column="61" />
+        <state relative-caret-position="64">
+          <caret line="35" column="23" lean-forward="true" selection-start-line="35" selection-start-column="23" selection-end-line="35" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/fog/application/Application.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-42">
+          <caret line="38" column="7" selection-start-line="38" selection-start-column="7" selection-end-line="38" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/fog/test/microservices/MicroserviceAppSample2.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="35" lean-forward="true" selection-start-line="13" selection-start-column="35" selection-end-line="13" selection-end-column="35" />
         </state>
       </provider>
     </entry>
