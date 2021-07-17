@@ -13,7 +13,6 @@ import org.cloudbus.cloudsim.sdn.overbooking.PeProvisionerOverbooking;
 import org.fog.application.AppEdge;
 import org.fog.application.AppLoop;
 import org.fog.application.Application;
-import org.fog.application.Application2;
 import org.fog.application.selectivity.FractionalSelectivity;
 import org.fog.entities.*;
 import org.fog.entities.microservicesBased.MicroserviceFogDevice;
@@ -86,7 +85,7 @@ public class MicroserviceApp_RandomMobility_Clustering {
             /**
              * Microservices-based application creation - a single application is selected for this
              */
-            Application2 microservicesApplication = createApplication("example", broker.getId());
+            Application microservicesApplication = createApplication("example", broker.getId());
             applications.add(microservicesApplication);
 
             //
@@ -288,10 +287,10 @@ public class MicroserviceApp_RandomMobility_Clustering {
         FogDevice mobile = createFogDevice(name, 500, 20, 1000, 270, 0, 87.53, 82.44, MicroserviceFogDevice.CLIENT);
         mobile.setParentId(parentId);
         //locator.setInitialLocation(name,drone.getId());
-        Sensor2 mobileSensor = new Sensor2("sensor-" + name, "M-SENSOR", userId, appId, new DeterministicDistribution(SENSOR_TRANSMISSION_TIME)); // inter-transmission time of EEG sensor follows a deterministic distribution
+        Sensor mobileSensor = new Sensor("sensor-" + name, "M-SENSOR", userId, appId, new DeterministicDistribution(SENSOR_TRANSMISSION_TIME)); // inter-transmission time of EEG sensor follows a deterministic distribution
         mobileSensor.setApp(applications.get(0));
         sensors.add(mobileSensor);
-        Actuator2 mobileDisplay = new Actuator2("actuator-" + name, userId, appId, "M-DISPLAY");
+        Actuator mobileDisplay = new Actuator("actuator-" + name, userId, appId, "M-DISPLAY");
         actuators.add(mobileDisplay);
 
         mobileSensor.setGatewayDeviceId(mobile.getId());
@@ -304,8 +303,8 @@ public class MicroserviceApp_RandomMobility_Clustering {
         return mobile;
     }
 
-    private static Application2 createApplication(String appId, int userId) {
-        Application2 application = Application2.createApplication(appId, userId); // creates an empty application model (empty directed graph)
+    private static Application createApplication(String appId, int userId) {
+        Application application = Application.createApplication(appId, userId); // creates an empty application model (empty directed graph)
 
         /*
          * Adding modules (vertices) to the application model (directed graph)

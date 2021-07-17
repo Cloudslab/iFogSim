@@ -28,6 +28,14 @@ public class Tuple extends Cloudlet{
 	 * Map from moduleName to vmId of a module instance
 	 */
 	private Map<String, Integer> moduleCopyMap;
+
+	/**
+	 * For device id based routing used
+	 */
+	protected int destinationDeviceId;
+	/* keep track of traversed microservices by tuples of type UP in microservices architecture UP -> tuple travelling towards service
+	 DOWN -> tuple travelling from service to client microservice.*/
+	protected Map<String, Integer> traversedMicroservices = new HashMap<>();
 	
 	public Tuple(String appId, int cloudletId, int direction, long cloudletLength, int pesNumber,
 			long cloudletFileSize, long cloudletOutputSize,
@@ -41,6 +49,7 @@ public class Tuple extends Cloudlet{
 		setDirection(direction);
 		setSourceDeviceId(-1);
 		setModuleCopyMap(new HashMap<String, Integer>());
+		setDestinationDeviceId(-1);
 	}
 
 	public int getActualTupleId() {
@@ -121,6 +130,34 @@ public class Tuple extends Cloudlet{
 
 	public void setSourceModuleId(int sourceModuleId) {
 		this.sourceModuleId = sourceModuleId;
+	}
+
+	public void setDestinationDeviceId(int deviceId) {
+		destinationDeviceId = deviceId;
+	}
+
+	public int getDestinationDeviceId() {
+		return destinationDeviceId;
+	}
+
+	public void addToTraversedMicroservices(Integer deviceID, String microserviceName) {
+		traversedMicroservices.put(microserviceName, deviceID);
+	}
+
+	public int getDeviceForMicroservice(String microserviceName) {
+		if (!traversedMicroservices.containsKey(microserviceName))
+			return -1;
+		else {
+			return traversedMicroservices.get(microserviceName);
+		}
+	}
+
+	public Map<String, Integer> getTraversed() {
+		return traversedMicroservices;
+	}
+
+	public void setTraversedMicroservices(Map<String, Integer> traversed) {
+		traversedMicroservices = traversed;
 	}
 
 }

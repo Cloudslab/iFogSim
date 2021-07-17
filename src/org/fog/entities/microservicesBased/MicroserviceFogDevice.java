@@ -9,7 +9,9 @@ import org.cloudbus.cloudsim.core.SimEvent;
 import org.fog.application.AppEdge;
 import org.fog.application.AppModule;
 import org.fog.application.Application;
-import org.fog.entities.*;
+import org.fog.entities.FogDevice;
+import org.fog.entities.FogDeviceCharacteristics;
+import org.fog.entities.Tuple;
 import org.fog.placement.microservicesBased.MicroservicePlacementLogic;
 import org.fog.placement.microservicesBased.PlacementLogicOutput;
 import org.fog.utils.*;
@@ -20,7 +22,7 @@ import java.util.*;
 /**
  * Created by Samodha Pallewatta
  */
-public class MicroserviceFogDevice extends FogDevice2 {
+public class MicroserviceFogDevice extends FogDevice {
 
     /**
      * Device type (1.client device 2.FCN 3.FON 4.Cloud)
@@ -148,7 +150,7 @@ public class MicroserviceFogDevice extends FogDevice2 {
 
     protected void processTupleArrival(SimEvent ev) {
 
-        Tuple2 tuple = (Tuple2) ev.getData();
+        Tuple tuple = (Tuple) ev.getData();
 
         Logger.debug(getName(), "Received tuple " + tuple.getCloudletId() + "with tupleType = " + tuple.getTupleType() + "\t| Source : " +
                 CloudSim.getEntityName(ev.getSource()) + "|Dest : " + CloudSim.getEntityName(ev.getDestination()));

@@ -13,7 +13,6 @@ import org.cloudbus.cloudsim.sdn.overbooking.PeProvisionerOverbooking;
 import org.fog.application.AppEdge;
 import org.fog.application.AppLoop;
 import org.fog.application.Application;
-import org.fog.application.Application2;
 import org.fog.application.selectivity.FractionalSelectivity;
 import org.fog.entities.*;
 import org.fog.entities.microservicesBased.MicroserviceFogDevice;
@@ -224,18 +223,18 @@ public class MicroserviceAppSample2 {
 
     private static FogDevice addMobile(String id, int userId, int parentId) {
 
-        Application2 application = (Application2) applications.get(appNum % appCount);
+        Application application = applications.get(appNum % appCount);
         String appId = application.getAppId();
         double throughput = 200;
 
         FogDevice mobile = createFogDevice("m-" + id, 1000, 2048, 18750, 250, 3, 0, 87.53, 82.44, MicroserviceFogDevice.CLIENT);
         mobile.setParentId(parentId);
 
-        Sensor2 eegSensor = new Sensor2("s-" + id, "sensor" + appId, userId, appId, new DeterministicDistribution(1000 / (throughput / 9 * 10))); // inter-transmission time of EEG sensor follows a deterministic distribution
+        Sensor eegSensor = new Sensor("s-" + id, "sensor" + appId, userId, appId, new DeterministicDistribution(1000 / (throughput / 9 * 10))); // inter-transmission time of EEG sensor follows a deterministic distribution
         eegSensor.setApp(application);
         sensors.add(eegSensor);
 
-        Actuator2 display = new Actuator2("a-" + id, userId, appId, "actuator" + appId);
+        Actuator display = new Actuator("a-" + id, userId, appId, "actuator" + appId);
         actuators.add(display);
 
         eegSensor.setGatewayDeviceId(mobile.getId());
@@ -322,7 +321,7 @@ public class MicroserviceAppSample2 {
 
         String appId = (String) applicationParameters.get("appId");
         int userId = Math.toIntExact((long) applicationParameters.get("userId"));
-        Application2 application = Application2.createApplication(appId, userId); // creates an empty application model (empty directed graph)
+        Application application = Application.createApplication(appId, userId); // creates an empty application model (empty directed graph)
 
         String client = "client" + appId;
         String mService1 = "mService1" + appId;

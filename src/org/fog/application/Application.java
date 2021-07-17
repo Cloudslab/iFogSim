@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.apache.commons.math3.util.Pair;
 import org.cloudbus.cloudsim.UtilizationModelFull;
+import org.fog.application.microservicesBased.DAG;
 import org.fog.application.selectivity.SelectivityModel;
 import org.fog.entities.Tuple;
 import org.fog.scheduler.TupleScheduler;
@@ -40,6 +41,10 @@ public class Application {
 	private List<AppLoop> loops;
 	
 	private Map<String, AppEdge> edgeMap;
+
+	protected Map<String, List<String>> specialPlacementInfo = new HashMap<>(); // module name to placement device staring with
+
+	protected DAG dag;
 
 	/**
 	 * Creates a plain vanilla application with no modules and edges.
@@ -242,6 +247,7 @@ public class Application {
 						tuple.setDirection(edge.getDirection());
 						tuple.setTupleType(edge.getTupleType());
 						tuple.setSourceModuleId(sourceModuleId);
+						tuple.setTraversedMicroservices(inputTuple.getTraversed());
 
 						tuples.add(tuple);
 					}
@@ -361,5 +367,35 @@ public class Application {
 			appModuleNames.add(module.getName());
 		}
 		return appModuleNames;
+	}
+
+	public void setSpecialPlacementInfo(String moduleName, String device) {
+		if (specialPlacementInfo.containsKey(moduleName))
+			specialPlacementInfo.get(moduleName).add(device);
+		else {
+			List<String> devices = new ArrayList<>();
+			devices.add(device);
+			specialPlacementInfo.put(moduleName, devices);
+		}
+	}
+
+	public Map<String, List<String>> getSpecialPlacementInfo() {
+		return specialPlacementInfo;
+	}
+
+	public void createDAG() {
+		List<String> moduleNames = new ArrayList<>();
+		for (AppModule module : getModules()) {
+			moduleNames.add(module.getName());
+		}
+		dag = new DAG(moduleNames);
+		for (AppEdge edge : getEdges()) {
+			if (edge.getDirection() == Tuple.UP)
+				dag.addEdge(edge.getSource(), edge.getDestination());
+		}
+	}
+
+	public DAG getDAG() {
+		return dag;
 	}
 }

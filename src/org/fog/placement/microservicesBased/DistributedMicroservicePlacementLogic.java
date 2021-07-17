@@ -4,7 +4,6 @@ import org.apache.commons.math3.util.Pair;
 import org.fog.application.AppEdge;
 import org.fog.application.AppModule;
 import org.fog.application.Application;
-import org.fog.application.Application2;
 import org.fog.entities.FogDevice;
 import org.fog.entities.Tuple;
 import org.fog.entities.microservicesBased.ControllerComponent;
@@ -145,7 +144,7 @@ public class DistributedMicroservicePlacementLogic implements MicroservicePlacem
 
     public void mapModules() {
         for (PlacementRequest placementRequest : placementRequests) {
-            Application2 app = (Application2) applicationInfo.get(placementRequest.getApplicationId());
+            Application app = applicationInfo.get(placementRequest.getApplicationId());
             List<String> failedMicroservices = new ArrayList<>();
             List<String> modulesToPlace = getMicroservicesToPlace(app, placementRequest.getPlacedMicroservices(), failedMicroservices, fogDevice.getName());
             while (!modulesToPlace.isEmpty()) {
@@ -206,7 +205,7 @@ public class DistributedMicroservicePlacementLogic implements MicroservicePlacem
         }
     }
 
-    private boolean allModulesPlaced(Application2 app, PlacementRequest placementRequest) {
+    private boolean allModulesPlaced(Application app, PlacementRequest placementRequest) {
         List<String> microservicesToPlace = new LinkedList<>();
         for (AppModule module : app.getModules()) {
             if (!placementRequest.getPlacedMicroservices().keySet().contains(module.getName())) {
@@ -217,7 +216,7 @@ public class DistributedMicroservicePlacementLogic implements MicroservicePlacem
         return true;
     }
 
-    private int placeWithinCluster(List<String> failedMicroservices, Application2 app) {
+    private int placeWithinCluster(List<String> failedMicroservices, Application app) {
         List<Integer> clusterDeviceIds = ((MicroserviceFogDevice) fogDevice).getClusterMembers();
         if (clusterDeviceIds.isEmpty())
             return -1;
@@ -276,7 +275,7 @@ public class DistributedMicroservicePlacementLogic implements MicroservicePlacem
         }
     }
 
-    private List<String> getMicroservicesToPlace(Application2 app, Map<String, Integer> placedMicroservices, List<String> m_failed, String deviceName) {
+    private List<String> getMicroservicesToPlace(Application app, Map<String, Integer> placedMicroservices, List<String> m_failed, String deviceName) {
         List<String> failed = new ArrayList<>();
         failed.addAll(m_failed);
         for (AppModule module : app.getModules()) {

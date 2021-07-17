@@ -2,7 +2,6 @@ package org.fog.mobilitydata;
 
 import org.cloudbus.cloudsim.core.CloudSim;
 import org.fog.entities.FogDevice;
-import org.fog.entities.FogDevice2;
 import org.fog.placement.LocationHandler;
 import org.fog.utils.Config;
 import org.json.simple.JSONObject;
@@ -70,21 +69,21 @@ public class Clustering {
 
 
         if (clusterMemberList.isEmpty() || clusterMemberList.size() < 1) {
-            ((FogDevice2) CloudSim.getEntity(fogId)).setSelfCluster(true);
-            ((FogDevice2) CloudSim.getEntity(fogId)).setIsInCluster(true);
+            ((FogDevice) CloudSim.getEntity(fogId)).setSelfCluster(true);
+            ((FogDevice) CloudSim.getEntity(fogId)).setIsInCluster(true);
         } else {
-            ((FogDevice2) CloudSim.getEntity(fogId)).setIsInCluster(true);
-            ((FogDevice2) CloudSim.getEntity(fogId)).setSelfCluster(false);
-            ((FogDevice2) CloudSim.getEntity(fogId)).setClusterMembers(clusterMemberList);
+            ((FogDevice) CloudSim.getEntity(fogId)).setIsInCluster(true);
+            ((FogDevice) CloudSim.getEntity(fogId)).setSelfCluster(false);
+            ((FogDevice) CloudSim.getEntity(fogId)).setClusterMembers(clusterMemberList);
             Map<Integer, Double> latencyMapL2 = new HashMap<>();
             for (int id : clusterMemberList) {
                 latencyMapL2.put(id, Config.clusteringLatency);
             }
-            ((FogDevice2) CloudSim.getEntity(fogId)).setClusterMembersToLatencyMap(latencyMapL2);
+            ((FogDevice) CloudSim.getEntity(fogId)).setClusterMembersToLatencyMap(latencyMapL2);
 
         }
         System.out.println("The Fog Device: " + locatorTemp.instanceToDataId.get(fogId) + " with id: " + fogId + " and parent id: " + parentId +
-                " has these cluster members: " + ((FogDevice2) CloudSim.getEntity(fogId)).getClusterMembers());
+                " has these cluster members: " + ((FogDevice) CloudSim.getEntity(fogId)).getClusterMembers());
         return;
     }
 

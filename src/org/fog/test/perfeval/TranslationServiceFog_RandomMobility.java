@@ -12,7 +12,6 @@ import org.cloudbus.cloudsim.sdn.overbooking.PeProvisionerOverbooking;
 import org.fog.application.AppEdge;
 import org.fog.application.AppLoop;
 import org.fog.application.Application;
-import org.fog.application.Application2;
 import org.fog.application.selectivity.FractionalSelectivity;
 import org.fog.entities.*;
 import org.fog.mobilitydata.DataParser;
@@ -28,11 +27,9 @@ import org.fog.utils.FogLinearPowerModel;
 import org.fog.utils.FogUtils;
 import org.fog.utils.TimeKeeper;
 import org.fog.utils.distribution.DeterministicDistribution;
-
-import java.io.IOException;
-
 import org.json.simple.parser.ParseException;
 
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -72,7 +69,7 @@ public class TranslationServiceFog_RandomMobility {
 
             FogBroker broker = new FogBroker("broker");
 
-            Application2 application = createApplication(appId, broker.getId());
+            Application application = createApplication(appId, broker.getId());
             application.setUserId(broker.getId());
 
             //
@@ -90,7 +87,6 @@ public class TranslationServiceFog_RandomMobility {
             createFogDevices(broker.getId(), appId);
 
 
-
             //
 
             ModuleMapping moduleMapping = ModuleMapping.createModuleMapping(); // initializing a module mapping
@@ -99,7 +95,6 @@ public class TranslationServiceFog_RandomMobility {
 
             MobilityController controller = new MobilityController("master-controller", fogDevices, sensors,
                     actuators, locator);
-
 
 
             controller.submitApplication(application, 0, (new ModulePlacementMobileEdgewards(fogDevices, sensors, actuators, application, moduleMapping)));
@@ -121,7 +116,7 @@ public class TranslationServiceFog_RandomMobility {
         RandomMobilityGenerator randMobilityGenerator = new RandomMobilityGenerator();
         for (int i = 0; i < numberOfMobileUser; i++) {
 
-                randMobilityGenerator.createRandomData(mobilityModel, i + 1, datasetReference, renewDataset);
+            randMobilityGenerator.createRandomData(mobilityModel, i + 1, datasetReference, renewDataset);
         }
     }
 
@@ -193,9 +188,9 @@ public class TranslationServiceFog_RandomMobility {
         FogDevice mobile = createFogDevice(name, 500, 20, 1000, 270, 0, 87.53, 82.44);
         mobile.setParentId(parentId);
         //locator.setInitialLocation(name,drone.getId());
-        Sensor2 mobileSensor = new Sensor2("sensor-" + name, "M-SENSOR", userId, appId, new DeterministicDistribution(SENSOR_TRANSMISSION_TIME)); // inter-transmission time of EEG sensor follows a deterministic distribution
+        Sensor mobileSensor = new Sensor("sensor-" + name, "M-SENSOR", userId, appId, new DeterministicDistribution(SENSOR_TRANSMISSION_TIME)); // inter-transmission time of EEG sensor follows a deterministic distribution
         sensors.add(mobileSensor);
-        Actuator2 mobileDisplay = new Actuator2("actuator-" + name, userId, appId, "M-DISPLAY");
+        Actuator mobileDisplay = new Actuator("actuator-" + name, userId, appId, "M-DISPLAY");
         actuators.add(mobileDisplay);
         mobileSensor.setGatewayDeviceId(mobile.getId());
         mobileSensor.setLatency(6.0);  // latency of connection between EEG sensors and the parent Smartphone is 6 ms
@@ -218,7 +213,7 @@ public class TranslationServiceFog_RandomMobility {
      * @param idlePower
      * @return
      */
-    private static FogDevice2 createFogDevice(String nodeName, long mips,
+    private static FogDevice createFogDevice(String nodeName, long mips,
                                              int ram, long upBw, long downBw, double ratePerMips, double busyPower, double idlePower) {
 
         List<Pe> peList = new ArrayList<Pe>();
@@ -259,9 +254,9 @@ public class TranslationServiceFog_RandomMobility {
                 arch, os, vmm, host, time_zone, cost, costPerMem,
                 costPerStorage, costPerBw);
 
-        FogDevice2 fogdevice = null;
+        FogDevice fogdevice = null;
         try {
-            fogdevice = new FogDevice2(nodeName, characteristics,
+            fogdevice = new FogDevice(nodeName, characteristics,
                     new AppModuleAllocationPolicy(hostList), storageList, 10, upBw, downBw, 0, ratePerMips);
         } catch (Exception e) {
             e.printStackTrace();
@@ -279,9 +274,9 @@ public class TranslationServiceFog_RandomMobility {
      * @return
      */
     @SuppressWarnings({"serial"})
-    private static Application2 createApplication(String appId, int userId) {
+    private static Application createApplication(String appId, int userId) {
 
-        Application2 application = Application2.createApplication(appId, userId); // creates an empty application model (empty directed graph)
+        Application application = Application.createApplication(appId, userId); // creates an empty application model (empty directed graph)
 
         /*
          * Adding modules (vertices) to the application model (directed graph)

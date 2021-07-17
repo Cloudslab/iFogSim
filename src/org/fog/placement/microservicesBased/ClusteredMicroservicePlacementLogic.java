@@ -4,7 +4,6 @@ import org.apache.commons.math3.util.Pair;
 import org.fog.application.AppEdge;
 import org.fog.application.AppModule;
 import org.fog.application.Application;
-import org.fog.application.Application2;
 import org.fog.entities.FogDevice;
 import org.fog.entities.Tuple;
 import org.fog.entities.microservicesBased.ControllerComponent;
@@ -219,7 +218,7 @@ public class ClusteredMicroservicePlacementLogic implements MicroservicePlacemen
             mappedMicroservices.put(placementRequest.getPlacementRequestId(), new HashMap<>(placementRequest.getPlacedMicroservices()));
 
             //special modules  - predefined cloud placements
-            Application2 app = (Application2) applicationInfo.get(placementRequest.getApplicationId());
+            Application app =  applicationInfo.get(placementRequest.getApplicationId());
             for (String microservice : app.getSpecialPlacementInfo().keySet()) {
                 for (String deviceName : app.getSpecialPlacementInfo().get(microservice)) {
                     FogDevice device = getDeviceByName(deviceName);

@@ -12,13 +12,15 @@ import org.cloudbus.cloudsim.sdn.overbooking.PeProvisionerOverbooking;
 import org.fog.application.AppEdge;
 import org.fog.application.AppLoop;
 import org.fog.application.Application;
-import org.fog.application.Application2;
 import org.fog.application.selectivity.FractionalSelectivity;
 import org.fog.entities.*;
 import org.fog.mobilitydata.DataParser;
 import org.fog.mobilitydata.RandomMobilityGenerator;
 import org.fog.mobilitydata.References;
-import org.fog.placement.*;
+import org.fog.placement.ClusteringController;
+import org.fog.placement.LocationHandler;
+import org.fog.placement.ModuleMapping;
+import org.fog.placement.ModulePlacementMobileEdgewards;
 import org.fog.policy.AppModuleAllocationPolicy;
 import org.fog.scheduler.StreamOperatorScheduler;
 import org.fog.utils.Config;
@@ -69,7 +71,7 @@ public class TranslationServiceFog_RandomMobility_Clustering {
 
             FogBroker broker = new FogBroker("broker");
 
-            Application2 application = createApplication(appId, broker.getId());
+            Application application = createApplication(appId, broker.getId());
             application.setUserId(broker.getId());
 
             //
@@ -198,9 +200,9 @@ public class TranslationServiceFog_RandomMobility_Clustering {
         FogDevice mobile = createFogDevice(name, 500, 20, 1000, 270, 0, 87.53, 82.44);
         mobile.setParentId(parentId);
         //locator.setInitialLocation(name,drone.getId());
-        Sensor2 mobileSensor = new Sensor2("sensor-" + name, "M-SENSOR", userId, appId, new DeterministicDistribution(SENSOR_TRANSMISSION_TIME)); // inter-transmission time of EEG sensor follows a deterministic distribution
+        Sensor mobileSensor = new Sensor("sensor-" + name, "M-SENSOR", userId, appId, new DeterministicDistribution(SENSOR_TRANSMISSION_TIME)); // inter-transmission time of EEG sensor follows a deterministic distribution
         sensors.add(mobileSensor);
-        Actuator2 mobileDisplay = new Actuator2("actuator-" + name, userId, appId, "M-DISPLAY");
+        Actuator mobileDisplay = new Actuator("actuator-" + name, userId, appId, "M-DISPLAY");
         actuators.add(mobileDisplay);
         mobileSensor.setGatewayDeviceId(mobile.getId());
         mobileSensor.setLatency(6.0);  // latency of connection between EEG sensors and the parent Smartphone is 6 ms
@@ -223,7 +225,7 @@ public class TranslationServiceFog_RandomMobility_Clustering {
      * @param idlePower
      * @return
      */
-    private static FogDevice2 createFogDevice(String nodeName, long mips,
+    private static FogDevice createFogDevice(String nodeName, long mips,
                                              int ram, long upBw, long downBw, double ratePerMips, double busyPower, double idlePower) {
 
         List<Pe> peList = new ArrayList<Pe>();
@@ -264,9 +266,9 @@ public class TranslationServiceFog_RandomMobility_Clustering {
                 arch, os, vmm, host, time_zone, cost, costPerMem,
                 costPerStorage, costPerBw);
 
-        FogDevice2 fogdevice = null;
+        FogDevice fogdevice = null;
         try {
-            fogdevice = new FogDevice2(nodeName, characteristics,
+            fogdevice = new FogDevice(nodeName, characteristics,
                     new AppModuleAllocationPolicy(hostList), storageList, 10, upBw, downBw, 0, ratePerMips);
         } catch (Exception e) {
             e.printStackTrace();
@@ -284,9 +286,9 @@ public class TranslationServiceFog_RandomMobility_Clustering {
      * @return
      */
     @SuppressWarnings({"serial"})
-    private static Application2 createApplication(String appId, int userId) {
+    private static Application createApplication(String appId, int userId) {
 
-        Application2 application = Application2.createApplication(appId, userId); // creates an empty application model (empty directed graph)
+        Application application = Application.createApplication(appId, userId); // creates an empty application model (empty directed graph)
 
         /*
          * Adding modules (vertices) to the application model (directed graph)
