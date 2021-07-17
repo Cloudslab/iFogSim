@@ -102,7 +102,7 @@ public class TranslationServiceFog_RandomMobility_Clustering {
                         actuators, locator, clusteringLevels);
             } else {
                 controller = new ClusteringController("master-controller", fogDevices, sensors,
-                        actuators, locator);
+                        actuators, locator, clusteringLevels);
             }
             controller.submitApplication(application, 0, (new ModulePlacementMobileEdgewards(fogDevices, sensors, actuators, application, moduleMapping)));
 
