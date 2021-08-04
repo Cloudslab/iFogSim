@@ -16,7 +16,7 @@ public class Config {
 	public static double MAX_VALUE = 1000000.0;
 
 	//Dynamic Clustering
-	public static Boolean ENABLE_DYNAMIC_CLUSTERING = true;
+	public static boolean ENABLE_DYNAMIC_CLUSTERING = false;
 	public static double Node_Communication_RANGE = 300.0; // In terms of meter
 	public static double clusteringLatency = 2.0; //milisecond
 

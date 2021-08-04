@@ -16,7 +16,7 @@ public class MicroservicePlacementConfig {
 
     //Resource info sharing among cluster nodes
     public static Boolean ENABLE_RESOURCE_DATA_SHARING = false;
-    public static double MODULE_DEPLYMENT_TIME = 0.0;
+    public static double MODULE_DEPLOYMENT_TIME = 0.0;
 
 
 }

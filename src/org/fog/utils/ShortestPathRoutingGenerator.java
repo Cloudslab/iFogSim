@@ -2,7 +2,7 @@ package org.fog.utils;
 
 import org.apache.commons.math3.util.Pair;
 import org.fog.entities.FogDevice;
-import org.fog.entities.microservicesBased.MicroserviceFogDevice;
+import org.fog.entities.MicroserviceFogDevice;
 
 import java.util.HashMap;
 import java.util.List;
