@@ -17,10 +17,7 @@ import org.fog.entities.*;
 import org.fog.mobilitydata.DataParser;
 import org.fog.mobilitydata.RandomMobilityGenerator;
 import org.fog.mobilitydata.References;
-import org.fog.placement.ClusteringController;
-import org.fog.placement.LocationHandler;
-import org.fog.placement.ModuleMapping;
-import org.fog.placement.ModulePlacementMobileEdgewards;
+import org.fog.placement.*;
 import org.fog.policy.AppModuleAllocationPolicy;
 import org.fog.scheduler.StreamOperatorScheduler;
 import org.fog.utils.Config;
@@ -104,7 +101,8 @@ public class TranslationServiceFog_RandomMobility_Clustering {
                 controller = new ClusteringController("master-controller", fogDevices, sensors,
                         actuators, locator, clusteringLevels);
             }
-            controller.submitApplication(application, 0, (new ModulePlacementMobileEdgewards(fogDevices, sensors, actuators, application, moduleMapping)));
+            Boolean clusteringFeature = true;
+            controller.submitApplication(application, 0, (new ModulePlacementMobileEdgewardsCluster(fogDevices, sensors, actuators, application, moduleMapping, clusteringFeature)));
 
             TimeKeeper.getInstance().setSimulationStartTime(Calendar.getInstance().getTimeInMillis());
 
