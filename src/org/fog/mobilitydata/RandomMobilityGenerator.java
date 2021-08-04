@@ -5,6 +5,9 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+//import  java.awt.geom.
+import org.fog.mobilitydata.Polygon2D;
+
 import java.io.*;
 import java.util.*;
 
@@ -39,6 +42,35 @@ public class RandomMobilityGenerator {
 
         Random r = new Random();
         return r.nextInt((max - min) + 1) + min;
+    }
+
+    private static boolean positionInRangeCheck(float x, float y) {
+        float topLeftXEnv = -37.813046f;
+        float topLeftYEnv = 144.951380f;
+
+        float downLeftXEnv = -37.821229f;
+        float downLeftYEnv = 144.955039f;
+
+
+        float topRightXEnv = -37.807397f;
+        float topRightYEnv = 144.971062f;
+
+        float downRightXEnv = -37.815136f;
+        float downRightYEnv = 144.975044f;
+
+        final Polygon2D polygon = new Polygon2D();
+        polygon.addPoint(topLeftXEnv, topLeftYEnv);
+        polygon.addPoint(downLeftXEnv, downLeftYEnv);
+        polygon.addPoint(topRightXEnv, topRightYEnv);
+        polygon.addPoint(downRightXEnv, downRightYEnv);
+
+        if (polygon.contains(x, y)) {
+            return true;
+        } else {
+            return false;
+        }
+
+
     }
 
     public void createRandomData(int mobilityModel, int user_index, String datasetReference, boolean renewDataset) throws IOException, ParseException {
@@ -119,7 +151,8 @@ public class RandomMobilityGenerator {
 
                 //positionX = positionX + (double) (Math.cos(Math.toRadians(angle)) * speed) * (time - mobilityPositionsPauseTime.get(index - 1));
                 //positionY = positionY + (double) (Math.sin(Math.toRadians(angle)) * speed) * (time - mobilityPositionsPauseTime.get(index - 1));
-
+                double tempPositionX = positionX;
+                double tempPositionY = positionY;
                 positionX = positionX + (double) (Math.cos(Math.toRadians(this.angle)) * mobilitySpeed) / 1000; // divided by 1000 to change the values to KM
                 positionY = positionY + (double) (Math.sin(Math.toRadians(this.angle)) * mobilitySpeed) / 1000; // divided by 1000 to change the values to KM
 
@@ -142,6 +175,13 @@ public class RandomMobilityGenerator {
                     this.directionFlag = false;
                     continue;
                 }
+
+                if (!positionInRangeCheck((float) positionX, (float) positionY)) {
+                    System.out.println("positionX: " + positionX + " positionY: " + positionX + " are out of environment bound....going to fix it");
+                    positionX = tempPositionX;
+                    positionY = tempPositionY;
+                }
+
 
                 tempPositions.get(index).add(positionX);
                 tempPositions.get(index).add(positionY);
