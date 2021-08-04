@@ -29,6 +29,8 @@ public class ClusteringController extends SimEntity {
 
 
     private Map<String, Application> applications;
+
+
     private Map<String, Integer> appLaunchDelays;
     private List<Integer> clustering_levels;
 
@@ -195,7 +197,7 @@ public class ClusteringController extends SimEntity {
 		System.out.println("Childs of "+getFogDeviceById(deviceID).getName());
 		for(Integer childId:getFogDeviceById(deviceID).getChildrenIds())
 			System.out.println(getFogDeviceById(childId).getName()+"("+childId+")");
-		
+
 	}*/
 
     @SuppressWarnings("unchecked")
@@ -227,8 +229,20 @@ public class ClusteringController extends SimEntity {
                 getAppModulePlacementPolicy().get(applicationName).getModulesOnPath().get(fogDevice.getId()).remove(prevParent.getId());
                 getAppModulePlacementPolicy().get(applicationName).getModulesOnPath().get(fogDevice.getId()).put(newParent.getId(), migratingModules);
                 for (String moduleName : migratingModules) {
-                    double upDelay = getUpDelay(prevParent.getId(), commonAncestor, getApplications().get(applicationName).getModuleByName(moduleName));
-                    double downDelay = getDownDelay(newParent.getId(), commonAncestor, getApplications().get(applicationName).getModuleByName(moduleName));
+
+                    double upDelay;
+                    double downDelay;
+                    upDelay = getUpDelay(prevParent.getId(), commonAncestor, getApplications().get(applicationName).getModuleByName(moduleName));
+                    downDelay = getDownDelay(newParent.getId(), commonAncestor, getApplications().get(applicationName).getModuleByName(moduleName));
+
+                    if(getAppModulePlacementPolicy().get(applicationName).getClusteringFeature())
+                    {
+                        if(prevParent.getClusterMembers().contains(newParent.getId()))
+                        {
+                            upDelay = prevParent.getClusterMembersToLatencyMap().get(newParent.getId());
+                            downDelay = 0;
+                        }
+                    }
                     JSONObject jsonSend = new JSONObject();
                     jsonSend.put("module", getApplications().get(applicationName).getModuleByName(moduleName));
                     jsonSend.put("delay", upDelay);
@@ -261,6 +275,7 @@ public class ClusteringController extends SimEntity {
         }
         return networkDelay;
     }
+
 
     private double getUpDelay(int deviceID, int commonAncestorID, AppModule module) {
         // TODO Auto-generated method stub
