@@ -61,7 +61,7 @@ public class MicroservicesController extends SimEntity {
     protected void init() {
         connectWithLatencies();
 
-        if (!Config.ENABLE_DYNAMIC_CLUSTERING) {
+        if (Config.ENABLE_STATIC_CLUSTERING) {
             for (Integer id : clustering_levels)
                 createClusterConnections(id, fogDevices, Config.clusteringLatency);
         }
@@ -74,7 +74,7 @@ public class MicroservicesController extends SimEntity {
     protected void init(Map<Integer, List<FogDevice>> monitored) {
         connectWithLatencies();
 
-        if (!Config.ENABLE_DYNAMIC_CLUSTERING) {
+        if (!Config.ENABLE_STATIC_CLUSTERING) {
             for (Integer id : clustering_levels)
                 createClusterConnections(id, fogDevices, Config.clusteringLatency);
         }

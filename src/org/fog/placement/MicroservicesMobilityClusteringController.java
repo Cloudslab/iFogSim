@@ -12,6 +12,7 @@ import org.fog.entities.Tuple;
 import org.fog.entities.MicroserviceFogDevice;
 import org.fog.entities.PlacementRequest;
 import org.fog.mobilitydata.References;
+import org.fog.utils.Config;
 import org.fog.utils.FogEvents;
 import org.fog.utils.MigrationDelayMonitor;
 import org.json.simple.JSONObject;
@@ -76,7 +77,8 @@ public class MicroservicesMobilityClusteringController extends MicroservicesCont
 
     @Override
     public void startEntity() {
-        clusteringSubmit(clustering_levels);
+        if (Config.ENABLE_DYNAMIC_CLUSTERING)
+            clusteringSubmit(clustering_levels);
 
         super.startEntity();
 
@@ -263,7 +265,7 @@ public class MicroservicesMobilityClusteringController extends MicroservicesCont
             if (pr.getPlacedMicroservices().get(m) == fogDevice.getId()) {
                 List<String> services = getServiceMicroservice(m, applicationName);
                 for (String service : services) {
-                    if(migratingModules.containsKey(service)) {
+                    if (migratingModules.containsKey(service)) {
                         JSONObject serviceDiscoveryAdd = new JSONObject();
                         serviceDiscoveryAdd.put("service data", new Pair<>(service, newParent));
                         serviceDiscoveryAdd.put("action", "ADD");
@@ -273,21 +275,20 @@ public class MicroservicesMobilityClusteringController extends MicroservicesCont
             }
         }
 
-        for(String m:migratingModules.keySet()){
+        for (String m : migratingModules.keySet()) {
             List<String> services = getServiceMicroservice(m, applicationName);
-            for(String service:services) {
+            for (String service : services) {
                 if (migratingModules.containsKey(service)) {
                     JSONObject serviceDiscoveryAdd = new JSONObject();
                     serviceDiscoveryAdd.put("service data", new Pair<>(service, newParent));
                     serviceDiscoveryAdd.put("action", "ADD");
                     send(newParent, upDelays.get(service), FogEvents.UPDATE_SERVICE_DISCOVERY, serviceDiscoveryAdd);
-                }
-                else{
+                } else {
                     int d = pr.getPlacedMicroservices().get(service);
                     JSONObject serviceDiscoveryAdd = new JSONObject();
                     serviceDiscoveryAdd.put("service data", new Pair<>(service, d));
                     serviceDiscoveryAdd.put("action", "ADD");
-                    sendNow(newParent,FogEvents.UPDATE_SERVICE_DISCOVERY, serviceDiscoveryAdd);
+                    sendNow(newParent, FogEvents.UPDATE_SERVICE_DISCOVERY, serviceDiscoveryAdd);
                 }
             }
         }
@@ -323,7 +324,7 @@ public class MicroservicesMobilityClusteringController extends MicroservicesCont
         PlacementRequest pr = perClientDevicePrs.get(mobileDevice.getId()).get(applicationName);
         for (String microservice : pr.getPlacedMicroservices().keySet()) {
             int deviceid = pr.getPlacedMicroservices().get(microservice);
-            if (deviceid!=mobileDevice.getId() && beforeCommonAncestor(deviceid, commonAncestor)) {
+            if (deviceid != mobileDevice.getId() && beforeCommonAncestor(deviceid, commonAncestor)) {
                 migratingModules.put(microservice, deviceid);
             }
         }
