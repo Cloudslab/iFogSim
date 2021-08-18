@@ -32,6 +32,8 @@ public class MicroserviceFogDevice extends FogDevice {
     public static final String FON = "fon"; // fog orchestration node
     public static final String CLOUD = "cloud"; // cloud datacenter
 
+    public int toClient = 0;
+
 
     /**
      * closest FON id. If this device is a FON its own id is assigned
@@ -84,6 +86,11 @@ public class MicroserviceFogDevice extends FogDevice {
                 break;
             case FogEvents.UPDATE_RESOURCE_INFO:
                 updateResourceInfo(ev);
+                break;
+            case FogEvents.START_DYNAMIC_CLUSTERING:
+                //This message is received by the devices to start their clustering
+                processClustering(this.getParentId(), this.getId(), ev);
+                updateCLusterConsInRoutingTable();
                 break;
             default:
                 super.processOtherEvent(ev);
@@ -651,5 +658,11 @@ public class MicroserviceFogDevice extends FogDevice {
 
     public void updateRoutingTable(int destId, int nextId) {
         routingTable.put(destId, nextId);
+    }
+
+    private void updateCLusterConsInRoutingTable() {
+        for(int deviceId:clusterMembers){
+            routingTable.put(deviceId,deviceId);
+        }
     }
 }

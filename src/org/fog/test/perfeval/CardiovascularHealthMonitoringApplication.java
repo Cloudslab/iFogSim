@@ -280,7 +280,7 @@ public class CardiovascularHealthMonitoringApplication {
         MicroserviceFogDevice fogdevice = null;
         try {
             fogdevice = new MicroserviceFogDevice(nodeName, characteristics,
-                    new AppModuleAllocationPolicy(hostList), storageList, 10, upBw, downBw, 1250000, 0, ratePerMips, deviceType);
+                    new AppModuleAllocationPolicy(hostList), storageList, 10, upBw, downBw, 10000, 0, ratePerMips, deviceType);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -289,7 +289,7 @@ public class CardiovascularHealthMonitoringApplication {
     }
 
     private static FogDevice addMobile(String name, int userId, Application app, int parentId) {
-        FogDevice mobile = createFogDevice(name, 200, 2048, 1000, 270, 0, 87.53, 82.44, MicroserviceFogDevice.CLIENT);
+        FogDevice mobile = createFogDevice(name, 200, 2048, 10000, 270, 0, 87.53, 82.44, MicroserviceFogDevice.CLIENT);
         mobile.setParentId(parentId);
         //locator.setInitialLocation(name,drone.getId());
         Sensor mobileSensor = new Sensor("s-" + name, "SENSOR", userId, app.getAppId(), new DeterministicDistribution(SENSOR_TRANSMISSION_TIME)); // inter-transmission time of EEG sensor follows a deterministic distribution
@@ -319,7 +319,7 @@ public class CardiovascularHealthMonitoringApplication {
          */
         application.addAppModule("clientModule", 128, 150, 100);
         application.addAppModule("mService1", 512, 250, 200);
-        application.addAppModule("mService2", 512, 300, 200);
+        application.addAppModule("mService2", 512, 350, 200);
         application.addAppModule("mService3", 2048, 450, 1000);
 
         /*

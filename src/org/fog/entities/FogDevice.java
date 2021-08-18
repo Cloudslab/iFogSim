@@ -1133,7 +1133,7 @@ public class FogDevice extends PowerDatacenter {
         return this.clusterMembersToLatencyMap;
     }
 
-    private void processClustering(int parentId, int nodeId, SimEvent ev) {
+    protected void processClustering(int parentId, int nodeId, SimEvent ev) {
         JSONObject objectLocator = (JSONObject) ev.getData();
         Clustering cms = new Clustering();
         cms.createClusterMembers(this.getParentId(), this.getId(), objectLocator);

@@ -189,7 +189,7 @@ public class CardiovascularHealthMonitoringApplicationEdgeward {
 
 
     private static FogDevice addMobile(String name, int userId, String appId, int parentId) {
-        FogDevice mobile = createFogDevice(name, 200, 2048, 1000, 270, 0, 87.53, 82.44);
+        FogDevice mobile = createFogDevice(name, 200, 2048, 10000, 270, 0, 87.53, 82.44);
         mobile.setParentId(parentId);
         //locator.setInitialLocation(name,drone.getId());
         Sensor mobileSensor = new Sensor("sensor-" + name, "SENSOR", userId, appId, new DeterministicDistribution(SENSOR_TRANSMISSION_TIME)); // inter-transmission time of EEG sensor follows a deterministic distribution
@@ -287,7 +287,7 @@ public class CardiovascularHealthMonitoringApplicationEdgeward {
          */
         application.addAppModule("clientModule", 128, 150, 100);
         application.addAppModule("mService1", 512, 250, 200);
-        application.addAppModule("mService2", 512, 300, 200);
+        application.addAppModule("mService2", 512, 350, 200);
         application.addAppModule("mService3", 2048, 450, 1000);
 
         /*
@@ -316,7 +316,7 @@ public class CardiovascularHealthMonitoringApplicationEdgeward {
         application.addTupleMapping("clientModule", "RESULT1", "RESULT1_DISPLAY", new FractionalSelectivity(1.0));
         application.addTupleMapping("clientModule", "RESULT2", "RESULT2_DISPLAY", new FractionalSelectivity(1.0));
 
-         /*
+        /*
          * Defining application loops to monitor the latency of.
          * Here, we add only one loop for monitoring : EEG(sensor) -> Client -> Concentration Calculator -> Client -> DISPLAY (actuator)
          */

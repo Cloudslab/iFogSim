@@ -330,32 +330,52 @@ public class ClusteredMicroservicePlacementLogic implements MicroservicePlacemen
                         int clusterDeviceId = clusterNode.get(placementRequest);
                         FogDevice device = getDevice(clusterDeviceId);
                         List<Integer> clusterDeviceIds = ((MicroserviceFogDevice) device).getClusterMembers();
-                        List<Integer> sortedClusterDevices = new ArrayList<>();
+                        List<Integer> sortedClusterDevicesActive = new ArrayList<>();
+                        List<Integer> sortedClusterDevicesInactive = new ArrayList<>();
                         for (Integer id : clusterDeviceIds) {
                             //sort list from min to max
-                            if (sortedClusterDevices.isEmpty())
-                                sortedClusterDevices.add(id);
-                            else {
+                            if (currentModuleMap.get(id).size()>0 && sortedClusterDevicesActive.isEmpty())
+                                sortedClusterDevicesActive.add(id);
+                            else if(currentModuleMap.get(id).size()==0 && sortedClusterDevicesInactive.isEmpty())
+                                sortedClusterDevicesInactive.add(id);
+                            else if(currentModuleMap.get(id).size()>0){
                                 boolean isPlaced = false;
-                                for (int i = 0; i < sortedClusterDevices.size(); i++) {
-                                    double sorted = resourceAvailability.get(sortedClusterDevices.get(i)).get("cpu") -
-                                            getCurrentCpuLoad().get(sortedClusterDevices.get(i));
+                                for (int i = 0; i < sortedClusterDevicesActive.size(); i++) {
+                                    double sorted = resourceAvailability.get(sortedClusterDevicesActive.get(i)).get("cpu") -
+                                            getCurrentCpuLoad().get(sortedClusterDevicesActive.get(i));
                                     double current = resourceAvailability.get(id).get("cpu") -
                                             getCurrentCpuLoad().get(id);
-                                    if (sorted < current) {
-                                        continue;
-                                    } else {
-                                        sortedClusterDevices.add(i, id);
+                                    if (sorted < current) {sortedClusterDevicesActive.add(i, id);
                                         isPlaced = true;
                                         break;
+                                    } else {
+                                        continue;
                                     }
                                 }
                                 if (!isPlaced)
-                                    sortedClusterDevices.add(id);
+                                    sortedClusterDevicesActive.add(id);
                             }
-
+                            else{
+                                boolean isPlaced = false;
+                                for (int i = 0; i < sortedClusterDevicesInactive.size(); i++) {
+                                    double sorted = resourceAvailability.get(sortedClusterDevicesInactive.get(i)).get("cpu") -
+                                            getCurrentCpuLoad().get(sortedClusterDevicesInactive.get(i));
+                                    double current = resourceAvailability.get(id).get("cpu") -
+                                            getCurrentCpuLoad().get(id);
+                                    if (sorted < current) {sortedClusterDevicesInactive.add(i, id);
+                                        isPlaced = true;
+                                        break;
+                                    } else {
+                                        continue;
+                                    }
+                                }
+                                if (!isPlaced)
+                                    sortedClusterDevicesInactive.add(id);
+                            }
                         }
 
+                        List<Integer> sortedClusterDevices = new ArrayList<>(sortedClusterDevicesActive);
+                        sortedClusterDevices.addAll(sortedClusterDevicesInactive);
                         List<String> placed = new ArrayList<>();
                         for (String microservice : toPlace.get(placementRequest)) {
                             for (int id : sortedClusterDevices) {
