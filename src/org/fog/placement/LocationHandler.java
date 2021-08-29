@@ -6,30 +6,35 @@ import java.util.List;
 import java.util.Map;
 
 import org.fog.mobilitydata.Location;
-import org.fog.mobilitydata.MobilityDataParser;
+import org.fog.mobilitydata.DataParser;
 import org.fog.mobilitydata.References;
 import org.fog.utils.Config;
 
 public class LocationHandler {
 	
-	public MobilityDataParser dataObject;
+	public DataParser dataObject;
 	public Map<Integer, String> instanceToDataId;
 	
 
-	public LocationHandler(MobilityDataParser dataObject) {
+	public LocationHandler(DataParser dataObject) {
 		// TODO Auto-generated constructor stub
 		this.dataObject = dataObject;
 		instanceToDataId = new HashMap<Integer, String>();
 		
 	}
+
+	public LocationHandler() {
+		// TODO Auto-generated constructor stub
+
+	}
 	
-	public MobilityDataParser getDataObject(){
+	public DataParser getDataObject(){
 		return dataObject;
 	}
 	
 	public static double calculateDistance(Location loc1, Location loc2) {
 
-	    final int R = 6371; // Radius of the earth
+	    final int R = 6371; // Radius of the earth in Kilometers
 
 	    double latDistance = Math.toRadians(loc1.latitude - loc2.latitude);
 	    double lonDistance = Math.toRadians(loc1.longitude - loc2.longitude);
@@ -135,9 +140,9 @@ public class LocationHandler {
 		return getDataObject().levelwiseResources.get(levelNo);
 	}
 
-	public void parseUserInfo(Map<Integer, Integer> userMobilityPattern) throws IOException {
+	public void parseUserInfo(Map<Integer, Integer> userMobilityPattern, String datasetReference) throws IOException {
 		// TODO Auto-generated method stub
-		getDataObject().parseUserData(userMobilityPattern);
+		getDataObject().parseUserData(userMobilityPattern, datasetReference);
 	}
 
 	public void parseResourceInfo() throws NumberFormatException, IOException {
