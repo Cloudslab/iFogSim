@@ -665,4 +665,12 @@ public class MicroserviceFogDevice extends FogDevice {
             routingTable.put(deviceId,deviceId);
         }
     }
+
+    public void removeMonitoredDevice(FogDevice fogDevice) {
+       controllerComponent.removeMonitoredDevice(fogDevice);
+    }
+
+    public void addMonitoredDevice(FogDevice fogDevice) {
+        controllerComponent.addMonitoredDevice(fogDevice);
+    }
 }

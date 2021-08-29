@@ -82,9 +82,6 @@ public class CrowdSensing_Microservices_RandomMobility_Clustering {
 
             FogBroker broker = new FogBroker("broker");
 
-            /**
-             * Microservices-based application creation - a single application is selected for this
-             */
             Application microservicesApplication = createApplication("example", broker.getId());
             applications.add(microservicesApplication);
 

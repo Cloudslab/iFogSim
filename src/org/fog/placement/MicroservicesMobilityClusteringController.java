@@ -171,7 +171,7 @@ public class MicroservicesMobilityClusteringController extends MicroservicesCont
         System.out.println(CloudSim.clock() + " Starting Mobility Management for " + fogDevice.getName());
         parentReference.put(fogDevice.getId(), newParent.getId());
         Map<String, Integer> migratingModules = new HashMap<>(); // migrating module _> it's device (can be preParent or  device the same cluster
-
+        setNewOrchestratorNode(fogDevice,newParent);
 
         if (prevParent.getId() != newParent.getId()) {
             //printFogDeviceChildren(newParent.getId());
@@ -229,6 +229,27 @@ public class MicroservicesMobilityClusteringController extends MicroservicesCont
 
         updateRoutingTable(fogDevice);
 
+    }
+
+    private void setNewOrchestratorNode(FogDevice fogDevice, FogDevice newParent) {
+        int parentId = newParent.getId();
+        while(parentId!=-1){
+            if(((MicroserviceFogDevice)newParent).getDeviceType().equals(MicroserviceFogDevice.FON)){
+                int currentFon = ((MicroserviceFogDevice)fogDevice).getFonId();
+                if(currentFon!=parentId) {
+                    ((MicroserviceFogDevice)getFogDeviceById(currentFon)).removeMonitoredDevice(fogDevice);
+                    ((MicroserviceFogDevice) fogDevice).setFonID(parentId);
+                    ((MicroserviceFogDevice)getFogDeviceById(parentId)).addMonitoredDevice(fogDevice);
+                    System.out.println("Orchestrator Node for device : " + fogDevice.getId() + " updated to " + parentId);
+                }
+                break;
+            }
+            else{
+                parentId =newParent.getParentId();
+                if(parentId!=-1)
+                    newParent = getFogDeviceById(parentId);
+            }
+        }
     }
 
     private void updateRoutingTable(FogDevice fogDevice) {

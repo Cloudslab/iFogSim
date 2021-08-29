@@ -183,7 +183,7 @@ public class MicroservicesController extends SimEntity {
             if (placementRequestDelayMap.get(p) == 0) {
                 sendNow(fonId, FogEvents.RECEIVE_PR, p);
             } else
-                send(fonId, placementRequestDelayMap.get(p), FogEvents.RECEIVE_PR, p);
+                send(getId(), placementRequestDelayMap.get(p), FogEvents.TRANSMIT_PR, p);
         }
         if (MicroservicePlacementConfig.PR_PROCESSING_MODE == MicroservicePlacementConfig.PERIODIC) {
             for (FogDevice f : fogDevices) {
@@ -207,6 +207,8 @@ public class MicroservicesController extends SimEntity {
     @Override
     public void processEvent(SimEvent ev) {
         switch (ev.getTag()) {
+            case FogEvents.TRANSMIT_PR:
+                transmitPr(ev);
             case FogEvents.CONTROLLER_RESOURCE_MANAGE:
                 manageResources();
                 break;
@@ -221,6 +223,12 @@ public class MicroservicesController extends SimEntity {
                 break;
         }
 
+    }
+
+    private void transmitPr(SimEvent ev) {
+        PlacementRequest placementRequest = (PlacementRequest) ev.getData();
+        int fonId = ((MicroserviceFogDevice) getFogDeviceById(placementRequest.getGatewayDeviceId())).getFonId();
+        sendNow(fonId, FogEvents.RECEIVE_PR, placementRequest);
     }
 
 

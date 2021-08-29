@@ -50,21 +50,20 @@ import java.util.*;
  * SIMULATION_MODE -> dynamic or static
  * PR_PROCESSING_MODE -> PERIODIC
  * ENABLE_RESOURCE_DATA_SHARING -> false (not needed as FONs placed at the highest level.
- * DYNAMIC_CLUSTERING -> true (for clustered) and false (for not clustered) *
+ * DYNAMIC_CLUSTERING -> true (for clustered) and false (for not clustered) * (also compatible with static clustering)
  */
 public class CardiovascularHealthMonitoringApplication {
     static List<FogDevice> fogDevices = new ArrayList<FogDevice>();
     static List<Sensor> sensors = new ArrayList<Sensor>();
     static List<Actuator> actuators = new ArrayList<Actuator>();
 
-    // TODO: 8/8/2021 mobility not required for evaluation
     static Map<Integer, Integer> userMobilityPattern = new HashMap<Integer, Integer>();
     static LocationHandler locator;
 
     static boolean CLOUD = false;
 
     static double SENSOR_TRANSMISSION_TIME = 10;
-    static int numberOfMobileUser = 25;
+    static int numberOfMobileUser = 5;
 
     //cluster link latency 2ms
     static Double clusterLatency = 2.0;
@@ -89,7 +88,7 @@ public class CardiovascularHealthMonitoringApplication {
 
             CloudSim.init(num_user, calendar, trace_flag);
 
-            String appId = "Cardiovascular Health Monitoring Application"; // identifier of the application
+            String appId = "Cardiovascular Health Monitoring Application CHM)"; // identifier of the application
 
             FogBroker broker = new FogBroker("broker");
 
@@ -108,14 +107,6 @@ public class CardiovascularHealthMonitoringApplication {
 
             createMobileUser(broker.getId(), application, datasetReference);
             createFogDevices(broker.getId(), application);
-
-            /**
-             * Clustered Fog node creation.
-             * 01. Create devices (Client,FON,FCN,Cloud)
-             * 02. Generate cluster connection.
-             * 03. Identify devices monitored by each FON
-             */
-//            createFogDevices(broker.getId(), application);
 
             List<Integer> clusterLevelIdentifier = new ArrayList<>();
             clusterLevelIdentifier.add(2);
@@ -147,7 +138,7 @@ public class CardiovascularHealthMonitoringApplication {
 
             CloudSim.stopSimulation();
 
-            Log.printLine("VRGame finished!");
+            Log.printLine("CHM app finished!");
         } catch (Exception e) {
             e.printStackTrace();
             Log.printLine("Unwanted errors happen");
@@ -312,7 +303,7 @@ public class CardiovascularHealthMonitoringApplication {
     @SuppressWarnings({"serial"})
     private static Application createApplication(String appId, int userId) {
 
-        Application application = Application.createApplication(appId, userId); // creates an empty application model (empty directed graph)
+        Application application = Application.createApplication(appId, userId);
 
         /*
          * Adding modules (vertices) to the application model (directed graph)
@@ -354,10 +345,6 @@ public class CardiovascularHealthMonitoringApplication {
             application.setSpecialPlacementInfo("mService2", "cloud");
         }
 
-        /*
-         * Defining application loops to monitor the latency of.
-         * Here, we add only one loop for monitoring : EEG(sensor) -> Client -> Concentration Calculator -> Client -> DISPLAY (actuator)
-         */
         final AppLoop loop1 = new AppLoop(new ArrayList<String>() {{
             add("SENSOR");
             add("clientModule");

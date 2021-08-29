@@ -125,6 +125,16 @@ public class ControllerComponent {
     public void removeServiceDiscoveryInfo(String microserviceName, Integer deviceID) {
         this.serviceDiscoveryInfo.removeServiceDIscoveryInfo(microserviceName, deviceID);
     }
+
+    public void removeMonitoredDevice(FogDevice fogDevice) {
+        this.fogDeviceList.remove(fogDevice);
+    }
+
+    public void addMonitoredDevice(FogDevice fogDevice) {
+        this.fogDeviceList.add(fogDevice);
+    }
+
+
 }
 
 class ServiceDiscovery {

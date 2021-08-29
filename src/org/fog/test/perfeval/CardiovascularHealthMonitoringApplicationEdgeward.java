@@ -30,11 +30,6 @@ import org.json.simple.parser.ParseException;
 import java.io.IOException;
 import java.util.*;
 
-/**
- * Simulation setup for IoT Drone With Random Mobility & Dynamic Clustering
- *
- * @author Mohammad Goudarzi
- */
 public class CardiovascularHealthMonitoringApplicationEdgeward {
     static List<FogDevice> fogDevices = new ArrayList<FogDevice>();
     static List<Sensor> sensors = new ArrayList<Sensor>();
@@ -45,7 +40,7 @@ public class CardiovascularHealthMonitoringApplicationEdgeward {
     static boolean CLOUD = false;
 
     static double SENSOR_TRANSMISSION_TIME = 10;
-    static int numberOfMobileUser = 25;
+    static int numberOfMobileUser = 1;
 
     // if random mobility generator for users is True, new random dataset will be created for each user
     static boolean randomMobility_generator = true; // To use random datasets
@@ -54,7 +49,7 @@ public class CardiovascularHealthMonitoringApplicationEdgeward {
 
     public static void main(String[] args) {
 
-        Log.printLine("Starting Translation Service...");
+        Log.printLine("Starting Cardiovascular Health Monitoring Application...");
 
         try {
             Log.disable();
@@ -104,7 +99,7 @@ public class CardiovascularHealthMonitoringApplicationEdgeward {
 
             CloudSim.stopSimulation();
 
-            Log.printLine("Translation Service finished!");
+            Log.printLine("Cardiovascular Health Monitoring Application finished!");
         } catch (Exception e) {
             e.printStackTrace();
             Log.printLine("Unwanted errors happen");
@@ -316,10 +311,6 @@ public class CardiovascularHealthMonitoringApplicationEdgeward {
         application.addTupleMapping("clientModule", "RESULT1", "RESULT1_DISPLAY", new FractionalSelectivity(1.0));
         application.addTupleMapping("clientModule", "RESULT2", "RESULT2_DISPLAY", new FractionalSelectivity(1.0));
 
-        /*
-         * Defining application loops to monitor the latency of.
-         * Here, we add only one loop for monitoring : EEG(sensor) -> Client -> Concentration Calculator -> Client -> DISPLAY (actuator)
-         */
         final AppLoop loop1 = new AppLoop(new ArrayList<String>() {{
             add("SENSOR");
             add("clientModule");
