@@ -41,6 +41,10 @@ public class Application {
 	
 	private Map<String, AppEdge> edgeMap;
 
+	protected Map<String, List<String>> specialPlacementInfo = new HashMap<>(); // module name to placement device staring with
+
+	protected DAG dag;
+
 	/**
 	 * Creates a plain vanilla application with no modules and edges.
 	 * @param appId
@@ -67,6 +71,22 @@ public class Application {
 		
 		getModules().add(module);
 		
+	}
+
+	/**
+	 * @param moduleName
+	 * @param ram
+	 * @param mips
+	 * @param size
+	 */
+	public void addAppModule(String moduleName, int ram, int mips, int size) {
+		long bw = 1000;
+		String vmm = "Xen";
+
+		AppModule module = new AppModule(FogUtils.generateEntityId(), moduleName, getAppId(), getUserId(),
+				mips, ram, bw, size, vmm, new TupleScheduler(mips, 1), new HashMap<Pair<String, String>, SelectivityModel>());
+
+		getModules().add(module);
 	}
 	
 	/**
@@ -226,6 +246,7 @@ public class Application {
 						tuple.setDirection(edge.getDirection());
 						tuple.setTupleType(edge.getTupleType());
 						tuple.setSourceModuleId(sourceModuleId);
+						tuple.setTraversedMicroservices(inputTuple.getTraversed());
 
 						tuples.add(tuple);
 					}
@@ -337,5 +358,43 @@ public class Application {
 
 	public void setEdgeMap(Map<String, AppEdge> edgeMap) {
 		this.edgeMap = edgeMap;
+	}
+
+	public List<String> getModuleNames(){
+		List<String> appModuleNames = new ArrayList<>();
+		for(AppModule module:getModules()){
+			appModuleNames.add(module.getName());
+		}
+		return appModuleNames;
+	}
+
+	public void setSpecialPlacementInfo(String moduleName, String device) {
+		if (specialPlacementInfo.containsKey(moduleName))
+			specialPlacementInfo.get(moduleName).add(device);
+		else {
+			List<String> devices = new ArrayList<>();
+			devices.add(device);
+			specialPlacementInfo.put(moduleName, devices);
+		}
+	}
+
+	public Map<String, List<String>> getSpecialPlacementInfo() {
+		return specialPlacementInfo;
+	}
+
+	public void createDAG() {
+		List<String> moduleNames = new ArrayList<>();
+		for (AppModule module : getModules()) {
+			moduleNames.add(module.getName());
+		}
+		dag = new DAG(moduleNames);
+		for (AppEdge edge : getEdges()) {
+			if (edge.getDirection() == Tuple.UP)
+				dag.addEdge(edge.getSource(), edge.getDestination());
+		}
+	}
+
+	public DAG getDAG() {
+		return dag;
 	}
 }

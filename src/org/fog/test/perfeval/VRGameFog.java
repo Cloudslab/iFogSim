@@ -47,10 +47,9 @@ public class VRGameFog {
 	
 	static boolean CLOUD = false;
 	
-	static int numOfDepts = 4;
-	static int numOfMobilesPerDept = 6;
-	static double EEG_TRANSMISSION_TIME = 5.1;
-	//static double EEG_TRANSMISSION_TIME = 10;
+	static int numOfDepts = 2;
+	static int numOfMobilesPerDept = 5;
+	static double EEG_TRANSMISSION_TIME = 5;
 	
 	public static void main(String[] args) {
 
@@ -268,7 +267,7 @@ public class VRGameFog {
 		application.addTupleMapping("client", "EEG", "_SENSOR", new FractionalSelectivity(0.9)); // 0.9 tuples of type _SENSOR are emitted by Client module per incoming tuple of type EEG 
 		application.addTupleMapping("client", "CONCENTRATION", "SELF_STATE_UPDATE", new FractionalSelectivity(1.0)); // 1.0 tuples of type SELF_STATE_UPDATE are emitted by Client module per incoming tuple of type CONCENTRATION 
 		application.addTupleMapping("concentration_calculator", "_SENSOR", "CONCENTRATION", new FractionalSelectivity(1.0)); // 1.0 tuples of type CONCENTRATION are emitted by Concentration Calculator module per incoming tuple of type _SENSOR 
-		application.addTupleMapping("client", "GLOBAL_GAME_STATE", "GLOBAL_STATE_UPDATE", new FractionalSelectivity(1.0)); // 1.0 tuples of type GLOBAL_STATE_UPDATE are emitted by Client module per incoming tuple of type GLOBAL_GAME_STATE 
+		application.addTupleMapping("client", "GLOBAL_GAME_STATE", "GLOBAL_STATE_UPDATE", new FractionalSelectivity(1.0)); // 1.0 tuples of type GLOBAL_STATE_UPDATE are emitted by Client module per incoming tuple of type GLOBAL_GAME_STATE
 	
 		/*
 		 * Defining application loops to monitor the latency of. 

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.math3.util.Pair;
 import org.cloudbus.cloudsim.core.CloudSim;
 import org.fog.entities.Tuple;
 
@@ -22,6 +23,13 @@ public class TimeKeeper {
 	
 	private Map<Integer, Double> loopIdToCurrentAverage;
 	private Map<Integer, Integer> loopIdToCurrentNum;
+
+	private Map<Integer, Integer> loopIdToLatencyQoSSuccessCount = new HashMap<>();
+
+	// loopID -> < Microservice -> < deviceID, <requestCount,totalExecutionTime > >
+	private Map<Integer, Map<String, Map<Integer, Pair<Integer, Double>>>> costCalcData = new HashMap<>();
+	// last execution time
+	private Map<Integer, Double> tupleIdToExecutionTime = new HashMap<>();
 	
 	public static TimeKeeper getInstance(){
 		if(instance == null)
@@ -147,6 +155,39 @@ public class TimeKeeper {
 
 	public void setLoopIdToCurrentNum(Map<Integer, Integer> loopIdToCurrentNum) {
 		this.loopIdToCurrentNum = loopIdToCurrentNum;
+	}
+
+	public Map<Integer, Integer> getLoopIdToLatencyQoSSuccessCount() {
+		return loopIdToLatencyQoSSuccessCount;
+	}
+
+	public void addCostCalcData(List<Integer> loopIds, String microserviceName, int deviceId, int tupleId) {
+//		for (Integer loopid : loopIds) {
+//			if (costCalcData.containsKey(loopid)) {
+//				if (costCalcData.get(loopid).containsKey(microserviceName)) {
+//					if (costCalcData.get(loopid).get(microserviceName).containsKey(deviceId)) {
+//						double totalExecutionTime = tupleIdToExecutionTime.get(tupleId) + costCalcData.get(loopid).get(microserviceName).get(deviceId).getSecond();
+//						int totalRequestCount = costCalcData.get(loopid).get(microserviceName).get(deviceId).getFirst() + 1;
+//						costCalcData.get(loopid).get(microserviceName).put(deviceId, new Pair<>(totalRequestCount, totalExecutionTime));
+//					} else {
+//						costCalcData.get(loopid).get(microserviceName).put(deviceId, new Pair<>(1, tupleIdToExecutionTime.get(tupleId)));
+//					}
+//				} else {
+//					Map<Integer, Pair<Integer, Double>> m1 = new HashMap<>();
+//					m1.put(deviceId, new Pair<>(1, tupleIdToExecutionTime.get(tupleId)));
+//
+//					costCalcData.get(loopid).put(microserviceName, m1);
+//				}
+//			} else {
+//				Map<Integer, Pair<Integer, Double>> m1 = new HashMap<>();
+//				m1.put(deviceId, new Pair<>(1, tupleIdToExecutionTime.get(tupleId)));
+//
+//				Map<String, Map<Integer, Pair<Integer, Double>>> m2 = new HashMap<>();
+//				m2.put(microserviceName, m1);
+//
+//				costCalcData.put(loopid, m2);
+//			}
+//		}
 	}
 	
 	
