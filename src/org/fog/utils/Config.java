@@ -18,7 +18,7 @@ public class Config {
 	// Create cluster among devices of same level with common parent irrespective of location. Only one of the two clustering modes should be used for clustering
 	public static boolean ENABLE_STATIC_CLUSTERING = false;
 	//Dynamic Clustering
-	public static boolean ENABLE_DYNAMIC_CLUSTERING = false;
+	public static boolean ENABLE_DYNAMIC_CLUSTERING = true;
 	public static double Node_Communication_RANGE = 300.0; // In terms of meter
 	public static double clusteringLatency = 2.0; //milisecond
 

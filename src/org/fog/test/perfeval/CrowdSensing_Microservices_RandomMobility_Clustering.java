@@ -49,7 +49,7 @@ import java.util.*;
  * PR_PROCESSING_MODE -> PERIODIC
  * ENABLE_RESOURCE_DATA_SHARING -> false (not needed as FONs placed at the highest level.
  */
-public class UseCase3 {
+public class CrowdSensing_Microservices_RandomMobility_Clustering {
     static List<FogDevice> fogDevices = new ArrayList<FogDevice>();
     static List<Sensor> sensors = new ArrayList<Sensor>();
     static List<Actuator> actuators = new ArrayList<Actuator>();
