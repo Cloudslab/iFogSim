@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="commons-math3-3.5">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/jars/commons-math3-3.5/commons-math3-3.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jars/cloudsim-3.0.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jars/cloudsim-examples-3.0.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jars/guava-18.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jars/json-simple-1.1.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/jars/cloudsim-3.0.3-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jars/cloudsim-examples-3.0.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
