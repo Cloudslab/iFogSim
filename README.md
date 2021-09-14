@@ -1,8 +1,11 @@
 # iFogSim2
 A Toolkit for Modeling and Simulation of Resource Management Techniques in Internet of Things, Edge and Fog Computing Environments withe the following new features:
  * Mobility-support and Migration Management
+   * Supporting real mobility datasets
+   * Implementing different random mobility models 
  * Microservice Orchestration
  * Dynamic Distributed Clustering
+ * Any Combinations of Above-mentioned features 
 
 ## How to run iFogSim2 ?
 * Create a Java project. 
