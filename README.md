@@ -5,7 +5,7 @@ A Toolkit for Modeling and Simulation of Resource Management Techniques in Inter
    * Implementing different random mobility models 
  * Microservice Orchestration
  * Dynamic Distributed Clustering
- * Any Combinations of Above-mentioned features 
+ * Any Combinations of Above-mentioned Features 
 
 ## How to run iFogSim2 ?
 * Create a Java project. 
