@@ -9,5 +9,5 @@ A Toolkit for Modeling and Simulation of Resource Management Techniques in Inter
  * To be updated
 
 # References
- * To be updated...
+ * Redowan Mahmud, Samodha Pallewatta , Mohammad Goudarzi, and Rajkumar Buyya, <A href="https://arxiv.org/abs/2109.05636">iFogSim2: An Extended iFogSim Simulator for Mobility, Clustering, and Microservice Management in Edge and Fog Computing Environments</A>, September 2021.
 
