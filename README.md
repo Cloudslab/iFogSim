@@ -1,4 +1,4 @@
-# iFogSim2
+# iFogSim2 (The New Version)
 A Toolkit for Modeling and Simulation of Resource Management Techniques in Internet of Things, Edge and Fog Computing Environments with the following new features:
  * Mobility-support and Migration Management
    * Supporting real mobility datasets
