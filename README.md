@@ -27,9 +27,9 @@ A Toolkit for Modeling and Simulation of Resource Management Techniques in Inter
 
 * IntelliJ IDEA
   * Clone the iFogSim2 Git repository to desired folder:
-  '''
+  ```
   git clone https://github.com/Cloudslab/iFogSim2
-  '''
+  ```
   * Select "project from existing resources" from the "File" drop-down menu
   * Verify the Java version
   * Verify the external libraries in the "JARs" Folder are added to the project
