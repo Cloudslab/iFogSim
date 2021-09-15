@@ -1,13 +1,14 @@
 # iFogSim2
-A Toolkit for Modeling and Simulation of Resource Management Techniques in Internet of Things, Edge and Fog Computing Environments withe the following new features:
+A Toolkit for Modeling and Simulation of Resource Management Techniques in Internet of Things, Edge and Fog Computing Environments with the following new features:
  * Mobility-support and Migration Management
    * Supporting real mobility datasets
    * Implementing different random mobility models 
  * Microservice Orchestration
  * Dynamic Distributed Clustering
  * Any Combinations of Above-mentioned Features
+ * Full Compatibility with latest version of CloudSim (i.e., CloudSim5) and Previous iFogSim Version and Tutorials
 
-It currently encompasses several usecases such as:
+iFogSim2 currently encompasses several usecases such as:
  * Audio Translation Scenario
  * Healthcare Scenario
  * Crowd-sensing Scenario 
