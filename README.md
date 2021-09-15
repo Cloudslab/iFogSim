@@ -30,7 +30,7 @@ It currently encompasses several usecases such as:
   * Include the JARs to your project.  
   * Run the example files (e.g. TranslationServiceFog_Clustering.java, CrowdSensing_Microservices_RandomMobility_Clustering.java) to get started.
 
-* IntelliJ IDEA
+* IntelliJ IDEA:
   * Clone the iFogSim2 Git repository to desired folder:
   ```
   git clone https://github.com/Cloudslab/iFogSim2
