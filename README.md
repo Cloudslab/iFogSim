@@ -5,7 +5,12 @@ A Toolkit for Modeling and Simulation of Resource Management Techniques in Inter
    * Implementing different random mobility models 
  * Microservice Orchestration
  * Dynamic Distributed Clustering
- * Any Combinations of Above-mentioned Features 
+ * Any Combinations of Above-mentioned Features
+
+It currently encompasses several usecases such as:
+ * Audio Translation Scenario
+ * Healthcare Scenario
+ * Crowd-sensing Scenario 
 
 ## How to run iFogSim2 ?
 * Eclipse IDE:
