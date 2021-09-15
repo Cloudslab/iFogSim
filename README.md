@@ -6,14 +6,19 @@ A Toolkit for Modeling and Simulation of Resource Management Techniques in Inter
  * Microservice Orchestration
  * Dynamic Distributed Clustering
  * Any Combinations of Above-mentioned Features
- * Full Compatibility with the Latest Version of the CloudSim (i.e., CloudSim5) and Previous iFogSim Version <A href="https://github.com/Cloudslab/iFogSim1"> and Tutorials
+ * Full Compatibility with the Latest Version of the CloudSim (i.e., CloudSim5) and [Previous iFogSim Version](https://github.com/Cloudslab/iFogSim1) and Tutorials
 
 iFogSim2 currently encompasses several usecases such as:
  * Audio Translation Scenario
  * Healthcare Scenario
- * Crowd-sensing Scenario 
+ * Crowd-sensing Scenario
 
-## How to run iFogSim2 ?
+# Cite IFogSim2
+```
+To be updated...
+```
+
+# How to run iFogSim2 ?
 * Eclipse IDE:
   * Create a Java project
   * Inside the project directory, initialize an empty Git repository with the following command:
@@ -40,6 +45,7 @@ iFogSim2 currently encompasses several usecases such as:
   * Verify the Java version
   * Verify the external libraries in the "JARs" Folder are added to the project
   * Run the example files (e.g. TranslationServiceFog_Clustering.java, CrowdSensing_Microservices_RandomMobility_Clustering.java) to get started
+
 
 # References
  * (Latest Version) Redowan Mahmud, Samodha Pallewatta , Mohammad Goudarzi, and Rajkumar Buyya, <A href="https://arxiv.org/abs/2109.05636">iFogSim2: An Extended iFogSim Simulator for Mobility, Clustering, and Microservice Management in Edge and Fog Computing Environments</A>, September 2021. (Latest Version)
