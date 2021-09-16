@@ -6,7 +6,7 @@ A Toolkit for Modeling and Simulation of Resource Management Techniques in Inter
  * Microservice Orchestration
  * Dynamic Distributed Clustering
  * Any Combinations of Above-mentioned Features
- * Full Compatibility with the Latest Version of the CloudSim (i.e., CloudSim5) and [Previous iFogSim Version](https://github.com/Cloudslab/iFogSim1) and Tutorials
+ * Full Compatibility with the Latest Version of the CloudSim (i.e., [CloudSim 5](https://github.com/Cloudslab/cloudsim/releases)) and [Previous iFogSim Version](https://github.com/Cloudslab/iFogSim1) and Tutorials
 
 iFogSim2 currently encompasses several new usecases such as:
  * Audio Translation Scenario
