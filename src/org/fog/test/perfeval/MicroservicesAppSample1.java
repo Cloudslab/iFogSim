@@ -41,7 +41,7 @@ public class MicroservicesAppSample1 {
 
     static int proxyServers = 2; // proxy server
     static Integer[] gatewayDevices = new Integer[]{3, 3};        // GW devices
-    static Integer[] mobilesPerL2 = new Integer[]{3, 2, 1, 2, 3, 1};   // eg : client end devices ( mobiles )
+    static Integer[] mobilesPerL2 = new Integer[]{7, 4, 7, 8, 5, 4};   // eg : client end devices ( mobiles )
     private static int l2Num = 0; // fog adding l1 nodes
     static Integer deviceNum = 0;
 
@@ -50,7 +50,7 @@ public class MicroservicesAppSample1 {
     static Integer[] cpus = new Integer[]{2800, 6000};
     static Integer[] ram = new Integer[]{2048, 4096};
 
-    static double ECG_TRANSMISSION_TIME = 5;
+    static double ECG_TRANSMISSION_TIME = 10;
 
     //cluster link latency 2ms
     static Double clusterLatency = 2.0;
@@ -64,10 +64,11 @@ public class MicroservicesAppSample1 {
 
     /**
      * Config properties
-     * SIMULATION_MODE -> dynamic
+     * SIMULATION_MODE -> DYNAMIC
      * PR_PROCESSING_MODE -> SEQUENTIAL
      * ENABLE_RESOURCE_DATA_SHARING -> true
      * DYNAMIC_CLUSTERING -> false
+     * STATIC_CLUSTERING -> true (with clustering) or false (without clustering)
      */
     public static void main(String[] args) {
 
@@ -99,7 +100,7 @@ public class MicroservicesAppSample1 {
             createFogDevices(broker.getId());
 
             List<Integer> clusterLevelIdentifier = new ArrayList<>();
-            clusterLevelIdentifier.add(2);
+            clusterLevelIdentifier.add(2); // level of the clustered devices
 
             Map<Integer, List<FogDevice>> monitored = new HashMap<>();
             for (FogDevice f : fogDevices) {
@@ -173,10 +174,10 @@ public class MicroservicesAppSample1 {
         FogDevice dept;
         if (diffResource) {
             int pos = deviceNum % 2;
-            dept = createFogDevice("L2-" + id, cpus[pos], ram[pos], 1250000, 18750, 2, 0.0, 107.339, 83.4333, MicroserviceFogDevice.FON);
+            dept = createFogDevice("L2-" + parentId + "-" + id, cpus[pos], ram[pos], 1250000, 18750, 2, 0.0, 107.339, 83.4333, MicroserviceFogDevice.FON);
             deviceNum = deviceNum + 1;
         } else {
-            dept = createFogDevice("L2-" + id, 2800, 2048, 1250000, 18750, 2, 0.0, 107.339, 83.4333, MicroserviceFogDevice.FON);
+            dept = createFogDevice("L2-" + parentId + "_" + id, 2800, 2048, 1250000, 18750, 2, 0.0, 107.339, 83.4333, MicroserviceFogDevice.FON);
         }
         fogDevices.add(dept);
         dept.setParentId(parentId);
@@ -194,12 +195,11 @@ public class MicroservicesAppSample1 {
 
         Application application = applications.get(0);
         String appId = application.getAppId();
-        double throughput = 200;
 
         FogDevice mobile = createFogDevice("m-" + id, 1000, 2048, 18750, 250, 3, 0, 87.53, 82.44, MicroserviceFogDevice.CLIENT);
         mobile.setParentId(parentId);
 
-        Sensor eegSensor = new Sensor("s-" + id, "ECG", userId, appId, new DeterministicDistribution(1000 / (throughput / 9 * 10))); // inter-transmission time of EEG sensor follows a deterministic distribution
+        Sensor eegSensor = new Sensor("s-" + id, "ECG", userId, appId, new DeterministicDistribution(ECG_TRANSMISSION_TIME)); // inter-transmission time of EEG sensor follows a deterministic distribution
         eegSensor.setApp(application);
         sensors.add(eegSensor);
 
@@ -339,17 +339,14 @@ public class MicroservicesAppSample1 {
         /*
          * Adding modules (vertices) to the application model (directed graph)
          */
-        application.addAppModule("client", 128, 605, 100); // adding module Client to the application model MB,MIPS,MB,kbps
-        application.addAppModule("ECGFeature_Extractor", 256, 630, 200); // adding module Concentration Calculator to the application model
-        application.addAppModule("ECG_Analyser", 512, 100, 2000); // adding module Connector to the application model
+        application.addAppModule("client", 128, 300, 100); // adding module Client to the application model MB,MIPS,MB,kbps
+        application.addAppModule("ECGFeature_Extractor", 256, 450, 200); // adding module Concentration Calculator to the application model
+        application.addAppModule("ECG_Analyser", 512, 1100, 2000); // adding module Connector to the application model
 
         /*
          * Connecting the application modules (vertices) in the application model (directed graph) with edges
          */
-        if (ECG_TRANSMISSION_TIME == 10)
-            application.addAppEdge("ECG", "client", 2000, 500, "ECG", Tuple.UP, AppEdge.SENSOR); // adding edge from EEG (sensor) to Client module carrying tuples of type EEG
-        else
-            application.addAppEdge("ECG", "client", 3000, 500, "ECG", Tuple.UP, AppEdge.SENSOR);
+        application.addAppEdge("ECG", "client", 2000, 500, "ECG", Tuple.UP, AppEdge.SENSOR); // adding edge from EEG (sensor) to Client module carrying tuples of type EEG
         application.addAppEdge("client", "ECGFeature_Extractor", 3500, 500, "_SENSOR", Tuple.UP, AppEdge.MODULE); // adding edge from Client to Concentration Calculator module carrying tuples of type _SENSOR
         application.addAppEdge("ECGFeature_Extractor", "ECG_Analyser", 100, 10000, 1000, "ECG_FEATURES", Tuple.UP, AppEdge.MODULE); // adding periodic edge (period=1000ms) from Concentration Calculator to Connector module carrying tuples of type PLAYER_GAME_STATE
         application.addAppEdge("ECGFeature_Extractor", "client", 14, 500, "ECG_FEATURE_ANALYSIS", Tuple.DOWN, AppEdge.MODULE);  // adding edge from Concentration Calculator to Client module carrying tuples of type CONCENTRATION

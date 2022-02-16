@@ -78,7 +78,11 @@ public class DistributedMicroservicePlacementLogic implements MicroservicePlacem
 
     @Override
     public void postProcessing() {
-
+        currentCpuLoad = 0.0;
+        currentModuleMap = new ArrayList<>();
+        currentModuleLoadMap = new HashMap<>();
+        currentModuleInstanceNum = new HashMap<>();
+        prStatus = new HashMap<>();
     }
 
     private PlacementLogicOutput generatePlacementMap() {
@@ -87,7 +91,7 @@ public class DistributedMicroservicePlacementLogic implements MicroservicePlacem
             placement.put(placementRequest.getPlacementRequestId(), placementRequest.getPlacedMicroservices());
         }
 
-        Map<Integer, Map<Application, List<ModuleLaunchConfig>>> perDevice = new HashMap<>();
+        Map<Integer, Map<Application, List<ModuleLaunchConfig>>> perDevice = new HashMap<>(); // per this algo only contains microservices placed on this device
         Map<Integer, List<Pair<String, Integer>>> serviceDiscoveryInfo = new HashMap<>();
         if (placement != null) {
             for (int prID : placement.keySet()) {
@@ -101,6 +105,8 @@ public class DistributedMicroservicePlacementLogic implements MicroservicePlacem
                 for (String microserviceName : placement.get(prID).keySet()) {
                     int deviceID = placement.get(prID).get(microserviceName);
 
+                    if(deviceID!=fogDevice.getId())
+                        continue;
                     //service discovery info propagation
                     List<Integer> clientDevices = getClientServiceNodeIds(application, microserviceName, placementRequest.getPlacedMicroservices(), placement.get(prID));
                     for (int clientDevice : clientDevices) {
@@ -139,7 +145,11 @@ public class DistributedMicroservicePlacementLogic implements MicroservicePlacem
 
         }
 
-        return new PlacementLogicOutput(perDevice, serviceDiscoveryInfo, prStatus);
+        Map<PlacementRequest,Integer> prStatusTemp = new HashMap<>();
+        for(PlacementRequest pr:prStatus.keySet()){
+            prStatusTemp.put(pr,prStatus.get(pr));
+        }
+        return new PlacementLogicOutput(perDevice, serviceDiscoveryInfo, prStatusTemp);
     }
 
     public void mapModules() {
