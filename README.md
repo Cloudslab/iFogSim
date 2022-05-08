@@ -15,14 +15,14 @@ iFogSim2 currently encompasses several new usecases such as:
 
 # Cite IFogSim2
 ```
-@article{mahmud2021ifogsim2,
+@article{ifogsim2preprint,
   title={IFogSim2: An Extended iFogSim Simulator for Mobility, Clustering, and Microservice Management in Edge and Fog Computing Environments},
   author={Mahmud, Redowan and Pallewatta, Samodha and Goudarzi, Mohammad and Buyya, Rajkumar},
   journal={arXiv preprint arXiv:2109.05636},
   year={2021}
 }
 
-@article{mahmud2022ifogsim2,
+@article{ifogsim2JSS,
   title={Ifogsim2: An extended ifogsim simulator for mobility, clustering, and microservice management in edge and fog computing environments},
   author={Mahmud, Redowan and Pallewatta, Samodha and Goudarzi, Mohammad and Buyya, Rajkumar},
   journal={Journal of Systems and Software},
