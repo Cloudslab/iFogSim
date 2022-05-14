@@ -1,5 +1,7 @@
 package org.fog.mobilitydata;
 
+import java.io.File;
+
 public class References {
 	
 	public static final int NOT_SET = -1;
@@ -14,10 +16,10 @@ public class References {
 	public static final double long_reference = 144.952370512958;
 
 	// Reference dataset filename to store and retrieve users positions
-	// ".\\dataset\\usersLocation-melbCBD_"
-	// ".\\dataset\\usersLocation-melbCBD-random_
-	public static final String dataset_reference = ".\\dataset\\usersLocation-melbCBD_";
-	public static final String dataset_random = ".\\dataset\\random_usersLocation-melbCBD_";
+	// String.format(".%sdataset%susersLocation-melbCBD_", File.separator, File.separator);
+	// String.format(".%sdataset%susersLocation-melbCBD-random_, File.separator, File.separator);
+	public static final String dataset_reference = String.format(".%sdataset%susersLocation-melbCBD_", File.separator, File.separator);
+	public static final String dataset_random = String.format(".%sdataset%srandom_usersLocation-melbCBD_", File.separator, File.separator);
 	public static final int random_walk_mobility_model = 1;
 	public static final int random_waypoint_mobility_model = 2;
 	public static double MinMobilitySpeed = 1; //
