@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.cloudbus.cloudsim.Host;
+import org.cloudbus.cloudsim.Vm;
 import org.cloudbus.cloudsim.core.CloudSim;
 import org.cloudbus.cloudsim.core.SimEntity;
 import org.cloudbus.cloudsim.core.SimEvent;
@@ -51,11 +53,13 @@ public class MobilityController extends SimEntity{
 		setParentReference(new HashMap<Integer, Integer>());
 		setAppModulePlacementPolicy(new HashMap<String, ModulePlacement>());
 		for(FogDevice fogDevice : fogDevices){
+			//给每一台边缘设备设置控制器id，每一个控制器id由父类SimEntity中的getId()提供
 			fogDevice.setControllerId(getId());
 		}
 		setFogDevices(fogDevices);
 		setActuators(actuators);
 		setSensors(sensors);
+		//为每一个fogdevice保存其上行和下行的延迟
 		connectWithLatencies();
 	}
 
@@ -178,6 +182,17 @@ public class MobilityController extends SimEntity{
 		FogDevice prevParent = getFogDeviceById(parentReference.get(fogDevice.getId()));
 		FogDevice newParent = getFogDeviceById(locator.determineParent(fogDevice.getId(),CloudSim.clock()));
 		System.out.println(CloudSim.clock()+" Starting Mobility Management for "+fogDevice.getName());
+
+		/**
+		//liuziyuan
+		List<Vm>VmList=fogDevice.getVmList();
+
+		for(Vm m:VmList){
+			System.out.println("虚机已分配的RAM："+m.getCurrentAllocatedRam()) ;
+
+		}
+		//
+		 **/
 		parentReference.put(fogDevice.getId(),newParent.getId());
 		List<String>migratingModules = new ArrayList<String>();
 		if(prevParent.getId()!=newParent.getId()) {
@@ -221,8 +236,19 @@ public class MobilityController extends SimEntity{
 			//printFogDeviceChildren(newParent.getId());
 			//printFogDeviceChildren(prevParent.getId());
 		}
-		
-		
+
+		//liuziyuan
+		for(String applicationName:fogDevice.getActiveApplications()){
+			List<FogDevice>FogDivces=getAppModulePlacementPolicy().get(applicationName).getFogDevices();
+			System.out.println("时间_"+CloudSim.clock());
+			for(FogDevice f:FogDivces){
+
+
+				System.out.println(f.getName()+"CPU占用量："+f.getHost().getUtilizationOfCpu()+"%\t"+"内存占用量："+f.getHost().getUtilizationOfRam()+"MB\t"+"带宽占用量："+f.getHost().getUtilizationOfBw()+"MBPS");
+
+			}
+		}
+		//
 		
 	}
 

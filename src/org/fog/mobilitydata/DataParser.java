@@ -72,6 +72,7 @@ public class DataParser {
                 String[] data = row.split(",");
                 try {
                     Location rl = new Location(Double.parseDouble(data[0]), Double.parseDouble(data[1]), References.NOT_SET);
+                    //如果当前临时用户坐标信息没有包含着当前的事件时间则将该事件时间加入
                     if (!tempUserLocationInfo.containsKey(eventTime))
                         tempUserLocationInfo.put(eventTime, rl);
                     else {

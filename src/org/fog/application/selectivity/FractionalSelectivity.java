@@ -1,6 +1,10 @@
 package org.fog.application.selectivity;
 
 /**
+ * 以固定的概率为传入的输入元组生成一个输出元组
+ */
+
+/**
  * Generates an output tuple for an incoming input tuple with a fixed probability
  * @author Harshit Gupta
  *

@@ -59,30 +59,35 @@ public class TranslationServiceFog {
             boolean trace_flag = false; // mean trace events
 
             CloudSim.init(num_user, calendar, trace_flag);
-
+            //建立应用id
             String appId = "Translation_Service"; // identifier of the application
-
+            //创建应用的总代理
             FogBroker broker = new FogBroker("broker");
-
+            //创建应用（应用id，总代理id）
             Application application = createApplication(appId, broker.getId());
+            //为应用设置使用者id 一般为总代理id
             application.setUserId(broker.getId());
 
 
-            //
+            //读取config.properties文件 对整体的模拟架构做分层 云（cloud）=0 区域代理节点（proxy）=1 网关=2 用户=3
             DataParser dataObject = new DataParser();
+            //生成LocationHandler
             locator = new LocationHandler(dataObject);
-
+            //读取数据集的路径
             String datasetReference = References.dataset_reference;
+            //创建移动的用户，
             createMobileUser(broker.getId(), appId, datasetReference);
+            //创建网关、代理节点、云节点
             createFogDevices(broker.getId(), appId);
 
 
-            //
 
+            //建立一个模组映射 Map<String, List<String>>
             ModuleMapping moduleMapping = ModuleMapping.createModuleMapping(); // initializing a module mapping
 
             moduleMapping.addModuleToDevice("storageModule", "cloud");
 
+            //将所有的边缘节点设备（移动手机、网管节点、代理节点、云节点）传入到controller里
             MobilityController controller = new MobilityController("master-controller", fogDevices, sensors,
                     actuators, locator);
 
@@ -102,14 +107,14 @@ public class TranslationServiceFog {
     }
 
     private static void createMobileUser(int userId, String appId, String datasetReference) throws IOException {
-
+        //存入移动用户的移动轨迹模式（随机的/固定轨迹）
         for (int id = 1; id <= numberOfMobileUser; id++)
             userMobilityPattern.put(id, References.DIRECTIONAL_MOBILITY);
-
+        //locator 依次解析每一个移动用户的移动轨迹
         locator.parseUserInfo(userMobilityPattern, datasetReference);
-
+        //获取所有移动用户的数据id
         List<String> mobileUserDataIds = locator.getMobileUserDataId();
-
+        //创建移动用户设备
         for (int i = 0; i < numberOfMobileUser; i++) {
             FogDevice mobile = addMobile("mobile_" + i, userId, appId, References.NOT_SET); // adding mobiles to the physical topology. Smartphones have been modeled as fog devices as well.
             mobile.setUplinkLatency(2); // latency of connection between the smartphone and proxy server is 4 ms
@@ -156,7 +161,7 @@ public class TranslationServiceFog {
                 FogDevice gateway = createFogDevice("gateway_" + i, 2800, 4000, 10000, 10000, 0.0, 107.339, 83.4333);
                 locator.linkDataWithInstance(gateway.getId(), locator.getLevelWiseResources(locator.getLevelID("Gateway")).get(i));
                 gateway.setParentId(locator.determineParent(gateway.getId(), References.SETUP_TIME));
-                gateway.setUplinkLatency(4);
+                gateway.setUplinkLatency(4); //设置网关到区域代理节点的延迟为4ms
                 fogDevices.add(gateway);
             }
 
@@ -205,7 +210,7 @@ public class TranslationServiceFog {
         int hostId = FogUtils.generateEntityId();
         long storage = 1000000; // host storage
         int bw = 10000;
-
+        //建立为每一个雾设备建立PowerHost类以用于能耗感知
         PowerHost host = new PowerHost(
                 hostId,
                 new RamProvisionerSimple(ram),
@@ -219,16 +224,16 @@ public class TranslationServiceFog {
         List<Host> hostList = new ArrayList<Host>();
         hostList.add(host);
 
-        String arch = "x86"; // system architecture
-        String os = "Linux"; // operating system
-        String vmm = "Xen";
-        double time_zone = 10.0; // time zone this resource located
-        double cost = 3.0; // the cost of using processing in this resource
-        double costPerMem = 0.05; // the cost of using memory in this resource
-        double costPerStorage = 0.001; // the cost of using storage in this
+        String arch = "x86"; // system architecture 系统架构
+        String os = "Linux"; // operating system 操作系统
+        String vmm = "Xen"; //虚拟化方式
+        double time_zone = 10.0; // time zone this resource located 虚拟机的时区（参数作用存疑）
+        double cost = 3.0; // the cost of using processing in this resource 使用资源的开销 具体单位不明
+        double costPerMem = 0.05; // the cost of using memory in this resource 使用单位内存的开销
+        double costPerStorage = 0.001; // the cost of using storage in this 使用单位存储的开销
         // resource
-        double costPerBw = 0.0; // the cost of using bw in this resource
-        LinkedList<Storage> storageList = new LinkedList<Storage>(); // we are not adding SAN
+        double costPerBw = 0.0; // the cost of using bw in this resource 使用单位带宽的开销
+        LinkedList<Storage> storageList = new LinkedList<Storage>(); // we are not adding SAN  SAN指存储区域网络  在本示例中未使用
         // devices by now
 
         FogDeviceCharacteristics characteristics = new FogDeviceCharacteristics(

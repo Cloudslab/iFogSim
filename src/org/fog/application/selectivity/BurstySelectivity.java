@@ -3,6 +3,12 @@ package org.fog.application.selectivity;
 import org.cloudbus.cloudsim.core.CloudSim;
 
 /**
+ * 根据突发模式，为每个输入元组生成一个输出元组。
+ * 在高爆发期，所有输入元组都会产生一个输出元组。
+ * 在低爆发期，没有输入元组会产生一个输出元组。
+ */
+
+/**
  * Generates an output tuple for every input tuple according to a bursty model.
  * During high burst period, all input tuples result in an output tuple.
  * During low burst period, no input tuples result in an output tuple.
