@@ -89,7 +89,7 @@ public class CrowdSensing_Microservices_RandomMobility_Clustering {
             DataParser dataObject = new DataParser();
             locator = new LocationHandler(dataObject);
 
-            String datasetReference = References.dataset_reference;
+            String datasetReference = new References().dataset_reference;
 
             if (randomMobility_generator) {
                 datasetReference = References.dataset_random;

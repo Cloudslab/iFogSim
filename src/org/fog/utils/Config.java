@@ -13,6 +13,7 @@ public class Config {
 	public static double FOG_DEVICE_COST_PER_MEMORY = 0.05;
 	public static double FOG_DEVICE_COST_PER_STORAGE = 0.001;
 	public static double FOG_DEVICE_COST_PER_BW = 0.0;
+
 	public static double MAX_VALUE = 1000000.0;
 
 	// Create cluster among devices of same level with common parent irrespective of location. Only one of the two clustering modes should be used for clustering

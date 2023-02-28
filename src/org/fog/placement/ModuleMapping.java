@@ -8,6 +8,7 @@ import java.util.Map;
 public class ModuleMapping {
     /**
      * Mapping from node name to list of <moduleName, numInstances> of instances to be launched on node
+     * 每一个FogDevice 和该设备上模组列表的映射  Map<FogDeviceName,ArrayList<ModuleName>>
      */
     protected Map<String, List<String>> moduleMapping;
 

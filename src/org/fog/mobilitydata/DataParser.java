@@ -5,11 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
-import java.util.Random;
+import java.util.*;
 
 
 public class DataParser {
@@ -19,9 +15,11 @@ public class DataParser {
     public Map<String, Integer> resourceAndUserToLevel = new HashMap<String, Integer>();
     public Map<String, Map<Double, Location>> usersLocation = new HashMap<String, Map<Double, Location>>();
 
+    public Map<String, Double> userInitTime = new HashMap<>();
+
 
     public DataParser() {
-        File configFile = new File(".\\dataset\\config.properties");
+        File configFile = new File("./dataset/config.properties");
         try {
             FileReader reader = new FileReader(configFile);
             Properties props = new Properties();
@@ -39,6 +37,13 @@ public class DataParser {
         }
     }
 
+    /**
+     * 下一个移动活动时间
+     *
+     * @param eventTime
+     * @param mobilityPattern
+     * @return
+     */
     private double nextMobilisationEvent(double eventTime, int mobilityPattern) {
         // TODO Auto-generated method stub
         Random ran = new Random();
@@ -93,6 +98,48 @@ public class DataParser {
 
     }
 
+    /**
+     * @param mobilityPattern   每个车辆移动模型MAP
+     * @param datasetPrefixPath 车辆移动数据集路径前缀
+     * @throws IOException
+     * @author liuziyuan
+     */
+    public void parseVehicleData(Map<Integer, Integer> mobilityPattern, String datasetPrefixPath) throws IOException {
+        for (int vehicleId : mobilityPattern.keySet()) {
+            Map<Double, Location> tempUserLocationInfo = new HashMap<Double, Location>();
+            BufferedReader csvReader = new BufferedReader(new FileReader(datasetPrefixPath + vehicleId + ".csv"));
+            //TODO: 编写车辆移动数据，evenTime在数据集中已经记录 无需调用 或重写 nextMobilisationEvent()函数
+            System.out.println("The Vehicle  dataset used in this simulation for vehicle: " + vehicleId + " is: " + datasetPrefixPath + vehicleId + ".csv");
+            String row;
+            double eventTime = 0.0;
+            //读取第一行数据，为了记录车辆第一次移动的时间
+            row = csvReader.readLine();
+            String[] data = row.split(",");
+
+            //将移动数据的每一条的时间和经纬坐标输入
+            eventTime = Double.parseDouble(data[0]);
+            Location rl = new Location(Double.parseDouble(data[1]), Double.parseDouble(data[2]), References.NOT_SET);
+            tempUserLocationInfo.put(eventTime, rl);
+            userInitTime.put("vehicle_" + vehicleId,eventTime);
+
+            while ((row = csvReader.readLine()) != null) {
+                data = row.split(",");
+                try {
+                    //将移动数据的每一条的时间和经纬坐标输入
+                    eventTime = Double.parseDouble(data[0]);
+                    rl = new Location(Double.parseDouble(data[1]), Double.parseDouble(data[2]), References.NOT_SET);
+                    tempUserLocationInfo.put(eventTime, rl);
+                } catch (NumberFormatException ex) {
+                    //System.out.println("Given String is not parsable to double");
+                }
+            }
+            csvReader.close();
+            usersLocation.put("vehicle_" + vehicleId, tempUserLocationInfo);
+            resourceAndUserToLevel.put("vehicle_" + vehicleId, levelID.get("User"));
+        }
+    }
+
+
     @SuppressWarnings("unchecked")
     public void parseResourceData() throws NumberFormatException, IOException {
 
@@ -103,7 +150,7 @@ public class DataParser {
             resouresOnLevels[i] = new ArrayList<String>();
 
 
-        BufferedReader csvReader = new BufferedReader(new FileReader(".\\dataset\\edgeResources-melbCBD.csv"));
+        BufferedReader csvReader = new BufferedReader(new FileReader("./dataset/edgeResources-melbCBD.csv"));
         String row;
         while ((row = csvReader.readLine()) != null) {
             String[] data = row.split(",");

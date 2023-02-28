@@ -1,5 +1,8 @@
 package org.fog.utils;
 
+/**
+ * 地图覆盖范围 形状为一个矩形 lat_l 代表低纬度的边 lat_u 代表高纬度的边，long_l代表高经度的边，long_u代表低经度的边
+ */
 public class GeoCoverage {
 
 	private double lat_l;

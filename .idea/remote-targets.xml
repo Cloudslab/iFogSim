@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="RemoteTargetsManager">
+    <targets>
+      <target name="517_server_2" type="ssh/sftp" uuid="51705bf6-15a5-45f8-a489-3dc015b42a64">
+        <config>
+          <option name="projectRootOnTarget" value="$PROJECT_DIR$/../../../../../server_2/iFogSim" />
+          <option name="serverName" value="517_server_2" />
+          <option name="useRsync" value="true" />
+        </config>
+        <ContributedStateBase type="JavaLanguageRuntime">
+          <config>
+            <option name="javaVersionString" value="17.0.6" />
+          </config>
+        </ContributedStateBase>
+      </target>
+    </targets>
+  </component>
+</project>

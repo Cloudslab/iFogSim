@@ -125,6 +125,11 @@ public class LocationHandler {
 		return timeSheet;
 	}
 
+	/**
+	 * 把仿真器中的FogDevice和基站数据集中的基站绑定
+	 * @param instanceId
+	 * @param dataID
+	 */
 	public void linkDataWithInstance(int instanceId, String dataID) {
 		// TODO Auto-generated method stub
 		instanceToDataId.put(instanceId, dataID);
@@ -145,6 +150,11 @@ public class LocationHandler {
 		getDataObject().parseUserData(userMobilityPattern, datasetReference);
 	}
 
+	public void parseVehicleInfo(Map<Integer, Integer> userMobilityPattern, String datasetReference) throws IOException {
+		// TODO Auto-generated method stub
+		getDataObject().parseVehicleData(userMobilityPattern, datasetReference);
+	}
+
 	public void parseResourceInfo() throws NumberFormatException, IOException {
 		// TODO Auto-generated method stub
 		getDataObject().parseResourceData();
@@ -152,8 +162,7 @@ public class LocationHandler {
 
 	public List<String> getMobileUserDataId() {
 		// TODO Auto-generated method stub
-		List<String> userDataIds = new ArrayList<>(getDataObject().usersLocation.keySet());
-		return userDataIds;
+		return new ArrayList<>(getDataObject().usersLocation.keySet());
 		
 	}
 

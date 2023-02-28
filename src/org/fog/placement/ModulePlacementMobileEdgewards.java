@@ -22,13 +22,23 @@ public class ModulePlacementMobileEdgewards extends ModulePlacement{
 	protected ModuleMapping moduleMapping;
 	protected List<Sensor> sensors;
 	protected List<Actuator> actuators;
+	/*
+	 * 当前所有FogDevice设备的cpu负载 Map<FogDeviceId,cpuWorkload>
+	 */
 	protected Map<Integer, Double> currentCpuLoad;
 	
 	/**
-	 * Stores the current mapping of application modules to fog devices 
+	 * 存储当前应用的模组到雾设备的映射关系
+	 * Stores the current mapping of application modules to fog devices
 	 */
 	protected Map<Integer, List<String>> currentModuleMap;
+	/*
+	 *当前每一台FogDevice设备上已装载的Module Map<FogDeviceId,Map<>>
+	 */
 	protected Map<Integer, Map<String, Double>> currentModuleLoadMap;
+	/*
+	 *每一个FogDevice设备上的模组实例数量 Map<FogDeviceId,Map<,>>
+	 */
 	protected Map<Integer, Map<String, Integer>> currentModuleInstanceNum;
 	
 
@@ -70,7 +80,7 @@ public class ModulePlacementMobileEdgewards extends ModulePlacement{
 				getCurrentModuleInstanceNum().get(deviceId).put(moduleName, 0);
 			}
 		}
-		
+		//获取gateway 到 cloud的 路径上的FogDeviceId
 		List<List<Integer>> leafToRootPaths = getLeafToRootPaths();
 		
 		for(List<Integer> path : leafToRootPaths){
@@ -391,7 +401,7 @@ public class ModulePlacementMobileEdgewards extends ModulePlacement{
 	/**
 	 * Get all modules that need to be shifted northwards along with <b>modules</b>.  
 	 * Typically, these other modules are those that are hosted on device with ID <b>deviceId</b> and lie upstream of modules in <b>modules</b> in application model. 
-	 * @param module the module that needs to be shifted northwards
+	 * @param modules the module that needs to be shifted northwards
 	 * @param deviceId the fog device ID that it is currently on
 	 * @return list of all modules that need to be shifted north along with <b>modules</b>
 	 */
@@ -475,7 +485,11 @@ public class ModulePlacementMobileEdgewards extends ModulePlacement{
 		}
 		return paths;
 	}
-	
+
+	/**
+	 * 获取所有底层设备到顶层设备的路径
+	 * @return
+	 */
 	protected List<List<Integer>> getLeafToRootPaths(){
 		FogDevice cloud=null;
 		for(FogDevice device : getFogDevices()){

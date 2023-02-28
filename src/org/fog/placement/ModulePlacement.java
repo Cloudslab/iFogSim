@@ -18,7 +18,9 @@ public abstract class ModulePlacement {
 
 	private List<FogDevice> fogDevices;
 	private Application application;
+	//模组到设备的映射
 	private Map<String, List<Integer>> moduleToDeviceMap;
+	//设备到模组的映射
 	private Map<Integer, List<AppModule>> deviceToModuleMap;
 	private Map<Integer, Map<String, Integer>> moduleInstanceCountMap;
 

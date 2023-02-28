@@ -16,11 +16,28 @@ public class References {
 	// Reference dataset filename to store and retrieve users positions
 	// ".\\dataset\\usersLocation-melbCBD_"
 	// ".\\dataset\\usersLocation-melbCBD-random_
-	public static final String dataset_reference = ".\\dataset\\usersLocation-melbCBD_";
+	//dataset/random_usersLocation-melbCBD_1.csv
+
+
+
+	//动态输入数据集前缀
+	public  String  dataset_reference = "./dataset/usersLocation-melbCBD_";
 	public static final String dataset_random = ".\\dataset\\random_usersLocation-melbCBD_";
 	public static final int random_walk_mobility_model = 1;
 	public static final int random_waypoint_mobility_model = 2;
 	public static double MinMobilitySpeed = 1; //
 	public static double MaxMobilitySpeed = 2; //
 	public static double environmentLimit = 6371; // shows the maximum latitude and longitude of the environment. Currently it is set based on radius of the Earth (6371 KM)
+
+	/**
+	 * @author liuziyuan
+	 * @param datasetPrefixPath  移动数据集路径前缀
+	 */
+	public References(String datasetPrefixPath) {
+		this.dataset_reference=datasetPrefixPath;
+	}
+
+	public References() {
+
+	}
 }

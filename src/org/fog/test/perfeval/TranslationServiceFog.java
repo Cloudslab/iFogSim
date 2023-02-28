@@ -74,7 +74,7 @@ public class TranslationServiceFog {
             //生成LocationHandler
             locator = new LocationHandler(dataObject);
             //读取数据集的路径
-            String datasetReference = References.dataset_reference;
+            String datasetReference =new References().dataset_reference;
             //创建移动的用户，
             createMobileUser(broker.getId(), appId, datasetReference);
             //创建网关、代理节点、云节点
@@ -210,7 +210,7 @@ public class TranslationServiceFog {
         int hostId = FogUtils.generateEntityId();
         long storage = 1000000; // host storage
         int bw = 10000;
-        //建立为每一个雾设备建立PowerHost类以用于能耗感知
+        //为每一个雾设备建立PowerHost类以用于能耗感知
         PowerHost host = new PowerHost(
                 hostId,
                 new RamProvisionerSimple(ram),

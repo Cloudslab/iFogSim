@@ -3,4 +3,5 @@ bin/
 .classpath
 .settings/
 .project
+dataset/geo_log
 
