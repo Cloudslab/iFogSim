@@ -16,8 +16,8 @@ public class References {
 	// Reference dataset filename to store and retrieve users positions
 	// ".\\dataset\\usersLocation-melbCBD_"
 	// ".\\dataset\\usersLocation-melbCBD-random_
-	public static final String dataset_reference = ".\\dataset\\usersLocation-melbCBD_";
-	public static final String dataset_random = ".\\dataset\\random_usersLocation-melbCBD_";
+	public static final String dataset_reference = "./dataset/usersLocation-melbCBD_";
+	public static final String dataset_random = "./dataset/random_usersLocation-melbCBD_";
 	public static final int random_walk_mobility_model = 1;
 	public static final int random_waypoint_mobility_model = 2;
 	public static double MinMobilitySpeed = 1; //

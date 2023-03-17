@@ -21,7 +21,7 @@ public class DataParser {
 
 
     public DataParser() {
-        File configFile = new File(".\\dataset\\config.properties");
+        File configFile = new File("./dataset/config.properties");
         try {
             FileReader reader = new FileReader(configFile);
             Properties props = new Properties();
@@ -102,7 +102,7 @@ public class DataParser {
             resouresOnLevels[i] = new ArrayList<String>();
 
 
-        BufferedReader csvReader = new BufferedReader(new FileReader(".\\dataset\\edgeResources-melbCBD.csv"));
+        BufferedReader csvReader = new BufferedReader(new FileReader("./dataset/edgeResources-melbCBD.csv"));
         String row;
         while ((row = csvReader.readLine()) != null) {
             String[] data = row.split(",");
