@@ -37,7 +37,7 @@ import java.util.*;
 
 /**
  * Simulation setup for Microservices Application
- * This test covers featured such as,
+ * This test covers features such as,
  * 1. creation of clusters among fog nodes
  * 2. horizontally scaling microservices (instead of vertical scaling) and load balancing among them
  * 3. routing based on destination device id using service discovery.
