@@ -89,6 +89,26 @@ public class FogDevice extends PowerDatacenter {
     protected boolean isClusterLinkBusy; //Flag denoting whether the link connecting to cluster from this FogDevice is busy
     protected double clusterLinkBandwidth;
 
+    private double totalDataTransferred = 0;
+
+    public void updateDataTransferred(double data) {
+        this.totalDataTransferred += data;
+    }
+
+    public double getTotalDataTransferred() {
+        return totalDataTransferred;
+    }
+
+    @Override
+    public void send(int entityId, double delay, int cloudSimTag, Object data) {
+        super.send(entityId, delay, cloudSimTag, data);
+        if (data instanceof Tuple) {
+            Tuple tuple = (Tuple) data;
+            double dataSize = tuple.getCloudletFileSize();
+            updateDataTransferred(dataSize);
+        }
+    }
+
 
     public FogDevice(
             String name,
