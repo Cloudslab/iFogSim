@@ -1,0 +1,15 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="iFogSim2:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/iFogSim2_jar</output-path>
+    <root id="archive" name="iFogSim2.jar">
+      <element id="module-output" name="iFogSim2" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/jars/commons-math3-3.5/commons-math3-3.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/jars/cloudsim-3.0.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/jars/cloudsim-examples-3.0.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/jars/guava-18.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/jars/json-simple-1.1.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/jars/cloudsim-examples-3.0.3-sources.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/jars/cloudsim-3.0.3-sources.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
