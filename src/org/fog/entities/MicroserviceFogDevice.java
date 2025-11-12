@@ -115,23 +115,6 @@ public class MicroserviceFogDevice extends FogDevice {
             sendNow(getId(), FogEvents.PROCESS_PRS);
     }
 
-    private void sendThroughFreeClusterLink(Tuple tuple, Integer clusterNodeID) {
-        double networkDelay = tuple.getCloudletFileSize() / getClusterLinkBandwidth();
-        setClusterLinkBusy(true);
-        double latency = (getClusterMembersToLatencyMap()).get(clusterNodeID);
-        send(getId(), networkDelay, FogEvents.UPDATE_CLUSTER_TUPLE_QUEUE);
-
-        if (tuple instanceof ManagementTuple) {
-            send(clusterNodeID, networkDelay + latency + ((ManagementTuple) tuple).processingDelay, FogEvents.MANAGEMENT_TUPLE_ARRIVAL, tuple);
-            //todo
-//            if (Config.ENABLE_NETWORK_USAGE_AT_PLACEMENT)
-//                NetworkUsageMonitor.sendingManagementTuple(latency, tuple.getCloudletFileSize());
-        } else {
-            send(clusterNodeID, networkDelay + latency, FogEvents.TUPLE_ARRIVAL, tuple);
-            NetworkUsageMonitor.sendingTuple(latency, tuple.getCloudletFileSize());
-        }
-    }
-
     protected void setDeviceType(String deviceType) {
         if (deviceType.equals(MicroserviceFogDevice.CLIENT) || deviceType.equals(MicroserviceFogDevice.FCN) ||
                 deviceType.equals(MicroserviceFogDevice.FON) || deviceType.equals(MicroserviceFogDevice.CLOUD))
@@ -197,7 +180,7 @@ public class MicroserviceFogDevice extends FogDevice {
             if (tuple.getDirection() == Tuple.UP) {
                 int destination = controllerComponent.getDestinationDeviceId(tuple.getDestModuleName());
                 if (destination == -1) {
-                    System.out.println("Service DiscoveryInfo missing. Tuple routing stopped for : " + tuple.getDestModuleName());
+                    System.out.println("Service DiscoveryInfo missing in device : " + getId() + "-" + getDeviceType() + ". Tuple routing stopped for : " + tuple.getDestModuleName());
                     return;
                 }
                 tuple.setDestinationDeviceId(destination);
@@ -452,14 +435,14 @@ public class MicroserviceFogDevice extends FogDevice {
                 module.updateVmProcessing(CloudSim.clock(), getVmAllocationPolicy().getHost(module).getVmScheduler()
                         .getAllocatedMipsForVm(module));
 
-                System.out.println("Module " + module.getName() + "created on " + getName() + " under Launch module");
+                System.out.println("Module " + module.getName() + " created on " + getName() + " under Launch module");
                 Logger.debug("Module deploy success", "Module " + module.getName() + " placement on " + getName() + " successful. vm id : " + module.getId());
             } else {
                 Logger.error("Module deploy error", "Module " + module.getName() + " placement on " + getName() + " failed");
                 System.out.println("Module " + module.getName() + " placement on " + getName() + " failed");
             }
         } else {
-            System.out.println("Module " + module.getName() + " already deplyed on" + getName());
+            System.out.println("Module " + module.getName() + " already deployed on " + getName());
         }
     }
 
@@ -653,7 +636,21 @@ public class MicroserviceFogDevice extends FogDevice {
         } else {
             super.sendUpFreeLink(tuple);
         }
+    }
 
+    protected void sendToCluster(Tuple tuple, int clusterNodeID) {
+        if (tuple instanceof ManagementTuple) {
+            double networkDelay = tuple.getCloudletFileSize() / getClusterLinkBandwidth();
+            setClusterLinkBusy(true);
+            double latency = getClusterMembersToLatencyMap().get(clusterNodeID);
+            send(getId(), networkDelay, FogEvents.UPDATE_CLUSTER_TUPLE_QUEUE);
+            send(clusterNodeID, networkDelay + latency + ((ManagementTuple) tuple).processingDelay, FogEvents.MANAGEMENT_TUPLE_ARRIVAL, tuple);
+            //todo
+//            if (Config.ENABLE_NETWORK_USAGE_AT_PLACEMENT)
+//                NetworkUsageMonitor.sendingManagementTuple(latency, tuple.getCloudletFileSize());
+        } else {
+            super.sendToCluster(tuple, clusterNodeID);
+        }
     }
 
     public void updateRoutingTable(int destId, int nextId) {
@@ -661,13 +658,13 @@ public class MicroserviceFogDevice extends FogDevice {
     }
 
     private void updateCLusterConsInRoutingTable() {
-        for(int deviceId:clusterMembers){
-            routingTable.put(deviceId,deviceId);
+        for (int deviceId : clusterMembers) {
+            routingTable.put(deviceId, deviceId);
         }
     }
 
     public void removeMonitoredDevice(FogDevice fogDevice) {
-       controllerComponent.removeMonitoredDevice(fogDevice);
+        controllerComponent.removeMonitoredDevice(fogDevice);
     }
 
     public void addMonitoredDevice(FogDevice fogDevice) {

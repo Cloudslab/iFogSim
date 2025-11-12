@@ -31,6 +31,7 @@ public class MicroservicesController extends SimEntity {
      * @param fogDevices
      * @param sensors
      * @param applications
+     * Used when monitored devices of each Fog Orchestration Node(which runs the placement logic) is not known but calculated dynamically.
      */
     public MicroservicesController(String name, List<FogDevice> fogDevices, List<Sensor> sensors, List<Application> applications, List<Integer> clusterLevels, Double clusterLatency, int placementLogic) {
         super(name);
@@ -46,6 +47,18 @@ public class MicroservicesController extends SimEntity {
 
     }
 
+    /**
+     *
+     * @param name
+     * @param fogDevices
+     * @param sensors
+     * @param applications
+     * @param clusterLevels
+     * @param clusterLatency
+     * @param placementLogic
+     * @param monitored
+     * Used when monitored devices of each Fog Orchestration Node(which runs the placement logic) is pre-set.(@param - monitored)
+     */
     public MicroservicesController(String name, List<FogDevice> fogDevices, List<Sensor> sensors, List<Application> applications, List<Integer> clusterLevels, Double clusterLatency, int placementLogic, Map<Integer, List<FogDevice>> monitored) {
         super(name);
         this.fogDevices = fogDevices;
@@ -61,6 +74,11 @@ public class MicroservicesController extends SimEntity {
     protected void init() {
         connectWithLatencies();
 
+        /** supports 3 modes of clustering
+         * 1. No clustering : Config.ENABLE_STATIC_CLUSTERING = false,  Config.ENABLE_DYNAMIC_CLUSTERING = false
+         * 2. Static clustering : Config.ENABLE_STATIC_CLUSTERING = true (Nodes of the same level that shares the same parent)
+         * 3. Dynamic clustering : Clustered based on location of the nodes and their transmission powers
+        **/
         if (Config.ENABLE_STATIC_CLUSTERING) {
             for (Integer id : clustering_levels)
                 createClusterConnections(id, fogDevices, Config.clusteringLatency);
@@ -74,7 +92,12 @@ public class MicroservicesController extends SimEntity {
     protected void init(Map<Integer, List<FogDevice>> monitored) {
         connectWithLatencies();
 
-        if (!Config.ENABLE_STATIC_CLUSTERING) {
+        /** supports 3 modes of clustering
+         * 1. No clustering : Config.ENABLE_STATIC_CLUSTERING = false,  Config.ENABLE_DYNAMIC_CLUSTERING = false
+         * 2. Static clustering : Config.ENABLE_STATIC_CLUSTERING = true (Nodes of the same level that shares the same parent)
+         * 3. Dynamic clustering : Clustered based on location of the nodes and their transmission powers
+         **/
+        if (Config.ENABLE_STATIC_CLUSTERING) {
             for (Integer id : clustering_levels)
                 createClusterConnections(id, fogDevices, Config.clusteringLatency);
         }
@@ -130,12 +153,13 @@ public class MicroservicesController extends SimEntity {
         for (FogDevice f : fogDevices) {
             ((MicroserviceFogDevice) f).addRoutingTable(routing.get(f.getId()));
         }
-
     }
 
     public void startEntity() {
+        //In STATIC mode initial placement is carried out before simulation start
         if (MicroservicePlacementConfig.SIMULATION_MODE == "STATIC")
             initiatePlacementRequestProcessing();
+        // In DYNAMIC placement initial placement can be carried out after the start of the simulation to simulate the effect of placement delays
         if (MicroservicePlacementConfig.SIMULATION_MODE == "DYNAMIC")
             initiatePlacementRequestProcessingDynamic();
 
