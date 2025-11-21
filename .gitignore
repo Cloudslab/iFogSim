@@ -6,3 +6,11 @@ bin/
 out/
 *.iml
 .idea/
+*.class
+**/target/
+*.log
+*.war
+*.jar
+.DS_Store
+.vscode/
+.env

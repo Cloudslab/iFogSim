@@ -41,6 +41,14 @@ iFogSim2 currently encompasses several new usecases such as:
   * Verify the external libraries in the "JARs" Folder are added to the project
   * Run the example files (e.g. TranslationServiceFog_Clustering.java, CrowdSensing_Microservices_RandomMobility_Clustering.java) to get started
 
+## Maven layout
+Project is now split into two Maven modules:
+
+* `ifogsim-core` – the main library (install to your local repo with `mvn -pl ifogsim-core -am install`)
+* `ifogsim-examples` – the performance-evaluation examples that depend on `ifogsim-core` (`mvn -pl ifogsim-examples -am package`)
+
+Datasets used by the examples now live under `ifogsim-examples/src/main/resources/dataset`. At runtime you can override the dataset location with `-Difogsim.dataset.dir=/path/to/dataset` if you want to supply your own writable copy.
+
 
 # References
  * Redowan Mahmud, Samodha Pallewatta, Mohammad Goudarzi, and Rajkumar Buyya, <A href="https://arxiv.org/abs/2109.05636">iFogSim2: An Extended iFogSim Simulator for Mobility, Clustering, and Microservice Management in Edge and Fog Computing Environments</A>, Journal of Systems and Software (JSS), Volume 190, Pages: 1-17, ISSN:0164-1212, Elsevier Press, Amsterdam, The Netherlands, August 2022.
